@@ -25,7 +25,7 @@ export default function HeroSection() {
                   <div className="h-px w-16 bg-gradient-to-r from-transparent to-black/10 dark:to-white/10" />
                   <div className="group flex items-center gap-2 rounded-lg border border-black/5 bg-black/2 px-3 py-1.5 transition-all duration-200 hover:border-black/10 hover:bg-black/5 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/15 dark:hover:bg-white/8">
                     <span className="font-medium text-black/60 text-xs transition-colors group-hover:text-black/80 dark:text-white/60 dark:group-hover:text-white/80">
-                      The future is now
+                      Residence Life, Simplified
                     </span>
                   </div>
                   <div className="h-px w-16 bg-gradient-to-l from-transparent to-black/10 dark:to-white/10" />
@@ -40,13 +40,10 @@ export default function HeroSection() {
                   )}
                   style={{ lineHeight: 1.15 }}
                 >
-                  Personal memory.
-                  <br />
-                  Private intelligence.
+                  The Modern RA Toolkit
                 </h1>
                 <p className="mx-auto max-w-[600px] text-neutral-500 text-sm leading-relaxed md:text-base dark:text-neutral-400">
-                  Capture life moments and let AI provide meaningful insights
-                  for your personal development.
+                  HallPals helps RAs manage their communities, connect with residents, and handle duty tasks — all in one app.
                 </p>
               </div>
 
@@ -55,38 +52,30 @@ export default function HeroSection() {
                   asChild
                   className="group h-9 w-fit rounded-lg bg-black px-3 font-medium text-white text-sm shadow-sm transition-all duration-200 hover:scale-[1.02] hover:bg-black/80 hover:shadow-md dark:bg-white dark:text-black dark:hover:bg-white/90"
                 >
-                  <Link href="/login">Start Journey</Link>
+                  <Link href="/download">Download on App Store</Link>
                 </Button>
                 <Button
                   asChild
                   className="h-9 w-fit rounded-lg border border-black/10 border-dashed bg-black/5 px-3 font-medium text-black/80 text-sm transition-all duration-200 hover:scale-[1.02] hover:border-black/20 hover:bg-black/10 dark:border-white/10 dark:bg-white/5 dark:text-white/80 dark:hover:bg-white/10"
                   variant="outline"
                 >
-                  <Link href="#features">Learn More</Link>
+                  <Link href="/demo">Request Demo for Your Campus</Link>
                 </Button>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Large Featured Video */}
+        {/* Hero Visual */}
         <div className="container mx-auto px-4 pt-6 md:px-6 mt-12 md:mt-16">
-          <div className="relative mx-auto aspect-video max-w-5xl overflow-hidden rounded-lg bg-black/5 dark:bg-white/5">
-            <OptimizedVideoPlayer src="/1208.mov" />
-          </div>
-        </div>
-
-        {/* Transition Element to Features Section */}
-        <div className="container relative mx-auto mt-12 px-4 md:mt-16 md:px-6">
-          <div className="mx-auto flex max-w-5xl items-center justify-center">
-            <div className="flex items-center gap-3">
-              <div className="h-px w-16 bg-gradient-to-r from-transparent to-black/10 dark:to-white/10" />
-              <div className="group flex cursor-pointer items-center gap-2 rounded-lg border border-black/5 bg-black/2 px-3 py-1.5 transition-all duration-200 hover:scale-105 hover:border-black/10 hover:bg-black/5 hover:shadow-sm dark:border-white/10 dark:bg-white/5 dark:hover:border-white/15 dark:hover:bg-white/8">
-                <span className="font-medium text-black/60 text-xs transition-colors group-hover:text-black/80 dark:text-white/60 dark:group-hover:text-white/80">
-                  Discover Capabilities
-                </span>
-              </div>
-              <div className="h-px w-16 bg-gradient-to-l from-transparent to-black/10 dark:to-white/10" />
+          <div className="relative mx-auto aspect-[9/16] w-full max-w-xs overflow-hidden rounded-[40px] border-8 border-black shadow-2xl bg-black dark:border-gray-800">
+            {/* Note: User specified an iPhone mockup. Using the screenshot with rounded corners to simulate it. */}
+            <div className="h-full w-full rounded-[32px] overflow-hidden bg-white">
+              <img
+                src="/screenshots/hero_mockup.png"
+                alt="HallPals RA Home View"
+                className="h-full w-full object-cover"
+              />
             </div>
           </div>
         </div>
