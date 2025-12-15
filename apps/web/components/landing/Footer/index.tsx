@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ThemeToggle } from "./ThemeToggle";
+
 
 const footerLinks = [
   {
@@ -23,6 +23,7 @@ const footerLinks = [
       { name: "Privacy", href: "#" },
       { name: "Terms", href: "#" },
       { name: "Contact", href: "#" },
+      { name: "415-375-0564", href: "tel:4153750564" },
     ],
   },
 ];
@@ -91,9 +92,7 @@ export default function Footer() {
                     <Linkedin className="h-4 w-4" />
                   </Link>
                 </div>
-                <div className="pt-2">
-                  <ThemeToggle />
-                </div>
+
               </div>
 
 
