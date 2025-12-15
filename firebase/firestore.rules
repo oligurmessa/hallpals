@@ -1,0 +1,433 @@
+rules_version = '2';
+
+// HallPals Firestore Security Rules
+// Phase C3.2: Global Chat with tenantId boundary
+// Reference: Backend Contract v1
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ============================================================
+    // HELPER FUNCTIONS
+    // ============================================================
+
+    // Check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Get the authenticated user's UID
+    function authUid() {
+      return request.auth.uid;
+    }
+
+    // Check if a member document exists for this user in a hall
+    function isHallMember(hallId) {
+      return isAuthenticated() &&
+        exists(/databases/$(database)/documents/halls/$(hallId)/members/$(authUid()));
+    }
+
+    // Get the hall member document for the authenticated user
+    function getHallMember(hallId) {
+      return get(/databases/$(database)/documents/halls/$(hallId)/members/$(authUid()));
+    }
+
+    // Check if user has a specific role in the hall
+    function hasRole(hallId, allowedRoles) {
+      return isHallMember(hallId) &&
+        getHallMember(hallId).data.role in allowedRoles;
+    }
+
+    // Check if user is RA or Staff in the hall
+    function isRaOrStaff(hallId) {
+      return hasRole(hallId, ["ra", "staff"]);
+    }
+
+    // Check if the rounds session belongs to the authenticated user
+    function isSessionOwner(hallId, sessionId) {
+      let session = get(/databases/$(database)/documents/halls/$(hallId)/rounds_sessions/$(sessionId));
+      return isAuthenticated() && session.data.userId == authUid();
+    }
+
+    // ============================================================
+    // /role_manifests/{role}/{email}
+    // Admin-only allowlist for elevated roles
+    // ============================================================
+    match /role_manifests/{role}/{email} {
+      // No client reads or writes - admin/Cloud Functions only
+      allow read, write: if false;
+    }
+
+    // ============================================================
+    // /users/{userId}
+    // Semi-private: Own user has full read, others can read limited fields
+    // displayName is needed for chat participant names
+    // ============================================================
+    match /users/{userId} {
+      // User can read their own full document
+      // Other authenticated users can also read (limited to displayName for chat)
+      // Note: Firestore rules can't field-level restrict, but we only query displayName
+      allow read: if isAuthenticated();
+
+      // SECURITY: Client cannot create user documents
+      // User documents are created by Cloud Functions (joinHallWithCode)
+      allow create: if false;
+
+      // User can only update displayName, fcmTokens, and updatedAt
+      // SECURITY: Cannot modify role, hallId, email, createdAt, tenantId
+      allow update: if isAuthenticated() &&
+        authUid() == userId &&
+        (!request.resource.data.diff(resource.data).affectedKeys()
+          .hasAny(["role", "hallId", "email", "createdAt", "tenantId"]));
+
+      // Users cannot delete their own user doc (admin/function only)
+      allow delete: if false;
+
+      // /users/{userId}/devices/{deviceId}
+      match /devices/{deviceId} {
+        allow read, create, update, delete: if isAuthenticated() && authUid() == userId;
+      }
+    }
+
+    // ============================================================
+    // /halls/{hallId}
+    // LOCKED DOWN: Only Cloud Functions can create/modify halls
+    // ============================================================
+    match /halls/{hallId} {
+      // Members can read hall info
+      // Also allow global 'staff' users to read all halls (for Dashboard listing)
+      allow read: if isHallMember(hallId) || 
+        get(/databases/$(database)/documents/users/$(authUid())).data.role in ['staff', 'admin', 'leadership'];
+
+      // SECURITY: All writes are Cloud Functions only
+      allow write: if false;
+
+      // ----------------------------------------------------------
+      // /halls/{hallId}/members/{memberId}
+      // LOCKED DOWN: Only Cloud Functions can create/modify memberships
+      // ----------------------------------------------------------
+      match /members/{memberId} {
+        // Members can read all members in their hall
+        allow read: if isHallMember(hallId);
+
+        // SECURITY: Client cannot create or modify memberships
+        // Memberships are created by Cloud Functions (joinHallWithCode)
+        allow create, update, delete: if false;
+      }
+
+      // ----------------------------------------------------------
+      // /halls/{hallId}/profiles/{uid}
+      // PUBLIC PROFILE: Limited fields visible to hall members
+      // Contains: displayName, role, updatedAt (no email, no private data)
+      // ----------------------------------------------------------
+      match /profiles/{uid} {
+        // Hall members can read any profile in their hall
+        allow read: if isHallMember(hallId);
+
+        // SECURITY: Only Cloud Functions can write profiles
+        // Profiles are synced from /users by joinHallWithCode
+        allow create, update, delete: if false;
+      }
+
+      // ----------------------------------------------------------
+      // /halls/{hallId}/residents/{residentId}
+      // ----------------------------------------------------------
+      match /residents/{residentId} {
+        // RAs and Staff can read/write residents
+        allow read, write: if isRaOrStaff(hallId) || 
+          get(/databases/$(database)/documents/users/$(authUid())).data.role in ['staff', 'admin', 'leadership'];
+      }
+
+      // ----------------------------------------------------------
+      // /halls/{hallId}/staff/{staffDocId}
+      // Defines the "Staff Manifest" for this hall
+      // ----------------------------------------------------------
+      match /staff/{staffDocId} {
+        // Staff (Directors) can read/write staff list
+        allow read, write: if isRaOrStaff(hallId) || 
+          get(/databases/$(database)/documents/users/$(authUid())).data.role in ['staff', 'admin', 'leadership'];
+      }
+
+      // ----------------------------------------------------------
+      // /halls/{hallId}/rooms/{roomId}
+      // ----------------------------------------------------------
+      match /rooms/{roomId} {
+        // All members can read rooms
+        allow read: if isHallMember(hallId);
+        // Client writes denied
+        allow write: if false;
+      }
+
+      // ----------------------------------------------------------
+      // /halls/{hallId}/room_inspections/{inspectionId}
+      // ----------------------------------------------------------
+      match /room_inspections/{inspectionId} {
+        // RA and Staff can read and write all inspections
+        allow read, write: if isRaOrStaff(hallId);
+        // Residents can read inspections for their assigned room
+        // Note: The query filters by roomNumber which matches their room assignment
+        allow read: if isHallMember(hallId);
+      }
+
+      // ----------------------------------------------------------
+      // /halls/{hallId}/bulletin_tasks/{taskId}
+      // ----------------------------------------------------------
+      match /bulletin_tasks/{taskId} {
+        // RA and Staff can read and write bulletin tasks
+        allow read, write: if isRaOrStaff(hallId);
+      }
+
+      // ----------------------------------------------------------
+      // /halls/{hallId}/duty_shifts/{shiftId}
+      // On-Duty RA shifts - residents can see who's on duty
+      // ----------------------------------------------------------
+      match /duty_shifts/{shiftId} {
+        // All hall members can read duty shifts (to see who's on duty)
+        allow read: if isHallMember(hallId);
+        // Only RA/Staff can create/update duty shifts
+        allow write: if isRaOrStaff(hallId);
+      }
+
+      // ----------------------------------------------------------
+      // /halls/{hallId}/events/{eventId}
+      // Hall events - all members can view, RA/Staff can manage
+      // ----------------------------------------------------------
+      match /events/{eventId} {
+        // All hall members can read events
+        allow read: if isHallMember(hallId);
+        // RA and Staff can create/update/delete events
+        allow write: if isRaOrStaff(hallId);
+      }
+
+      // ----------------------------------------------------------
+      // /halls/{hallId}/noise_reports/{reportId}
+      // Noise reports submitted by residents
+      // ----------------------------------------------------------
+      match /noise_reports/{reportId} {
+        // RA and Staff can read all noise reports
+        allow read: if isRaOrStaff(hallId);
+        // Residents can read their own noise reports
+        allow read: if isHallMember(hallId) && resource.data.reportedBy == authUid();
+        // Anyone in hall can create a noise report (Cloud Function handles validation)
+        allow create: if isHallMember(hallId) &&
+          request.resource.data.reportedBy == authUid();
+        // No client updates or deletes
+        allow update, delete: if false;
+      }
+
+      // ----------------------------------------------------------
+      // /halls/{hallId}/maintenance_requests/{requestId}
+      // Maintenance requests submitted by residents
+      // ----------------------------------------------------------
+      match /maintenance_requests/{requestId} {
+        // RA and Staff can read all maintenance requests
+        allow read: if isRaOrStaff(hallId);
+        // Residents can read their own requests
+        allow read: if isHallMember(hallId) && resource.data.requestedBy == authUid();
+        // Creation handled by Cloud Function
+        allow create: if false;
+        // No client updates or deletes
+        allow update, delete: if false;
+      }
+
+      // ----------------------------------------------------------
+      // /halls/{hallId}/move_out_checklists/{checklistId}
+      // Move-out checklists for residents
+      // ----------------------------------------------------------
+      match /move_out_checklists/{checklistId} {
+        // RA and Staff can read all checklists
+        allow read: if isRaOrStaff(hallId);
+        // Residents can read their own checklist
+        allow read: if isHallMember(hallId) && resource.data.residentId == authUid();
+        // Residents can update their own checklist items
+        allow update: if isHallMember(hallId) &&
+          resource.data.residentId == authUid() &&
+          !request.resource.data.diff(resource.data).affectedKeys()
+            .hasAny(["residentId", "roomNumber", "createdAt"]);
+        // Only staff can create/delete
+        allow create, delete: if isRaOrStaff(hallId);
+      }
+
+      // ----------------------------------------------------------
+      // /halls/{hallId}/announcements/{announcementId}
+      // Hall announcements - all members can view
+      // ----------------------------------------------------------
+      match /announcements/{announcementId} {
+        // All hall members can read announcements
+        allow read: if isHallMember(hallId);
+        // Only RA/Staff can create/update/delete announcements
+        allow write: if isRaOrStaff(hallId);
+      }
+
+      // ----------------------------------------------------------
+      // /halls/{hallId}/floor_rules/{ruleId}
+      // Floor rules and expectations
+      // ----------------------------------------------------------
+      match /floor_rules/{ruleId} {
+        // All hall members can read floor rules
+        allow read: if isHallMember(hallId);
+        // Only RA/Staff can manage rules
+        allow write: if isRaOrStaff(hallId);
+      }
+
+      // ----------------------------------------------------------
+      // /halls/{hallId}/faqs/{faqId}
+      // Hall FAQs
+      // ----------------------------------------------------------
+      match /faqs/{faqId} {
+        // All hall members can read FAQs
+        allow read: if isHallMember(hallId);
+        // Only RA/Staff can manage FAQs
+        allow write: if isRaOrStaff(hallId);
+      }
+
+      // ----------------------------------------------------------
+      // /halls/{hallId}/shifts/{shiftId}
+      // ----------------------------------------------------------
+      match /shifts/{shiftId} {
+        // User can read shifts where they are the assignee
+        allow read: if isAuthenticated() &&
+          isHallMember(hallId) &&
+          resource.data.userId == authUid();
+        // Client writes denied (sync function only)
+        allow write: if false;
+      }
+
+      // ----------------------------------------------------------
+      // /halls/{hallId}/rounds_sessions/{sessionId}
+      // ----------------------------------------------------------
+      match /rounds_sessions/{sessionId} {
+        // RA can read their own sessions; staff can read all
+        allow read: if isRaOrStaff(hallId) &&
+          (resource.data.userId == authUid() || hasRole(hallId, ["staff"]));
+
+        // RA can create session only if userId == auth uid
+        allow create: if hasRole(hallId, ["ra", "staff"]) &&
+          request.resource.data.userId == authUid() &&
+          !request.resource.data.keys().hasAny(["overallCoverage"]);
+
+        // RA can update only their own session; cannot write overallCoverage
+        allow update: if hasRole(hallId, ["ra", "staff"]) &&
+          resource.data.userId == authUid() &&
+          request.resource.data.userId == authUid() &&
+          !request.resource.data.diff(resource.data).affectedKeys().hasAny(["overallCoverage"]);
+
+        // Delete denied (admin only)
+        allow delete: if false;
+
+        // ----------------------------------------------------
+        // /halls/{hallId}/rounds_sessions/{sessionId}/floor_visits/{visitId}
+        // ----------------------------------------------------
+        match /floor_visits/{visitId} {
+          // Same rules as parent session
+          allow read: if isRaOrStaff(hallId) &&
+            (isSessionOwner(hallId, sessionId) || hasRole(hallId, ["staff"]));
+
+          allow create, update: if hasRole(hallId, ["ra", "staff"]) &&
+            isSessionOwner(hallId, sessionId);
+
+          allow delete: if false;
+
+          // ------------------------------------------------
+          // /halls/{hallId}/rounds_sessions/{sessionId}/floor_visits/{visitId}/segments/{segmentId}
+          // ------------------------------------------------
+          match /segments/{segmentId} {
+            allow read: if isRaOrStaff(hallId) &&
+              (isSessionOwner(hallId, sessionId) || hasRole(hallId, ["staff"]));
+
+            allow create, update: if hasRole(hallId, ["ra", "staff"]) &&
+              isSessionOwner(hallId, sessionId);
+
+            allow delete: if false;
+          }
+        }
+      }
+
+    } // End of /halls/{hallId}
+
+    // ============================================================
+    // /conversations/{conversationId}
+    // GLOBAL CHAT (Phase C3.2) - Membership-based access control
+    // ============================================================
+    match /conversations/{conversationId} {
+      // Read allowed if user is in participantIds array
+      // This allows list queries to work without subcollection reads
+      // participantIds is synced with members subcollection by Cloud Functions
+      allow read: if isAuthenticated() &&
+        authUid() in resource.data.participantIds;
+
+      // SECURITY: All conversation writes are Cloud Functions only
+      // - createOrGetDM creates DM conversations
+      // - createGroupConversation creates group conversations
+      // - onMessageCreate trigger updates lastMessageAt/Preview
+      allow create, update, delete: if false;
+
+      // ----------------------------------------------------------
+      // /conversations/{conversationId}/members/{uid}
+      // Canonical membership - determines access
+      // ----------------------------------------------------------
+      match /members/{uid} {
+        // User can read their own member doc
+        // Any participant can read all member docs (for group info)
+        allow read: if isAuthenticated() &&
+          (authUid() == uid || authUid() in get(/databases/$(database)/documents/conversations/$(conversationId)).data.participantIds);
+
+        // SECURITY: All membership writes are Cloud Functions only
+        allow create, update, delete: if false;
+      }
+
+      // ----------------------------------------------------------
+      // /conversations/{conversationId}/messages/{messageId}
+      // ----------------------------------------------------------
+      match /messages/{messageId} {
+        // Only participants can read messages
+        allow read: if isAuthenticated() &&
+          authUid() in get(/databases/$(database)/documents/conversations/$(conversationId)).data.participantIds;
+
+        // SECURITY: All message writes are Cloud Functions only
+        allow create, update, delete: if false;
+      }
+    }
+
+    // ============================================================
+    // /docs/{docId}
+    // Global Docs/Handbook Module
+    // ============================================================
+    match /docs/{docId} {
+      // Helper to get user role from /users/{uid}
+      function getUserRole() {
+        return get(/databases/$(database)/documents/users/$(authUid())).data.role;
+      }
+
+      function hasGlobalRole(allowedRoles) {
+        return isAuthenticated() && getUserRole() in allowedRoles;
+      }
+
+      // Read: RA, Staff, Leadership (Global Roles)
+      // Note: "resident" is EXCLUDED from read access per requirements
+      allow read: if hasGlobalRole(["ra", "staff", "leadership"]);
+
+      // Write: Staff, Leadership only
+      allow create, update, delete: if hasGlobalRole(["staff", "leadership"]) &&
+        request.resource.data.updatedBy == authUid() &&
+        (request.resource.data.updatedAt == request.time || request.resource.data.updatedAt == null);
+
+      match /entries/{entryId} {
+        // Read: RA, Staff, Leadership
+        allow read: if hasGlobalRole(["ra", "staff", "leadership"]);
+
+        // Write: Staff, Leadership only
+        allow create, update, delete: if hasGlobalRole(["staff", "leadership"]) &&
+          request.resource.data.text is string &&
+          request.resource.data.text.size() > 0;
+      }
+    }
+
+    // ============================================================
+    // DENY ALL OTHER PATHS
+    // ============================================================
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

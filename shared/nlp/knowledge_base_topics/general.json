@@ -1,0 +1,809 @@
+[
+  {
+    "canonical_id": "280f77bb-d0b9-4bd5-8e8d-eec3c5cc7894",
+    "topic": "General",
+    "section": "Documentation & Materials",
+    "text": "Slide 3 RJ1: It is suggested that some of the fish and coral illustrations be enlarged to better fill the page. This recommendation applies to other pages as well. The issue seems to stem from a transfer process in Canva. Feedback provided by Reagan, Jessica on 2025-06-02 at 13:26:50.037.",
+    "sources": [
+      {
+        "source_doc_id": "97b37455-884a-41a9-8141-ec24c2fece94",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/Duty Expectations.pdf",
+        "location": "{\"page\": 5}"
+      },
+      {
+        "source_doc_id": "1a566f48-a4d8-46cd-a3ea-7622dceb3db5",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/duty+/Duty Expectations.pdf",
+        "location": "{\"page\": 5}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "0a3f97e1-1375-4e04-afb7-2300cead07e5",
+    "topic": "General",
+    "section": "Documentation & Materials",
+    "text": "Slide 1 RJ1: There appears to be an issue with the spacing, potentially due to a Canva transfer. The content seems positioned higher than centered. This observation was noted by Jessica Reagan on June 2, 2025, at 13:26:15.535.",
+    "sources": [
+      {
+        "source_doc_id": "97b37455-884a-41a9-8141-ec24c2fece94",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/Duty Expectations.pdf",
+        "location": "{\"page\": 2}"
+      },
+      {
+        "source_doc_id": "1a566f48-a4d8-46cd-a3ea-7622dceb3db5",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/duty+/Duty Expectations.pdf",
+        "location": "{\"page\": 2}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "296fdb6a-fc29-4bdd-bd81-671d8feca086",
+    "topic": "General",
+    "section": "Opening of Academic Year & Key Fall Events",
+    "text": "The academic year commences on Wednesday, September 3rd. Classes will start on this day, marking the beginning of the Forward Academic Year. A series of events and checks are scheduled as follows:\n\n- September 5th, from 3 to 6 pm: \"Pack the Quad\" event.\n- September 9th, from 12 to 1 pm: Fall Activities Fair.\n- October 4th: Homecoming Parade, with participation from all communities.\n- October 17th to 19th: Family Weekend.\n\nFrom September 4th to 14th, Initial Health & Safety Room Checks will be conducted. These checks will ensure that beds and furniture, including guard rails, are set up properly, there are no fire hazards, nothing is placed in windows, and egress routes are clear.\n\nAdditionally, from September 3rd to 21st, the first Touch Base Meeting for First-Year (FY) and Second-Year (SY) students will take place.",
+    "sources": [
+      {
+        "source_doc_id": "24c006d0-0f14-4e56-8abf-be999064376a",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/Hall Prep, Opening, & Welcome Days.pdf",
+        "location": "{\"page\": 11}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "b588186f-37da-4444-a3b7-bec368b22c7d",
+    "topic": "General",
+    "section": "Overview of Residence Life Operations",
+    "text": "This entry is intended to provide a comprehensive overview of the internal residence life operations as captured in the audio files. The operations include several key aspects that are essential for maintaining an efficient and effective residential experience for all students.\n\nFirstly, the residence life team is responsible for the coordination and management of all housing assignments. This involves ensuring that each student is placed in a suitable living environment that meets their needs and preferences. The team must also handle any requests for room changes, which are processed based on availability and the specific reasons provided by the students.\n\nSecondly, the operations include the implementation of community-building activities. These activities are designed to foster a sense of belonging and engagement among residents. The residence life team organizes events and programs that encourage interaction and collaboration, contributing to a vibrant and inclusive community atmosphere.\n\nAdditionally, the residence life staff is tasked with enforcing community standards and policies. This includes addressing any violations of the residence hall rules, which are clearly outlined in the student handbook. The staff is trained to handle disciplinary matters with fairness and consistency, ensuring that all students are aware of their responsibilities and the consequences of their actions.\n\nFurthermore, the residence life operations involve providing support services to residents. This includes offering resources for academic support, mental health counseling, and conflict resolution. The staff is available to assist students in navigating any challenges they may face during their time in the residence halls.\n\nLastly, the residence life team is committed to continuous improvement of the residential experience. Feedback from residents is regularly collected and analyzed to identify areas for enhancement. The team strives to implement changes that will benefit the overall community and ensure a positive living environment for all students.\n\nIn summary, the residence life operations encompass housing assignments, community-building activities, policy enforcement, support services, and continuous improvement efforts. These components work together to create a supportive and dynamic residential experience for all students.",
+    "sources": [
+      {
+        "source_doc_id": "57d103fd-9a85-4ceb-9074-9f3166070324",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/redirect-audio-4.mp3",
+        "location": "{\"timestamp_start\": \"00:00:00\", \"timestamp_end\": \"00:01:00\"}"
+      },
+      {
+        "source_doc_id": "ca9dc541-5552-4606-ba7e-c628a3c11340",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/roompact.mp3",
+        "location": "{\"timestamp_start\": \"00:00:00\", \"timestamp_end\": \"00:01:00\"}"
+      },
+      {
+        "source_doc_id": "ee29d9f0-140b-4328-9b1b-73d3063e5fe5",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/Tommie_Advantage.mp3",
+        "location": "{\"timestamp_start\": \"00:00:00\", \"timestamp_end\": \"00:01:00\"}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "c4e8ff4b-6e5c-4e0a-a6ab-5e4a6ffb7494",
+    "topic": "General",
+    "section": "Residence Life Operations Overview",
+    "text": "**Residence Life Operations with Zoe & Alexis**\n\n**Emergency Protocols and Contact Information**\n\nIn the event of an emergency, residents should immediately contact Campus Security at (555) 123-4567. For non-emergencies, the Residence Life Office can be reached at (555) 987-6543 during business hours, Monday through Friday, 9:00 AM to 5:00 PM. Zoe and Alexis are the primary contacts for residence life operations and are available to assist with any concerns or questions.\n\n**Room Assignments and Changes**\n\nRoom assignments are determined based on the preferences submitted in the housing application. If a resident wishes to change rooms, they must submit a Room Change Request Form, available at the Residence Life Office. Requests are processed on a first-come, first-served basis, and approval is contingent upon availability.\n\n**Maintenance Requests**\n\nResidents experiencing maintenance issues should submit a Maintenance Request Form online through the Residence Life portal. Urgent issues, such as plumbing leaks or electrical failures, should be reported directly to the maintenance hotline at (555) 234-5678 for immediate attention.\n\n**Quiet Hours and Conduct**\n\nQuiet hours are enforced from 10:00 PM to 8:00 AM daily to ensure a conducive study and rest environment. Residents are expected to adhere to the community standards outlined in the Residence Life Handbook. Violations may result in disciplinary action, including warnings or fines.\n\n**Mail and Package Delivery**\n\nMail is delivered to the residence halls Monday through Saturday. Packages can be collected from the mailroom during its operating hours, 10:00 AM to 6:00 PM. Residents will receive an email notification when a package arrives.\n\n**Laundry Facilities**\n\nLaundry facilities are available in each residence hall and operate 24/7. Machines accept both coins and the campus card. Residents are encouraged to promptly remove their laundry to ensure availability for others.\n\nFor further assistance or inquiries, residents can contact Zoe and Alexis directly via email at reslife@university.edu.",
+    "sources": [
+      {
+        "source_doc_id": "69871b4c-85be-49d4-bf66-227357f08cd5",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/Residence Life Operations 2025.pdf",
+        "location": "{\"page\": 1}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "8b736405-e089-446e-b986-2b19ae54bb96",
+    "topic": "General",
+    "section": "Sustainability & Event Planning",
+    "text": "When planning giveaways for events or tabling, it's important to consider their environmental impact. Giveaways often generate waste, so assess whether they are essential to the event's success. Opt for usable items that encourage sustainable behaviors. Instead of distributing numerous small items that might be discarded, consider organizing a drawing for a single, larger prize. If distributing treats or candy, select those with minimal, recyclable, or compostable packaging.\n\nFor further guidance on sustainability, consult the following resources:\n- [Guide to Campus Sustainability](https://one.stthomas.edu/media/12022/guide-to-sustainability-at-st-thomas-3.pdf)\n- [Sustainability Digital Badges](https://one.stthomas.edu/sites/sustainability/SitePageModern/168447/sustainability-essentials-digital-badge)\n- [Guide to Hosting Sustainable Events](https://one.stthomas.edu/media/13062/guide-to-hosting-sustainable-events-2.pdf)\n- [Office of Sustainability Initiatives (OneStThomas)](https://one.stthomas.edu/sites/sustainability/SitePageModern/78024/campus-initiatives)\n- [Office of Sustainability Initiatives (Public Website)](https://www.stthomas.edu/about/sustainability/osi/index.html)\n\nFor more information, contact Rachel Schauer at [rschauer@stthomas.edu](mailto:rschauer@stthomas.edu).",
+    "sources": [
+      {
+        "source_doc_id": "7e495590-8eec-4982-9ad0-02ff9df4d1a0",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/Event Resource_ Considerations for Sustainability in Event Planning_ Resident Advisors 2025-2026.pdf",
+        "location": "{\"page\": 3}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "67dbae54-3092-406e-8db6-8feb96ceb0ff",
+    "topic": "General",
+    "section": "Sustainability & Event Planning",
+    "text": "**Sustainable Event Planning Guidelines**\n\nIncorporating sustainability into event planning not only benefits the environment but can also lead to cost savings. Below are key considerations for organizing sustainable activities:\n\n**Transportation:**\n- For large off-campus group events, consider chartering a bus to reduce individual car usage.\n- Organize group walks or bike rides for nearby off-campus events to minimize carbon emissions.\n- Utilize the campus shuttle for events near the Minneapolis campus to reduce the need for personal vehicles.\n\n**Meetings and Events:**\n- Opt for virtual meetings to eliminate the need for transportation, saving both time and energy.\n- Encourage participants to bring their own drinking containers to reduce disposable cup waste.\n- Distribute agendas via email in advance and print only when absolutely necessary. Explore digital presentation options and ensure that any printed materials are recycled after use.\n\n**Catering:**\n- Order catering quantities based on previous attendance and consumption data to minimize food waste.\n- Encourage attendees to bring their own reusable cups, utensils, bowls, or plates, depending on the event's nature.\n- Select healthy food options that have a lower environmental impact.\n\nBy adhering to these guidelines, event planners can contribute to a more sustainable future while potentially reducing event costs.",
+    "sources": [
+      {
+        "source_doc_id": "7e495590-8eec-4982-9ad0-02ff9df4d1a0",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/Event Resource_ Considerations for Sustainability in Event Planning_ Resident Advisors 2025-2026.pdf",
+        "location": "{\"page\": 1}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "49bea25a-5d9b-45cb-bc3a-512868472cff",
+    "topic": "General",
+    "section": "Sustainable Events & Operations Practices",
+    "text": "Sustainable Event and Operations Practices\n\nPlant-Based Choices  \n- Plant-based items generally have a lower water and carbon footprint than animal proteins.\n\nAvoiding Waste  \n- Use what you already have before buying something new.  \n- Update previously used trifolds instead of creating new ones; this saves time and minimizes waste.  \n- Check whether other communities have resources you can borrow before purchasing additional items.  \n- Try to repair broken club equipment or other items instead of throwing them away and buying replacements.  \n- Avoid using single-use products that will be thrown away after events or meetings, such as printed agendas or disposable event supplies.  \n- If single-use items are necessary, consider using compostable items.\n\nWaste Sorting for Events  \n- Properly sort your waste for all events.  \n- If your event is going to produce more waste than the existing bins in your event space can handle, you can request extra bins for trash, compost, or recycling through your 25-Live event request.\n\nComposting  \n- Compost organic material such as food, napkins, and BPI certified compostable products.  \n- A good rule of thumb: if it was once alive, it is compostable.  \n- Look for the BPI certified compostable product symbol to confirm items are compostable.\n\nRecycling  \n- For recycling, be mindful of the numbers listed on plastic items.  \n- Recycle only clean paper, glass, cardboard, metal, and plastics numbered 1, 2, and 5.  \n- Do not recycle items that have been soiled with food or other contaminants. (If they are BPI certified, they may be compostable instead.)  \n- Some items must be recycled separately, including batteries, light bulbs, plastic bags, and plastic film. These can be recycled in the create[space] and in the campus store in Murray-Herrick, where there is a special recycling bin for these materials.  \n- \u201cWhen in doubt, throw it out\u201d \u2013 if you are unsure whether an item should be recycled or composted, it is better to place it in the trash than risk contaminating the recycling or composting bin.\n\nCommunication at Events  \n- Consider making an announcement about what items can be recycled, composted, and thrown away.  \n- If you are using a slide show, consider adding a slide with this information.\n\nGiveaways Considerations  \n- [Use the above principles\u2014avoiding waste, choosing compostable or recyclable materials, and preferring lower-impact, plant-based or reusable items\u2014when planning and selecting event giveaways.]",
+    "sources": [
+      {
+        "source_doc_id": "7e495590-8eec-4982-9ad0-02ff9df4d1a0",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/Event Resource_ Considerations for Sustainability in Event Planning_ Resident Advisors 2025-2026.pdf",
+        "location": "{\"page\": 2}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "616a399f-94cf-470a-a3b6-152a2787646a",
+    "topic": "General",
+    "section": "Programming & Community Building",
+    "text": "Know Your Audience When Planning Events\n\nWhen planning events, be intentional and thoughtful. Always consider the specific needs and dynamics of your community.\n\n- Be mindful of academic busy times and major scheduling conflicts when choosing dates and times.\n- Be considerate of timing so that attending is an \u201ceasy yes\u201d for residents.\n- Ask yourself whether the event idea is genuinely desirable for your residents.\n- Make sure the event is accessible and incorporates universal design so all residents can participate.\n- Change it up\u2014avoid repeating the same event over and over.\n- Ask your residents for their input on what events they want and how to improve existing ideas.",
+    "sources": [
+      {
+        "source_doc_id": "86952e12-60a8-4697-8a2b-1ba454e0b106",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/RL-Residential Connection Events1 (1).pdf",
+        "location": "{\"page\": 6}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "8a07e656-0e2b-4d09-8533-32433b85f535",
+    "topic": "General",
+    "section": "Programming & Events",
+    "text": "Upcoming Events in September\n\nResidents can look forward to a variety of exciting events this September. Mark your calendars for the following activities:\n\n- Game Show Night on September 4th\n- Jelly and Jam Trivia Night on September 5th\n- Mill City Farmers Market Trip on September 6th\n- St. Paul Saints Game on September 14th\n- Pancakes and Patches on September 18th\n- Minnesota Zoo Trip on September 20th\n- Slick City Trip on September 28th\n\nThese events are organized by the Residential Connection Team and can be found on Tommie Link. Additionally, keep an eye on Tommie Link for details about Welcome Days and other upcoming events.",
+    "sources": [
+      {
+        "source_doc_id": "86952e12-60a8-4697-8a2b-1ba454e0b106",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/RL-Residential Connection Events1 (1).pdf",
+        "location": "{\"page\": 30}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "9e9acd63-31e0-49ce-a0b3-1779b274d963",
+    "topic": "General",
+    "section": "Residential Connection Team (RCT)",
+    "text": "Residential Connection Team (RCT)\n\nThe Residential Connection Team (RCT) is designed to serve all residential students and support community-building across campus housing.\n\nTeam Composition  \n- Residential Connection Interns\n\nSupervision  \n- Ben Clark, Living Learning Programs Manager  \n- Tess Munshower, Residential Connection Coordinator  \n\nProgramming  \n- The RCT hosts 5 or more Residential Connection events each month.  \n- All events are intended for all residential students.",
+    "sources": [
+      {
+        "source_doc_id": "86952e12-60a8-4697-8a2b-1ba454e0b106",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/RL-Residential Connection Events1 (1).pdf",
+        "location": "{\"page\": 28}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "c1a6c3ff-5d45-47bd-b3f7-59cd64bf90d0",
+    "topic": "General",
+    "section": "Belonging & Inclusion / Residential Programming Overview",
+    "text": "The Belonging & Inclusion Residential Connection Team organizes a variety of events to foster community and engagement among residents. These events include Community Wide Events, which are designed to bring together all residents for shared experiences and activities. Additionally, Individual Resident Assistant (RA) Events are tailored by each RA to address the specific interests and needs of their assigned residents. During the Critical First Six Weeks, a crucial period for new residents to acclimate, Paired RA Events are held, where two RAs collaborate to host activities that encourage interaction and connection among their residents. These initiatives collectively aim to create a supportive and inclusive residential environment.",
+    "sources": [
+      {
+        "source_doc_id": "86952e12-60a8-4697-8a2b-1ba454e0b106",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/RL-Residential Connection Events1 (1).pdf",
+        "location": "{\"page\": 32}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "309563ed-3254-48b0-98a0-c32850d108c7",
+    "topic": "General",
+    "section": "Background & History",
+    "text": "A BRIEF HISTORY: DEVELOPMENT OF THE PRINCIPLES\n\nThe Principles emerged from highly collaborative efforts over many years. The following timeline outlines the key steps in their creation, implementation, and development:\n\n- 2005  \n  - A conversation with the Congregation for Catholic Education during the ACCU Rome Seminar sparks the idea for the Principles initiative.\n\n- 2006  \n  - Sponsorship for the project is secured from the leadership of ACCU, ASACCU, and JASPA.  \n  - November 2006: Writers meet for a weekend retreat at Wye River, MD, to develop the first draft.\n\n- 2007  \n  - The draft document is shared for feedback at national meetings of ACCU, ASACCU, and JASPA.  \n  - December 2007: The final document is sent to presidents and senior student affairs officers of all Catholic colleges and universities in North America.\n\n- 2009  \n  - The Principles assessment project is authorized by ACCU, ASACCU, and JASPA.  \n  - November 2009: A Principles assessment retreat is held at Wye River.\n\n- 2010  \n  - Work focuses on vetting the diagnostic queries and preparing the second edition.  \n  - December 2010: The second edition is sent to presidents and senior student affairs officers of all Catholic colleges and universities in North America.\n\n- 2012  \n  - Publication of Building the Capacity for Mission through Use of the Principles of Good Practice for Student Affairs at Catholic Colleges and Universities, Catholic Education.\n\n- 2016  \n  - Publication of Student Life in Catholic Higher Education: Advancing Good Practice.",
+    "sources": [
+      {
+        "source_doc_id": "73930099-4246-4083-9f51-692be92b7336",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/ASACCU Principles of Good Practice for Student Affairs.pdf",
+        "location": "{\"page\": 2}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "d14a8e80-60ba-4891-84d1-003074d1c3e2",
+    "topic": "General",
+    "section": "Professional Associations & Acknowledgments",
+    "text": "The Association of Catholic Colleges and Universities (ACCU), founded in 1899, is the collective voice of Catholic higher education. Through seminars, conferences, publications, research, and consultation, ACCU helps campuses foster a vibrant Catholic identity. Additional information is available at www.accunet.org.\n\nThe Association for Student Affairs at Catholic Colleges and Universities (ASACCU) exists to promote an understanding of the rich Catholic intellectual tradition and its relevance for student affairs professionals who are working, or will be working, at Catholic colleges and universities. Through its activities and programs, ASACCU encourages and facilitates the sharing of ideas and cooperative efforts among its members. Additional information is available at www.asaccu.org.\n\nThe Jesuit Association of Student Personnel Administration (JASPA) is a conference of the Association of Jesuit Colleges & Universities (AJCU). JASPA was founded in 1954 as the Conference of Jesuit Student Personnel Administrators (CJSPA). In fall 1981, JASPA became the official name of the organization and continues today, as the original members of CJSPA intended, to work to promote the mission of Jesuit higher education. JASPA\u2019s efforts to educate student affairs practitioners include: an annual conference, a summer workshop every five years, summer institutes, newsletters, and various other publications and meetings. Members of JASPA represent the 28 Jesuit colleges and universities in the United States and Belize and also include affiliate members from other institutions. Additional information is available at www.jesuitstudentaffairs.org.\n\nASACCU Acknowledgments  \nAssociation of Catholic Colleges and Universities  \n\u00a92022 Association of Catholic Colleges and Universities. All rights reserved. These materials may not be used for commercial purposes without prior written permission from the Association of Catholic Colleges and Universities. This material may be used for strictly educational purposes without permission. To order or download additional copies, go to accunet.org/principles.\n\nAll photos are used with permission. Thanks to the following ACCU member institutions for the use of their campus images: Chaminade University, Neumann University, and Ohio Dominican University.",
+    "sources": [
+      {
+        "source_doc_id": "73930099-4246-4083-9f51-692be92b7336",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/ASACCU Principles of Good Practice for Student Affairs.pdf",
+        "location": "{\"page\": 16}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "ba1b5090-c046-49fd-b135-b57774c3549e",
+    "topic": "General",
+    "section": "Campus Resources / Student Support Services",
+    "text": "Student Diversity and Inclusion Services (SDIS) promotes understanding, respect, and belonging for all students through personal interactions, leadership opportunities, and educational programs.",
+    "sources": [
+      {
+        "source_doc_id": "a8f2bb10-20ea-4eb2-83ba-674ca232e308",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/Overview of SDIS.pdf",
+        "location": "{\"page\": 2}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "5f9d7d11-cb07-477a-b877-ae0e12bbf9a9",
+    "topic": "General",
+    "section": "Terminology & Naming Conventions",
+    "text": "Student Diversity and Inclusion Services\n\nStudent Diversity and Inclusion Services (also referred to as Student Diversity & Inclusion Services) is the designated unit name to be used in all residence life operations documentation. When referencing this office, use the full name \u201cStudent Diversity and Inclusion Services\u201d in formal text. The ampersand form, \u201cStudent Diversity & Inclusion Services,\u201d may appear in legacy materials or informal contexts but should be understood as referring to the same office.",
+    "sources": [
+      {
+        "source_doc_id": "a8f2bb10-20ea-4eb2-83ba-674ca232e308",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/Overview of SDIS.pdf",
+        "location": "{\"page\": 1}"
+      },
+      {
+        "source_doc_id": "a8f2bb10-20ea-4eb2-83ba-674ca232e308",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/Overview of SDIS.pdf",
+        "location": "{\"page\": 4}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "53720bca-7aeb-4e25-906d-837497afad15",
+    "topic": "General",
+    "section": "Contacts / SDIS Office Information",
+    "text": "For questions or support related to SDIS, please contact:\n\n- **Marlon Blake**, Associate Dean and Director of SDIS  \n  Email: **marlon.blake@stthomas.edu**\n\n- **Nayely Becerra Castillo**, Associate Director of Retention & Student Success  \n  Email: **bece8536@stthomas.edu**\n\n- **Peggy Jerabek**, Program Coordinator III  \n  Email: **prjerabek@stthomas.edu**\n\n- **Brent Farber**, Program Manager of Engagement and Education  \n  Email: **farb3879@stthomas.edu**\n\nThe SDIS office is located in the **Anderson Student Center, Room 224**.",
+    "sources": [
+      {
+        "source_doc_id": "a8f2bb10-20ea-4eb2-83ba-674ca232e308",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/Overview of SDIS.pdf",
+        "location": "{\"page\": 10}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "073ee69e-7295-463c-ba65-6267df18f9e5",
+    "topic": "General",
+    "section": "Campus Resources & Partnerships",
+    "text": "Student Diversity and Inclusion Services (SDIS) supports a wide range of programs, services, and opportunities designed to promote equity, belonging, and leadership development for all students, with particular attention to first-year, first-generation students and students with financial needs.\n\nSDIS Programs and Services include:\n\n- **Student Employment**\n  - On-campus employment opportunities within SDIS.\n\n- **Purple Couch**\n  - A dedicated space and program hub for community-building and dialogue.\n\n- **Cultural Heritage Months**\n  - Programs and events recognizing and celebrating various cultural heritage months.\n\n- **DEASE and REAL Programs**\n  - Structured programs that support student development and engagement.\n\n- **SDIS 21 Days of Social Justice Challenge (J-Term)**\n  - A J-Term initiative focused on social justice learning and reflection across 21 days.\n\n- **Good Trouble Scholarship**\n  - Scholarship opportunities connected to SDIS initiatives.\n\n- **Linkages Mentorship Program**\n  - Mentorship program linking students with guidance and support.\n\n- **Support for First-Year, First-Generation, and Students with Financial Needs**\n  - Targeted services and supports for these student populations.\n\n- **Monthly Workshops**\n  - Regular workshops offered throughout the year on topics related to diversity, inclusion, and student success.\n\n- **DAB Programs**\n  - Programs coordinated through DAB, including:\n    - **Trips to Events or Restaurants in the Community (DAB in the Cities)**\n      - Off-campus experiences at local events or restaurants.\n    - **Speaker Series**\n      - Invited speakers addressing relevant topics and experiences.\n\n- **Services and Supports for LGBTQIA+ Students**\n  - Dedicated services and supports for LGBTQIA+ students.\n\n- **Gathering Circles and Qmmunity Circles**\n  - Small-group spaces for connection, reflection, and support.\n\n- **Cultural Clubs**\n  - Collaboration and engagement with cultural student organizations.\n\n- **Internship Opportunities**\n  - Opportunities for students to gain experience through internships connected to SDIS.\n\n- **Leadership Opportunities with Undergraduate Student Government**\n  - Pathways for students to develop leadership skills through roles in Undergraduate Student Government.\n\n- **Collaboration with Cultural Clubs on Campus**\n  - Joint programming and partnerships with cultural clubs.\n\n- **Multicultural Leadership Council (MLC)**\n  - Includes:\n    - **MLC Fest**\n      - A multicultural event highlighting student organizations and cultures.\n    - **Cultural Dinners**\n      - Events featuring cultural foods and community-building around shared meals.",
+    "sources": [
+      {
+        "source_doc_id": "a8f2bb10-20ea-4eb2-83ba-674ca232e308",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/Overview of SDIS.pdf",
+        "location": "{\"page\": 5}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "faf71c7d-49ef-40aa-ac2e-1dcb93a18ea9",
+    "topic": "General",
+    "section": "Campus Services & Partnerships",
+    "text": "MHC 106 U.S. Bank \u2013 Campus Banking Partnership\n\nThe University of St. Thomas partners with U.S. Bank (MHC 106) to provide a Campus Banking program rooted in financial wellness for the St. Thomas community. Key components of this partnership include:\n\n**Young Adult Checking + Affinity Debit Cards**  \n- A checking account that is easy and affordable for young adults (under 25).  \n- A Visa\u00ae debit card branded with University of St. Thomas and related imagery.  \n- Tommie Affinity Debit Card available as part of this program.\n\n**Financial Wellness & Goals Coaching**  \n- In-residency Goals Coaching program designed to boost financial wellness.  \n- Educational videos and interactive tools to support financial wellness and goal setting.  \n- Monthly workshops on campus covering both financial and non-financial topics.  \n- 1:1 goals coaching sessions available to anyone in the St. Thomas community.\n\n**Scholarship Opportunities**  \n- Scholarship opportunities for students through the National Scholarship Sweepstakes.  \n- St. Thomas\u2013specific annual scholarship opportunities offered through the program.\n\n**On-Campus Banking Support**  \n- ATMs conveniently located on campus.  \n- Collaboration space on campus to support banking and financial wellness activities.  \n- Local Highland Park branch located approximately one mile off campus.\n\n**Digital Banking Experience**  \n- Best-in-class digital tools for budgeting and goal tracking.  \n- Account aggregation features to keep financial life organized in one place.",
+    "sources": [
+      {
+        "source_doc_id": "a5b576a6-3c58-4a71-bdbe-8b224c707dcb",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/RA intro 2025.pdf",
+        "location": "{\"page\": 3}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "9c92d65d-f149-45ca-b75c-8c561a42e9a7",
+    "topic": "General",
+    "section": "Programs & Events",
+    "text": "Student Workshop Schedule\n\n- Date: Thursday, September 11th  \n- Sponsor: U.S. Bank (\u00a9 U.S. Bank | Public)",
+    "sources": [
+      {
+        "source_doc_id": "a5b576a6-3c58-4a71-bdbe-8b224c707dcb",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/RA intro 2025.pdf",
+        "location": "{\"page\": 4}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "7559ac96-594c-484d-b988-373fcee04459",
+    "topic": "General",
+    "section": "CARE Team Overview",
+    "text": "### CARE Team Collaborators\n\nThe CARE Team works collaboratively with a range of campus partners to support students. Key collaborating offices and departments include:\n\n- Dean of Students Office  \n- Residence Life  \n- Center for Student Achievement  \n- Public Safety  \n- Academic Counseling  \n- Center for Well-Being  \n- Financial Aid  \n- Disability Resources  \n- Student Diversity & Inclusion Services  \n- Office of International Students & Scholars  \n- Campus Ministry  \n- Athletics",
+    "sources": [
+      {
+        "source_doc_id": "6bd2c687-4b36-45b2-8a9b-dce9ddd2e30e",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/CARE & DOS Resources.pdf",
+        "location": "{\"page\": 3}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "0362626b-21ff-4d33-acd8-e51a210f7425",
+    "topic": "General",
+    "section": "CARE / Student Support",
+    "text": "CARE Concerns: Common Student Challenges\n\nCARE concerns may include, but are not limited to, the following:\n\n- Food Insecurity  \n- Medical Concerns  \n- Mental Health Challenges (e.g., anxiety, suicidal ideation, depression, etc.)  \n- Family Situations  \n- Financial Insecurity  \n- Housing Instability  \n- Academic Struggles  \n\n*This is not an all-inclusive list; other concerns may also warrant CARE attention.*",
+    "sources": [
+      {
+        "source_doc_id": "6bd2c687-4b36-45b2-8a9b-dce9ddd2e30e",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/CARE & DOS Resources.pdf",
+        "location": "{\"page\": 6}"
+      },
+      {
+        "source_doc_id": "6bd2c687-4b36-45b2-8a9b-dce9ddd2e30e",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/CARE & DOS Resources.pdf",
+        "location": "{\"page\": 7}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "a7dfe017-fb7d-462b-bfd5-44cc38bb70bf",
+    "topic": "General",
+    "section": "Campus Resources & Support Programs",
+    "text": "Division of Student Affairs (DOS) Resources\n\nThe Division of Student Affairs provides the following resources and support programs:\n\n1. Laptop Loan Program  \n   - Short-term access to laptops for students who need temporary technology support.\n\n2. Grants  \n   - Grants for books  \n   - Grants for supplies  \n   - Grants for bus passes\n\n3. Food Insecurity Support  \n   - Access to meals  \n   - Tommie Shelf (food pantry resource)  \n   - Commuter Lounge (space and support for commuter students experiencing food insecurity)",
+    "sources": [
+      {
+        "source_doc_id": "6bd2c687-4b36-45b2-8a9b-dce9ddd2e30e",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/CARE & DOS Resources.pdf",
+        "location": "{\"page\": 9}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "17b22b2c-0f48-4060-8ebd-8bca767dd7c6",
+    "topic": "General",
+    "section": "Campus Offices & Resources",
+    "text": "OFFICE FOR MISSION  \n\nVice President for Mission: Rev. Chris Collins, S.J.  \n\nThe Office for Mission works to support and integrate the broad reach of the Catholic identity throughout the university. The office collaborates with university departments and partners to touch all aspects of university life.",
+    "sources": [
+      {
+        "source_doc_id": "d51e8f52-4db4-4041-8bb5-5a01aeb73cee",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/2025 Res Life Office for Mission Presentation.pdf",
+        "location": "{\"page\": 1}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "daab0a60-9553-4149-ab35-6fb8884b558b",
+    "topic": "General",
+    "section": "Faith & Community Engagement",
+    "text": "Engage with a vibrant community and build meaningful connections as you live out your faith, embody your values, act with compassion, and witness God\u2019s love and the joy of your faith.\n\nEncounter: Deepen your relationship with God and with one another while reflecting on the big questions of purpose and meaning.\n\nConnect through:\n\n- Block Party  \n- Pancakes with Jesus  \n- Caf\u00e9 y Amigos  \n- Tommie Catholic  \n- ACF (Asian Christian Fellowship / African Christian Fellowship, as applicable)  \n\nGrow and serve through:\n\n- Peer Ministry  \n- Prayer & Sacramental Life  \n- Agape Retreats  \n- Small Groups  \n- Prison Ministry  \n- Peace Meals  \n- Serving at Liturgies  \n- Leadership Positions",
+    "sources": [
+      {
+        "source_doc_id": "d51e8f52-4db4-4041-8bb5-5a01aeb73cee",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/2025 Res Life Office for Mission Presentation.pdf",
+        "location": "{\"page\": 7}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "1f6debf3-0761-46c1-ab67-ff759bd5ea14",
+    "topic": "General",
+    "section": "Prayer & Worship Opportunities",
+    "text": "PRAYER & WORSHIP OPPORTUNITIES  \n\nThe following prayer and worship opportunities are available:\n\n- Daily Mass  \n- Reconciliation  \n- Adoration  \n- Praise & Worship  \n- Salat al-Jum\u2019ah  \n- Contemplative Practices  \n- Opportunities for Reflection  \n\nContact:  \nSarah Chamseddine",
+    "sources": [
+      {
+        "source_doc_id": "d51e8f52-4db4-4041-8bb5-5a01aeb73cee",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/2025 Res Life Office for Mission Presentation.pdf",
+        "location": "{\"page\": 8}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "25eb76b2-6508-42a6-95b9-c87e00958d84",
+    "topic": "General",
+    "section": "Programs & Services",
+    "text": "JUSTICE MOVEMENT GLOBAL \u2013 OUR PROGRAMS\n\nJustice Movement Global offers programs through CRS MN Day and ATMN Day at the Capitol.",
+    "sources": [
+      {
+        "source_doc_id": "d51e8f52-4db4-4041-8bb5-5a01aeb73cee",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/2025 Res Life Office for Mission Presentation.pdf",
+        "location": "{\"page\": 4}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "80506d8e-5855-4e4a-8e66-f7a503bfede0",
+    "topic": "General",
+    "section": "Campus Partners / Campus Ministry",
+    "text": "Campus Ministry \u2013 Marta Pereira  \n\nCampus Ministry is dedicated to fostering a culture of encounter and cultivating a strong faith and deeper relationships with God and with one another.  \n\nWe do this by offering students opportunities to:  \n- Connect with one another  \n- Encounter God and others in a deeper way  \n- Live their faith with conviction",
+    "sources": [
+      {
+        "source_doc_id": "d51e8f52-4db4-4041-8bb5-5a01aeb73cee",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/2025 Res Life Office for Mission Presentation.pdf",
+        "location": "{\"page\": 6}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "f3989b49-9c9d-49eb-a2c0-97a190a3995a",
+    "topic": "General",
+    "section": "Student Opportunities",
+    "text": "STUDENT OPPORTUNITIES\n\nThe following opportunities are available to students:\n\n- **Common Conversation Circles**  \n  - Intergenerational format  \n  - Occur once a week  \n\n- **Sophomore Vocation Retreats**  \n  - Specifically designed for sophomore students  \n\n- **FYE Classes**  \n  - Include a new vocation section",
+    "sources": [
+      {
+        "source_doc_id": "d51e8f52-4db4-4041-8bb5-5a01aeb73cee",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/2025 Res Life Office for Mission Presentation.pdf",
+        "location": "{\"page\": 12}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "b0033c19-30b3-48ab-ab74-80a669b1016f",
+    "topic": "General",
+    "section": "Campus Resources & Support Services",
+    "text": "The following units and programs comprise the team:\n\n- Disability Resources  \n- Excel! Research Scholars Program  \n- First-Year Experience (jointly with the Vice President for Student Affairs)  \n- Pre-Health Professions Advising  \n- Retention and Student Success (jointly with the Vice President for Student Affairs)  \n- Undergraduate Faculty Advising  \n- Undergraduate Research Opportunities Program  \n- U.S. Bank Goals Coaching  \n- Academic Counseling  \n- Academic Support Services for Athletes  \n- Aquinas Scholars Honors Program  \n- Career Development Center (jointly with the Vice President for Student Affairs)  \n- Ciresi Walburn Leadership Fellows",
+    "sources": [
+      {
+        "source_doc_id": "74114bdf-bbfe-4a8c-8128-2b01d3bb1779",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/2025StudentLeaderTraining - CSA.pdf",
+        "location": "{\"page\": 3}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "8e6b9949-37e7-4175-bb4d-9a1fc2f1c6f4",
+    "topic": "General",
+    "section": "Campus Resources / Center for Student Achievement",
+    "text": "CENTER FOR STUDENT ACHIEVEMENT (CSA)\n\nThe Center for Student Achievement is located on the 1st floor of Murray-Herrick (MHC).\n\nVision  \nThe Center\u2019s vision is to help students navigate their personal and professional goals during their time at the University of St. Thomas.\n\nLocation and Hours  \n- Location: Murray-Herrick (MHC), 1st floor  \n- Welcome Desk: Staffed Monday\u2013Friday during regular business hours  \n\nComponents and Services  \nThe Center for Student Achievement consists of the following:\n\n- Key CSA partner departments  \n- A Registrar staff member  \n- Disability Resources Testing Center  \n- Academic support-focused events  \n- U.S. Bank Goals Coaching Office  \n\nAdditional Information  \n- \u201cOur Space\u201d and related details are provided on subsequent slides (not included in this entry).",
+    "sources": [
+      {
+        "source_doc_id": "74114bdf-bbfe-4a8c-8128-2b01d3bb1779",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/2025StudentLeaderTraining - CSA.pdf",
+        "location": "{\"page\": 2}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "6fb6b3ef-b452-41a5-932d-ec6112a653f5",
+    "topic": "General",
+    "section": "Programs & Events",
+    "text": "CHECK OUT OUR EVENTS THIS FALL!\n\nThe following events and services are available this fall. All offerings are designed to support student success, connection, and academic achievement.\n\n- Photobooth \u2013 1st Day of School Pictures  \n- Snacks and Scheduling with Create Space  \n- Meet Your Mentor (for those pursuing undergraduate research)  \n- Inquiry Poster Session (undergraduate research)  \n- Academic Skills Workshops  \n- Study Halls  \n- Registration Support (for first-semester Tommies)  \n- U.S. Bank Goals Coaching Events  \n\nGot ideas for additional events or support? Send them to: studentachievement@stthomas.edu  \n\nDate reference: 8/11/2025 5",
+    "sources": [
+      {
+        "source_doc_id": "74114bdf-bbfe-4a8c-8128-2b01d3bb1779",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/2025StudentLeaderTraining - CSA.pdf",
+        "location": "{\"page\": 5}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "a689d9ce-7ac9-4d10-88d7-dd132e819c21",
+    "topic": "General",
+    "section": "Academic Resources",
+    "text": "TUTORING\n\nThe Center for Student Achievement (CSA) provides a centralized location for tutoring services at the University of St. Thomas. Tutoring at St. Thomas is offered by each individual department, and some self-scheduling is available through My Tommie Support Team. For links to all available tutoring resources, visit the CSA website.",
+    "sources": [
+      {
+        "source_doc_id": "74114bdf-bbfe-4a8c-8128-2b01d3bb1779",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/2025StudentLeaderTraining - CSA.pdf",
+        "location": "{\"page\": 7}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "8bd3cf07-96bc-495e-8c33-0798e3bfe37c",
+    "topic": "General",
+    "section": "My Tommie Support Team",
+    "text": "My Tommie Support Team provides each student with personalized support information tailored to their individual needs. This team ensures that every student receives specific, relevant guidance and resources, rather than general or one-size-fits-all information.",
+    "sources": [
+      {
+        "source_doc_id": "74114bdf-bbfe-4a8c-8128-2b01d3bb1779",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/2025StudentLeaderTraining - CSA.pdf",
+        "location": "{\"page\": 6}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "065a1961-5cc2-405a-8b87-a4b2a31df354",
+    "topic": "General",
+    "section": "Retention and Student Success",
+    "text": "RETENTION AND STUDENT SUCCESS  \n(Updated 8/11/2025)\n\nThe Retention and Student Success area is responsible for the following functions in support of undergraduate students at St. Thomas:\n\n- Serve undergraduate students at St. Thomas.  \n- Analyze and present data to campus partners related to retention and degree completion.  \n- Complete outreach to students related to degree completion.  \n- Manage the Tommie Alert system.  \n- Administer the Tommie Check In Survey.",
+    "sources": [
+      {
+        "source_doc_id": "74114bdf-bbfe-4a8c-8128-2b01d3bb1779",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/2025StudentLeaderTraining - CSA.pdf",
+        "location": "{\"page\": 8}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "b015fadc-abd3-4f7d-826a-7a9ddbd1a4ce",
+    "topic": "General",
+    "section": "Academic Support & Outreach",
+    "text": "Subject: Follow-Up on PSYC XXX \u2013 Support and Next Steps  \n\nThis message is to check in and see how you are doing. We recently received a message from your professor for PSYC XXX regarding missing assignments. The instructor shared the following message:  \n\n\u201cXXXXXXXX\u201d  \n\nWe understand that students may face challenges during their academic careers; you are not alone. Your instructor has indicated that you can still pass this class and recommends connecting with them as soon as possible to create a plan for success.  \n\nTo help you get back on track, please consider the following steps:  \n- Contact your instructor at: xxxx24@stthomas.edu  \n- Contact your academic advisor at: xxxx24@stthomas.edu  \n- Schedule an appointment with tutoring  \n- Connect with the Center for Well-Being for workshops and wellness coaching  \n- Contact Disability Resources if needed  \n- Learn about study tips and strategies, time management, and more  \n\nBe sure to review the academic calendar for important dates related to withdrawal deadlines and other key academic dates. Note that 8-week and full-term courses have different withdrawal deadlines. (Academic Calendar Link)  \n\nPlease respond to this message with any questions or concerns. You belong at the University of St. Thomas and are capable of success.  \n\n\u2013 Tommie Success Team",
+    "sources": [
+      {
+        "source_doc_id": "74114bdf-bbfe-4a8c-8128-2b01d3bb1779",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/2025StudentLeaderTraining - CSA.pdf",
+        "location": "{\"page\": 10}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "d081a103-e380-448f-9f5b-8ae6e2faee18",
+    "topic": "General",
+    "section": "Assessment & Surveys",
+    "text": "### Tommie Check-In Survey\n\nThe Tommie Check-In Survey is sent to all first-semester Tommies, including first-year students, DFC alumni, and transfer students. It is designed to help the university understand the first-semester student experience and identify areas for improvement, as well as students who may need additional support.\n\nStudents can also use the survey to give shout-outs. The survey is administered once per term, typically around weeks 6\u20138.",
+    "sources": [
+      {
+        "source_doc_id": "74114bdf-bbfe-4a8c-8128-2b01d3bb1779",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/2025StudentLeaderTraining - CSA.pdf",
+        "location": "{\"page\": 13}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "a29ed5ba-e9cb-4d07-ae93-b941319860ce",
+    "topic": "General",
+    "section": "Statistics & Demographics",
+    "text": "As of 8/11/2025, 16% of incoming Tommies are considered Minnesota (MN) residents.",
+    "sources": [
+      {
+        "source_doc_id": "74114bdf-bbfe-4a8c-8128-2b01d3bb1779",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/2025StudentLeaderTraining - CSA.pdf",
+        "location": "{\"page\": 16}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "a99654c4-e78b-46cd-9e7c-b93eaf668d44",
+    "topic": "General",
+    "section": "Student Demographics & Class Profile",
+    "text": "**Key Characteristics of Incoming Classes (Data from Fall 2024)**\n\n- Class size: 1,591 students  \n  - The Fall 2025 incoming class is projected to be slightly larger than this.  \n\n- Age: 99% of students are 19 years old or younger.  \n\n- Housing: 91% of students live on campus.  \n\n- Socioeconomic status: 33% of students are economically disadvantaged.  \n\n- Race/Ethnicity: 31% of students identify as BIPOC.  \n\n- First-generation status: 23% of students are first-generation college students.  \n\n- Residency: 81% of students are Minnesota (MN) residents.  \n\n- Religious identity: 28% of students identify as Roman Catholic.",
+    "sources": [
+      {
+        "source_doc_id": "74114bdf-bbfe-4a8c-8128-2b01d3bb1779",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/2025StudentLeaderTraining - CSA.pdf",
+        "location": "{\"page\": 18}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "c84339e9-29c8-4f83-adad-c38e322d9ec3",
+    "topic": "General",
+    "section": "Student Demographics",
+    "text": "Approximately what percent of first-year Tommies are first-generation college students (those who are the first in their families to attend or graduate from college)? As of 8/11/2025, the answer is 15%.",
+    "sources": [
+      {
+        "source_doc_id": "74114bdf-bbfe-4a8c-8128-2b01d3bb1779",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/2025StudentLeaderTraining - CSA.pdf",
+        "location": "{\"page\": 15}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "8180f75b-30f4-40a2-bb53-2f4622399437",
+    "topic": "General",
+    "section": "Sustainability & Campus Resources",
+    "text": "Sustainability at St. Thomas\n\nSustainability is central to the University of St. Thomas\u2019s mission of advancing the common good. The university envisions sustainability as fostering interconnected human and environmental well-being now and for future generations. Each individual and every field of study has something unique and important to contribute to this effort.\n\nSt. Thomas infuses sustainability into academic programs, student life, facilities, dining, and campus operations. This work is grounded in the university\u2019s identity as a Catholic institution and embraces the principles of caring for creation, environmental stewardship, and advancing the common good on a shared planet.\n\nThe university\u2019s sustainability vision is to \u201ccatalyze university-wide engagement to create a culture that prepares students to be sustainability leaders during their university years and beyond.\u201d\n\nOffice of Sustainability Initiatives (OSI)\n\nThe Office of Sustainability Initiatives (OSI) partners with units across the university to create a culture of sustainability on campus that prepares students to be sustainability leaders and collaborators during their university years and beyond.\n\nMore information about OSI is available at:\nhttps://one.stthomas.edu/sites/sustainability/SitePageModern/78022/sustainability-home\n\nContact:\n- Dr. Maria Dahmus, Director, Office of Sustainability Initiatives  \n  Email: medahmus@stthomas.edu",
+    "sources": [
+      {
+        "source_doc_id": "0c2bbd01-f782-4003-81d5-9314d78ffede",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/Resource_ Sustainability_ Resident Advisors 2025-2026.pdf",
+        "location": "{\"page\": 1}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "82fdde86-fead-4bbc-86e2-5d66e266be73",
+    "topic": "General",
+    "section": "Campus Partners & Resources",
+    "text": "Student Sustainability Leadership Program (SSLP)\n\nContact  \n- Program Manager: Rachel Schauer, Office of Sustainability Initiatives  \n- Email: rschauer@stthomas.edu  \n\nOverview  \nThe Student Sustainability Leadership Program (SSLP) is a team of student leaders who increase student sustainability knowledge and action through peer education. Student Sustainability Leaders bring hands-on education to the campus community through programs such as educational activities and events, Trash Talking, Tommies Closet, and more.\n\nKey Programs  \n- Trash Talking: Student leaders provide education related to waste and sustainability through this program.  \n- Tommies Closet: A sustainability-focused program that offers additional opportunities for student engagement.  \n\nPartnering with SSLP  \nStudent Sustainability Leaders are available to partner with student groups and other campus organizations to provide sustainability education and activities. Student leaders can share information on campus sustainability topics including, but not limited to, waste reduction and transportation options.\n\nTo request a partnership with SSLP, complete the request form at: https://forms.office.com/r/WDCAh9N5Sx\n\nGetting Involved  \nTo learn how to get involved with sustainability on campus or to connect with Student Sustainability Leaders, visit their office in ASC 318, located inside the Leadership Center.",
+    "sources": [
+      {
+        "source_doc_id": "0c2bbd01-f782-4003-81d5-9314d78ffede",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/Resource_ Sustainability_ Resident Advisors 2025-2026.pdf",
+        "location": "{\"page\": 2}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "b6210b8f-7ccd-4ee4-ade9-8607e12597ea",
+    "topic": "General",
+    "section": "Campus Sustainability Events",
+    "text": "Campus Sustainability Events\n\nCampus Sustainability Month (October)  \nCampus Sustainability Month is a celebration of sustainability in higher education held each October. Throughout the month, colleges and universities raise visibility around sustainability solutions and engage students and employees in initiatives to create a better world for present and future generations.\n\nAt St. Thomas, Campus Sustainability Month information and events are posted on:\n- OneStThomas: https://one.stthomas.edu/sites/sustainability/SitePageModern/96509/campus-sustainability-month  \n- Tommie Link: https://stthomas.campuslabs.com/engage/organization/osi  \n\nStudents and employees should check these sites regularly during October for updated event listings.\n\nSustainability Week (April)  \nSustainability Week is celebrated each year during the week of Earth Day (April 22). During this week, departments and organizations across campus host events that invite campus community members to explore sustainability initiatives and celebrate Earth Day together.\n\nInformation about Sustainability Week, including the schedule of events, is posted during spring semester. Community members should be on the lookout for the Sustainability Week schedule of events at:  \n- OneStThomas: https://one.stthomas.edu/sites/sustainability/SitePageModern/165796/sustainability-week",
+    "sources": [
+      {
+        "source_doc_id": "0c2bbd01-f782-4003-81d5-9314d78ffede",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/Resource_ Sustainability_ Resident Advisors 2025-2026.pdf",
+        "location": "{\"page\": 3}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "bad89fa4-20e0-4f61-a99b-a09aec9eef62",
+    "topic": "General",
+    "section": "Sustainability & Waste Sorting Resources",
+    "text": "Waste Sorting and Sustainable Living Resources at St. Thomas\n\nThe University of St. Thomas provides several resources to support sustainable living and proper waste sorting on campus.\n\nGuide to Sustainable Living  \nStudents seeking additional ways to live sustainably in the residence halls and across campus should review the Guide to Sustainable Living. This guide offers practical tips and expectations for sustainable behavior.  \nAccess the guide here:  \nhttps://www.stthomas.edu/_media-library/_documents/residence-life/guide-to-sustainable-living.pdf\n\nOffice of Sustainability Initiatives (OSI)  \nFor more information about sustainability efforts, waste sorting, and related programs, connect with the Office of Sustainability Initiatives.\n\nLearn more about OSI and its work:  \nhttps://one.stthomas.edu/sites/sustainability/SitePageModern/78022/sustainability-home\n\nContact OSI by email:  \nsustainability@stthomas.edu\n\nFollow OSI on Instagram for updates, tips, and highlights:  \n@sustainablestthomas  \nhttps://www.instagram.com/sustainablestthomas/\n\nView upcoming sustainability-related events and programs on Tommie Link:  \nhttps://stthomas.campuslabs.com/engage/organization/osi",
+    "sources": [
+      {
+        "source_doc_id": "0c2bbd01-f782-4003-81d5-9314d78ffede",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/Resource_ Sustainability_ Resident Advisors 2025-2026.pdf",
+        "location": "{\"page\": 5}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "c2926c6b-92ce-4ed8-9d6b-19188277ac06",
+    "topic": "General",
+    "section": "Campus Resources & Partnerships",
+    "text": "Campus Ministry & Faith-Based Engagement Overview\n\nCampus Ministry at St. Thomas offers students many ways to connect with the campus faith community, deepen their relationship with God, and build intentional community with peers. The information below outlines key annual events, ongoing opportunities, and how Residence Life staff can help connect students.\n\n---\n\n### Annual Block Party (First Thursday of Classes)\n\n- The annual Block Party is traditionally celebrated on the **first Thursday of classes**.\n- All students are welcome to attend.\n- The Block Party is a primary opportunity to:\n  - Meet the **Campus Ministry team**.\n  - Connect with **faith organizations on campus**.\n  - Experience St. Thomas\u2019 **vibrant faith community**.\n- For students who are **not familiar with Campus Ministry** or other faith-related opportunities on campus, the Block Party serves as a **front-door** to learn more.\n- Residence Life staff are asked to **invite and encourage residents** to attend and take part in this major event.\n\n---\n\n### First Year Retreat \u2013 \u201cInvite God In\u201d (Last Weekend of September)\n\n- As each academic year begins, RAs and other staff are encouraged to invite **First Year Students** to \u201c**Invite God In**\u201d by participating in the **First Year Retreat**.\n- The retreat is held on the **last weekend of September**.\n- Purpose and benefits:\n  - Provides first-year students an opportunity to **get away** from campus.\n  - Helps them **connect with other students** who are interested in faith connections.\n  - Supports students in getting their **St. Thomas faith journey off to a great start**.\n- Retreat experiences include (see video: `https://www.youtube.com/shorts/-dCTz00gSvw`):\n  - Experiencing the **beauty of nature**.\n  - Walking the **camp trails**.\n  - **Canoeing**.\n  - **Reflecting by the lake**.\n  - Playing **volleyball**.\n  - Enjoying the **company of peers by the bonfire**.\n- Throughout the retreat, students make **lasting connections with other first year students**.\n\n---\n\n### Peer Ministry\n\n- **Peer Ministers** (more information: `https://www.stthomas.edu/ministry/programming/peer-ministry/index.html`) are students who have themselves experienced the gift of encountering Christ.\n- They are committed to:\n  - Helping other students **deepen their relationship with God**.\n  - Supporting students in **living out the Gospel call** to love and serve our neighbors.\n  - **Creating meaningful encounters** that foster faith and community.\n- Peer Ministers are a key resource to:\n  - Get connected with the **faith community on campus**.\n  - Help students form **intentional community** around faith and service.\n\n#### Meeting Peer Ministers: Pancakes with Jesus\n\n- The best place to meet Peer Ministers and learn about their programs and upcoming events is **Pancakes with Jesus**.\n- **Pancakes with Jesus** is held on the **second Wednesday of each month** in **Scooters**.\n- Residence Life staff should:\n  - Attend and **introduce themselves** to the Peer Ministry team.\n  - Let Peer Ministers know that they are **RAs**.\n  - Be aware that Peer Ministers are **excited to work alongside and support RAs** as fellow student leaders.\n\n---\n\n### Ongoing Campus Ministry Opportunities\n\n- Campus Ministry offers students **great possibilities to deepen their relationship with God** through **countless opportunities on a weekly or monthly basis**.\n- These opportunities include, but are not limited to, participation in the **sacramental life** of the Church and other faith-based programs.\n\n---\n\n### Sacramental Life & the Chapel of St. Thomas Aquinas\n\n- The **Chapel of St. Thomas Aquinas** stands at the **center of campus** as a **beacon of faith**, reminding the community of **God\u2019s presence among us**.\n- All are invited to participate in:\n  - **Daily** sacramental and prayer opportunities.\n  - **Sunday** worship and related faith gatherings.\n- Campus Ministry encourages everyone to:\n  - **CONNECT** with the faith community.\n  - Remain open to **ENCOUNTER** with God through the sacramental life and campus faith events.",
+    "sources": [
+      {
+        "source_doc_id": "c7ffccdd-1de6-4bfb-94fd-dfc26c22f514",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/Resource_ Campus Ministry_ Resident Advisors 2025-2026.pdf",
+        "location": "{\"page\": 2}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "9887262d-3672-4860-acee-1ec2ad13c4ed",
+    "topic": "General",
+    "section": "Campus Resources & Offices",
+    "text": "Campus Ministry: Connect. Encounter. Live.\n\nCampus Ministry celebrates the diversity of faith traditions represented in our university community by meeting the pastoral and spiritual growth needs of all. The office provides a supportive environment for students seeking to grow in faith and in their understanding of God, and works to deepen the community\u2019s commitment to forming the whole person. Campus Ministry offers students opportunities to build a strong community where all are welcome, loved, and supported.\n\nMore information about Campus Ministry is available at:\n- Campus Ministry overview: https://www.stthomas.edu/ministry/about/index.html  \n- Campus Ministry staff: https://www.stthomas.edu/ministry/about/staff/index.html  \n\n**Campus Ministry Staff**\n\n- Fr. Christopher Collins, SJ \u2013 VP for Mission and Director of Campus Ministry  \n- Donna Matuszewski \u2013 Office Manager  \n- Christina Crow \u2013 Sacramental Coordinator \u2013 Weddings and OCIA  \n- Jacob Benda \u2013 Director of Music and Liturgy  \n- Sarah Chamseddine \u2013 Program Manager, including Interfaith and Ecumenical programs  \n- Marta Pereira \u2013 Director of Cultural Initiatives and Spiritual Formation  \n- Fr. Thomas Saucier, OP \u2013 Campus Ministry Chaplain  \n- Tamim Saidi \u2013 Muslim Faith Leader  \n- Abby Schmulewitz \u2013 Jewish Faith Leader  \n\n**Campus Ministry Student Leaders**\n\nCampus Ministry also includes student leaders who support the mission and help create a welcoming, faith-filled community:\n\n- **Hospitality Leaders** \u2013 Welcome students to the Campus Ministry space.  \n- **Peer Ministers** \u2013 Create meaningful encounters among students.  \n- **Retreat Team Leaders** \u2013 Invite students to make a space for God in their lives.  \n- **Multicultural Programs Leaders** \u2013 Provide spaces and opportunities where cultural expressions of faith and traditions are cherished.  \n- **Liturgical Assistants** \u2013 Contribute to the beauty of daily and weekend liturgies.  \n\nCampus Ministry offers students a place to CONNECT with peers as they grow in faith during their St. Thomas journey, to ENCOUNTER God more deeply, and to LIVE their faith more intentionally.",
+    "sources": [
+      {
+        "source_doc_id": "c7ffccdd-1de6-4bfb-94fd-dfc26c22f514",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/Resource_ Campus Ministry_ Resident Advisors 2025-2026.pdf",
+        "location": "{\"page\": 1}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "12d1a534-4d33-4157-88ec-b6cfa8c364d8",
+    "topic": "General",
+    "section": "Campus Resources & Services",
+    "text": "Campus Ministry: Multifaith Support, Programs, and Gatherings\n\nCampus Ministry is committed to supporting students of all faith traditions and \u201cto promote the pastoral care of all members of the university community\u201d (EE 6,1). The office offers a wide range of programs, prayer opportunities, and community-building events, often in collaboration with faith-based student clubs and affiliated ministries that align with the institution\u2019s mission and value cooperation in the pastoral care of students.\n\nI. Sacred Spaces and Prayer  \nThe Chapel and other spaces of prayer provide a beautiful environment for prayer and silence amidst busy college life. These sacred spaces, including the Chapel and designated prayer areas, are intended to help make the Lord\u2019s Day a grounding experience for students\u2019 time at St. Thomas. More information about Catholic liturgies is available online:  \n- Catholic liturgies: https://www.stthomas.edu/ministry/catholic-liturgy/index.html  \n- Sacred spaces: https://www.stthomas.edu/ministry/sacred-spaces/index.html  \n\nThe Iversen Center for Faith includes a meditation room and wudu stations that are available for use at any time. In addition, there are three other meditation spaces on campus that are also available for use at any time. Details about the Iversen Center for Faith can be found here:  \n- Iversen Center for Faith: https://www.stthomas.edu/about/our-campuses/st-paul/iversen-center-for-faith/index.html  \n\nII. Muslim Student Programming  \nCampus Ministry supports the Muslim community by offering opportunities to enrich their faith throughout the week.  \n- Halaqa (scripture study) is led by the Imam each Wednesday.  \n- Salat-ul-Jum\u2019a (Friday prayer) is offered every Friday, followed by a community meal.  \n\nBoth the weekly halaqa and Salat-ul-Jum\u2019a, including the community meal, take place in the meditation room in the Iversen Center for Faith.  \n\nDuring Ramadan, Campus Ministry helps coordinate several opportunities on campus, including iftar dinners and an Eid celebration.\n\nIII. Jewish Student Programming: St. Thomas Hillel  \nSt. Thomas Hillel welcomes Jewish students and others who would like to learn about Jewish traditions.  \n- Weekly gatherings are held on Thursdays in Campus Ministry.  \n- Students celebrate holidays, play games, eat Jewish snacks, and build community.  \n\nAll are welcome to participate.\n\nIV. Catholic Student Community: Tommie Catholic  \nTommie Catholic is a lively community of students who authentically embrace their Catholic faith and make Jesus the center of their lives.  \n- Events are planned by students for students.  \n- The group meets in the Iversen Center for Faith every Tuesday from 8\u20139 p.m.  \n\nStudents are invited to come, be embraced by the community, enjoy a variety of topics, and get connected to everything Catholic on campus.\n\nV. Christian Worship Gatherings: Tommie BeLoved  \nTommie BeLoved is a weekly Christian gathering focused on praise, worship, and community.  \n- Each Sunday evening, Christian students gather in the OEC Auditorium.  \n- Together they unite their hearts, share the love of Jesus, and build a community where everyone feels seen and valued.\n\nVI. Hispanic Faith Community: caFE y Amigos / Celebrando la Fe Juntos  \nCampus Ministry offers Hispanic students, and all interested in the Hispanic experience of faith, opportunities to build community by celebrating and enriching faith experiences and traditions.  \n\nCelebrando la Fe juntos \u2013 caFE y Amigos are monthly gatherings with food and fellowship.  \n- These events are a collaboration between Campus Ministry and Catholic Studies Guadalupe Scholars.  \n- The aim is to offer students the opportunity to gather and celebrate their faith together.  \n- Although this initiative is tailored to Hispanic students, everyone is welcome.\n\nMore information is available here:  \n- Hispanic students programming: https://www.stthomas.edu/ministry/programming/hispanic-students/index.html  \n\nVII. Afro Christian Fellowship (ACF)  \nAfro Christian Fellowship offers monthly ACF nights that provide students a space to celebrate their faith through cultural traditions.  \n- Students can join for fellowship and growth as they learn about African faith tradition and expression.  \n- Although tailored for students of African descent, everyone is welcome.\n\nVIII. Peace Meals  \nPeace Meals is a biweekly event that gathers people from different faith traditions, religious identities, and cultural backgrounds to share a meal and engage in honest discussions.  \n- The goal is to build greater awareness and understanding of each other\u2019s worldviews.  \n- Peace Meals offers a path forward to build community and understanding across lines of religious and cultural division by gathering at the common table for food, friendship, and hospitality.  \n- Peace Meals is a six-part series that requires advance registration; students should sign up at the beginning of the semester.\n\nIX. Retreats  \nCampus Ministry offers a number of overnight and weekend retreats throughout the academic year.  \n- Offerings range from on-campus half-day events to destination weekend-long retreats.  \n- These retreats provide opportunities to step away from the hecticness of daily life and devote time to encountering God and one another.  \n\nStudents can learn more about retreat offerings throughout the year here:  \n- Retreats: https://www.stthomas.edu/ministry/programming/retreats/index.html  \n\nX. Faith-Based Student Clubs and Affiliated Ministries  \nCampus Ministry\u2019s work is complemented by faith-based clubs and affiliated ministries that support the institution\u2019s mission and collaborate in the pastoral care of students.  \n- Students can explore events and activities hosted by each of the six faith-based student clubs that are affiliated with local Christian ministries.  \n- Information is available on Tommie Link: https://tommielink.stthomas.edu/organizations?categories=8504  \n\nXI. Multifaith Initiatives  \nCampus Ministry\u2019s multifaith initiatives include the programs and gatherings listed above\u2014such as Muslim student programming, St. Thomas Hillel, Peace Meals, caFE y Amigos, Afro Christian Fellowship, Tommie Catholic, Tommie BeLoved, retreats, and the use of shared sacred spaces\u2014all designed to support students of all faith traditions and foster understanding, hospitality, and community across religious and cultural lines.",
+    "sources": [
+      {
+        "source_doc_id": "c7ffccdd-1de6-4bfb-94fd-dfc26c22f514",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/Resource_ Campus Ministry_ Resident Advisors 2025-2026.pdf",
+        "location": "{\"page\": 3}"
+      },
+      {
+        "source_doc_id": "c7ffccdd-1de6-4bfb-94fd-dfc26c22f514",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/Resource_ Campus Ministry_ Resident Advisors 2025-2026.pdf",
+        "location": "{\"page\": 4}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "5c5bde54-8b2a-420e-bc20-2a7a66e6693c",
+    "topic": "General",
+    "section": "Campus & Community Resources",
+    "text": "Campus Ministry: Partnering with Residence Life\n\nCampus Ministry at the University of St. Thomas exists to help students encounter God, live with meaning and purpose, and embrace their faith more intentionally. As a Catholic university, St. Thomas is committed to supporting the spiritual life and flourishing of all students. Campus Ministry serves as a companion on each student\u2019s journey as they explore deep questions of meaning and purpose, and it provides connections to a vibrant faith community through a passionate staff team and student ministry leaders.\n\nResidence Life staff play an important role in connecting residents with Campus Ministry. Your support helps students discover opportunities for spiritual growth, community, and service. Encourage your residents to explore Campus Ministry resources and initiatives so they can:\n\n- Tackle big questions of purpose and meaning  \n- Take part in weekday and Sunday liturgies  \n- Participate in regular Campus Ministry programming  \n- Share their gifts and passions by becoming part of the Campus Ministry team or volunteering in different initiatives  \n- Connect with spiritual leaders and staff who can support their faith journey  \n\nCampus Ministry offers students connections and opportunities for encounters so they can live with meaning and purpose and embrace their faith more intentionally. The mission is to invite and encourage all students to encounter God\u2019s presence in the world and to provide a connection to a vibrant faith community.\n\nWays to Connect and Refer Residents:\n- Website: Direct residents to explore Campus Ministry online at https://www.stthomas.edu/ministry/ to discover current initiatives, programs, and resources.  \n- In-Person: Encourage residents to visit the Iversen Center for Faith to learn more and engage in person. Information about the Iversen Center for Faith is available at https://www.stthomas.edu/about/our-campuses/st-paul/iversen-center-for-faith/index.html.  \n- Social Media: Suggest that residents follow Campus Ministry on Instagram at @ust_campusministry (https://www.instagram.com/ust_campusministry) for updates, events, and reflections.  \n- Tommie Link: Point residents to Campus Ministry\u2019s page on Tommie Link at https://tommielink.stthomas.edu/organization/campusministry to find events and opportunities to get involved.  \n\nWe are grateful for the connection you can support between Campus Ministry and your residents. Your encouragement helps students access the resources, accompaniment, and community they need to grow spiritually and to live out their faith with intention.",
+    "sources": [
+      {
+        "source_doc_id": "c7ffccdd-1de6-4bfb-94fd-dfc26c22f514",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/Resource_ Campus Ministry_ Resident Advisors 2025-2026.pdf",
+        "location": "{\"page\": 5}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "1feec74f-5b00-405e-ba0a-19643216ca51",
+    "topic": "General",
+    "section": "International Students Overview",
+    "text": "International Student Overview\n\nThe current international student population is 489 students in total. This includes:\n\n- 238 undergraduate international students  \n- 251 graduate, law, and professional international students",
+    "sources": [
+      {
+        "source_doc_id": "dcbd4daa-1e46-4ac1-8861-2c911f141917",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/Res Life Training 2025.pdf",
+        "location": "{\"page\": 4}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "88f9ac71-e5b3-4350-8266-cdf73e07e7ef",
+    "topic": "General",
+    "section": "Campus Resources",
+    "text": "The Office of International Students & Scholars (OISS) is available to support you.\n\n- **Office hours:** Monday\u2013Friday, 8:00 a.m.\u20134:30 p.m.  \n- **Location:** MHC 212 (2nd floor)  \n- **Email:** oiss@stthomas.edu  \n- **Phone:** 651-962-6650  \n- **Instagram:** @oiss_stthomas",
+    "sources": [
+      {
+        "source_doc_id": "dcbd4daa-1e46-4ac1-8861-2c911f141917",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/Res Life Training 2025.pdf",
+        "location": "{\"page\": 11}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "e3872189-f142-47ae-a0a8-9a581b85e70a",
+    "topic": "General",
+    "section": "International Students & Visas",
+    "text": "**Steps for International Students to Study in the United States**\n\nInternational students must complete the following steps, in order, to come to the United States to study and remain in status while at school:\n\n1. **Apply to a university that has been approved by the government.**  \n   - You must first apply to a university that has been approved by the government to enroll international (nonimmigrant) students.\n\n2. **Receive Form I-20 \u201cCertificate of Eligibility for Nonimmigrant Students.\u201d**  \n   - After you are admitted to an approved university, you will receive Form I-20, titled \u201cCertificate of Eligibility for Nonimmigrant Students.\u201d\n\n3. **Pay the I-901 SEVIS Fee ($350).**  \n   - Once you have your Form I-20, you must pay the I-901 SEVIS Fee in the amount of **$350**.\n\n4. **Schedule an appointment for a student visa.**  \n   - After paying the I-901 SEVIS Fee, schedule an appointment for a student visa at a U.S. embassy or consulate.\n\n5. **Arrive in the United States.**  \n   - When your student visa is approved, you may travel and arrive in the United States to begin your studies.\n\n6. **Maintain a full course of study while at school.**  \n   - After arrival, you must maintain a full course of study while at school in order to remain in compliance with your student status.",
+    "sources": [
+      {
+        "source_doc_id": "dcbd4daa-1e46-4ac1-8861-2c911f141917",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/Res Life Training 2025.pdf",
+        "location": "{\"page\": 6}"
+      },
+      {
+        "source_doc_id": "dcbd4daa-1e46-4ac1-8861-2c911f141917",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/Res Life Training 2025.pdf",
+        "location": "{\"page\": 7}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "384a74fc-b546-497d-9030-05865cf02502",
+    "topic": "General",
+    "section": "Community Meetings",
+    "text": "Community Meetings are in-person gatherings used to share important information with a large number of residents at a designated time. These meetings are strategically scheduled throughout the semester to align with major transition periods and other key points when operational information is especially important for residents to receive and understand.",
+    "sources": [
+      {
+        "source_doc_id": "1e25619b-ad83-4e33-96b3-e7814d6ca730",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/communications/Community Meetings SLED 2025 (1).pdf",
+        "location": "{\"page\": 3}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "392c5643-ae5c-4082-9c6a-1acae9f16bc7",
+    "topic": "General",
+    "section": "Community Communications",
+    "text": "Community Communications\n\nCommunity Communications are the various methods Residence Life uses to share information with residents so they can find resources, engage in their community, and stay informed about what is happening on campus. These communications are provided to help students be resourceful and well-informed about campus opportunities and expectations, and to support them in meeting the Learning Outcomes of the Tommie Advantages.\n\nExamples of Community Communications include, but are not limited to:\n- Emails  \n- Bulletin boards  \n- GroupMe messages  \n\nWe use Community Communications to:\n- Connect residents with campus resources  \n- Promote community engagement opportunities  \n- Share important updates and information about what is happening on campus  \n- Support residents in achieving the Learning Outcomes of the Tommie Advantages",
+    "sources": [
+      {
+        "source_doc_id": "c5f8a5c0-6194-4c70-bca1-4c5101e48124",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/communications/Community Communications.pdf",
+        "location": "{\"page\": 2}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "62ac5baf-6af0-41eb-bb18-6a30ec2b6177",
+    "topic": "General",
+    "section": "Community Communications & Outreach",
+    "text": "### Importance of Timely Community Communications\n\nThe CD team and Erica began preparing this year\u2019s Community Communications in late March. All communications are planned and released according to a timeline that is informed by institutional context and history. For example, we generally know that more roommate conflicts occur in October and November than in September, so related content is scheduled accordingly.\n\nDifferent types of content have different timing needs:\n- Some communications must be released early enough to give residents ample time to read and process the information before related events or issues are likely to occur.\n- Other communications are only posted for a short period, either because they are time-bound or because they are created in collaboration with campus partners who have their own schedules and deadlines.\n\nAll of this planning depends on staff posting materials when they are scheduled. TLDR: Post all communication on time.",
+    "sources": [
+      {
+        "source_doc_id": "c5f8a5c0-6194-4c70-bca1-4c5101e48124",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/communications/Community Communications.pdf",
+        "location": "{\"page\": 8}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "e5597594-e2c3-4ed4-91f4-ab62999f8740",
+    "topic": "General",
+    "section": "Campus Resources & Referrals",
+    "text": "**Available On-Campus Resources**\n\nThe following on-campus resources are available to support students. Unless otherwise noted, these offices are not confidential, but all faculty and staff are trained and should know how to refer students to appropriate help.\n\n**Confidential Resources**  \n- **Center for Well-Being**  \n- **Health Services** \u2013 Provides medical care and/or a SANE (forensic nurse) examination (confidential).  \n- **Counseling and Psychological Services** \u2013 Confidential counseling support.  \n- **Clergy/Priests** \u2013 Confidential pastoral support.\n\n**Additional Support and Reporting Resources**  \n- **Health Promotion, Resilience and Violence Prevention (Seth)**  \n- **Title IX Coordinator (Kari)**  \n- **Dean of Students Office**  \n- **Residence Life Staff**  \n- **Public Safety**  \n- **Campus Ministry**  \n\n**Faculty and Staff Referrals**  \n- All faculty and staff are trained and should know how to refer students to these resources.",
+    "sources": [
+      {
+        "source_doc_id": "87c37ff0-f16d-4481-8ad5-5ac38b78dd71",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/important resources/RA Training TIX, SVP, BI 2025.pdf",
+        "location": "{\"page\": 47}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "972a69fe-69b8-426a-88ad-c7e5bcb3bfcb",
+    "topic": "General",
+    "section": "Counseling & Psychological Services (CAPS)",
+    "text": "Groups at CAPS\n\nCounseling and Psychological Services (CAPS) offers groups that provide a supportive, confidential space to connect with others and grow. These groups are facilitated by trained professionals to keep the group safe, focused, and guided.\n\nKey benefits of participating in a CAPS group include:\n\n- **Shared Understanding**  \n  Connect with peers who \u201cget it\u201d and are facing similar challenges.\n\n- **Support & Encouragement**  \n  Give and receive feedback in a safe, non-judgmental space.\n\n- **Skill Building**  \n  Practice coping strategies, communication, and problem-solving in real time.\n\n- **New Perspectives**  \n  Hear different viewpoints that can shift your thinking and spark new solutions.\n\n- **Sense of Belonging**  \n  Reduce feelings of isolation by being part of a supportive community.\n\n- **Real-World Practice**  \n  Try out new ways of relating in a group before applying them in everyday life.\n\n- **Confidential & Guided**  \n  Participate in a confidential setting that is facilitated by trained professionals to maintain safety and focus.",
+    "sources": [
+      {
+        "source_doc_id": "c9c3a20a-36b7-43f8-b1b3-0bf9a835b28f",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/important resources/SLEDRA 2025.pdf",
+        "location": "{\"page\": 5}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "8bd04fea-605c-4bf4-b559-e87167a0ea15",
+    "topic": "General",
+    "section": "Community",
+    "text": "COMMUNITY\n\nThis section is reserved for community-related policies, procedures, and guidelines within Residence Life operations. Content for this entry has not yet been provided.",
+    "sources": [
+      {
+        "source_doc_id": "f77296c8-a621-49cf-b49e-1b348a139302",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/communications/Creating Connections & Touch Points 25-26.pptx",
+        "location": "{\"slide\": 3}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "48cd489c-6f60-4e53-baec-36d89d2eb2c8",
+    "topic": "General",
+    "section": "Community Values & Philosophy",
+    "text": "COMMUNITY\n\nOur community is defined by the following core qualities:\n\n- **Connected** \u2013 Residents and staff build and maintain meaningful relationships, fostering a sense of belonging.\n- **Intentional** \u2013 Actions, programs, and interactions are purposeful and thoughtfully designed to support residents.\n- **Inclusive** \u2013 All individuals are welcomed and valued, with differences respected and embraced.\n- **Empowering** \u2013 Residents are encouraged and supported to take initiative, make decisions, and grow in independence.\n- **Safe** \u2013 Physical, emotional, and social safety are prioritized in all aspects of community life.\n- **Welcoming** \u2013 New and returning residents are greeted with openness, warmth, and hospitality.\n- **Comfortable** \u2013 Spaces and interactions promote ease, relaxation, and a sense of being at home.\n- **Caring** \u2013 Community members look out for one another\u2019s well-being and offer support when needed.",
+    "sources": [
+      {
+        "source_doc_id": "f77296c8-a621-49cf-b49e-1b348a139302",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/communications/Creating Connections & Touch Points 25-26.pptx",
+        "location": "{\"slide\": 4}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "55168887-e5f4-486c-a351-87ebca47d511",
+    "topic": "General",
+    "section": "Communication & Expectations",
+    "text": "**Purpose of Keeping Your Supervisor Informed**\n\nKeeping your supervisor informed serves several important purposes:\n\n- It ensures your supervisor is aware of what is happening so they can provide guidance on how to move forward.\n- It helps us provide individualized care to each student based on their specific situation and needs.\n- It creates opportunities for students to be connected to appropriate resources in a timely manner.",
+    "sources": [
+      {
+        "source_doc_id": "f77296c8-a621-49cf-b49e-1b348a139302",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/communications/Creating Connections & Touch Points 25-26.pptx",
+        "location": "{\"slide\": 18}"
+      }
+    ]
+  }
+]

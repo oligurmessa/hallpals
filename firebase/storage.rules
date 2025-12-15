@@ -1,0 +1,14 @@
+rules_version = '2';
+
+// HallPals Storage Security Rules
+// Phase B0: Deny-by-default placeholder
+// TODO: Implement per Backend Contract v1
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Deny all reads and writes by default
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

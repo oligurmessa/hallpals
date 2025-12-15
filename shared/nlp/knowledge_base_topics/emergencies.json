@@ -1,0 +1,368 @@
+[
+  {
+    "canonical_id": "25118ecc-7ada-499f-8bf4-36af697d62d2",
+    "topic": "Emergencies",
+    "section": "Emergency Calling Protocols",
+    "text": "**STUDENT LEADER EMERGENCY CALLING PROTOCOL**\n\nThis protocol outlines the appropriate contacts for various emergency situations. In all cases, if you are uncertain whether to call, it is better to over-report than under-report. If a situation arises that is not listed, or if you need assistance, contact the CD/GSA on duty. Additionally, if a student is sent to the care room following Public Safety's assessment, inform the CD/GSA on duty.\n\n**Contact Information:**\n- **CD/GSA on Duty:** 612-801-8484\n- **Public Safety:** \n  - Non-emergency: 651-962-5100\n  - Emergency: 651-962-5555\n\n**Incident Response Guidelines:**\n\n- **Accidents not requiring hospital transport:** Call Public Safety.\n- **Acts of Intolerance/Bias/Harassment/Hate Crime:** Call both CD/GSA and Public Safety.\n- **Alcohol or Drug Violation:** Call Public Safety.\n- **Death of a Student:** Call both CD/GSA and Public Safety.\n- **Fireworks or other Fire Hazards:** Call Public Safety.\n- **Flood in Hall:** Call both CD/GSA and Public Safety.\n- **Noise Violation:** No calls necessary.\n- **Physical Assault:** Call both CD/GSA and Public Safety.\n- **Pulled Fire Alarm:** Call Public Safety.\n- **Real Fire Emergency:** Call both CD/GSA and Public Safety.\n- **Room/Building Search (community safety risk):** Call both CD/GSA and Public Safety (only Public Safety can conduct searches).\n- **Room/Building Search (alcohol/drugs or guests):** Call Public Safety (only Public Safety can conduct searches).\n- **Serious Mental Health Concerns:** Call both CD/GSA and Public Safety (CD/GSA will likely call).\n- **Serious Vandalism (extensive damage, broken windows):** Call both CD/GSA and Public Safety.\n- **Sexual Misconduct:** Call CD/GSA (they will contact Public Safety if requested).\n- **Student Arrest:** Call both CD/GSA and Public Safety.\n- **Student Emergency Transport to Hospital:** Call both CD/GSA and Public Safety.\n- **Student Requiring Attention in CARE Room:** Call both CD/GSA and Public Safety (although they\u2019re likely already there).\n- **Emergency Personnel in Community (e.g., Police, EMTs, Fire):** Call both CD/GSA and Public Safety (although they\u2019re likely already there).\n- **Suicide Attempt/Gesture:** Call both CD/GSA and Public Safety.\n- **Theft:** Call Public Safety.\n- **Unconscious Student:** Call both CD/GSA and Public Safety.\n- **Unresponsive Intoxicated/Impaired Student:** Call Public Safety.\n- **Unusual Facilities Incidents:** Call both CD/GSA and Public Safety.\n- **Visitation Violation:** No calls necessary.\n- **Weapons:** Call Public Safety.",
+    "sources": [
+      {
+        "source_doc_id": "7b283412-7c71-435b-a2f3-62e7cabce024",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/C. Student Leader Emergency Calling Protocol-1.pdf",
+        "location": "{\"page\": 1}"
+      },
+      {
+        "source_doc_id": "d0c50efc-b1d6-4364-b8d6-662e1fd97bf2",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/RA Manual 2025-2026.pdf",
+        "location": "{\"page\": 6}"
+      },
+      {
+        "source_doc_id": "ea8527c2-4633-4be5-843b-7a20b213fbbb",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/duty+/C. Student Leader Emergency Calling Protocol.pdf",
+        "location": "{\"page\": 1}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "ba30fd79-d670-480a-ab53-8ed8ddc80584",
+    "topic": "Emergencies",
+    "section": "Emergency Contacts",
+    "text": "For any questions or assistance, please contact the CD/GSA on Duty at 651-801-8484. In case of an emergency, reach out to Public Safety at 651-962-5555. For non-emergency situations, dial 651-962-5100. RJ1.",
+    "sources": [
+      {
+        "source_doc_id": "97b37455-884a-41a9-8141-ec24c2fece94",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/Duty Expectations.pdf",
+        "location": "{\"page\": 21}"
+      },
+      {
+        "source_doc_id": "1a566f48-a4d8-46cd-a3ea-7622dceb3db5",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/duty+/Duty Expectations.pdf",
+        "location": "{\"page\": 21}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "b6e0c93b-6708-4876-a9c1-a99bd7d2cf0a",
+    "topic": "Emergencies",
+    "section": "RA Response Procedures",
+    "text": "**RA Response Procedures**\n\n**Evacuation Protocols:**\n- In the event of an emergency, such as a fire, leave the building immediately and adhere to instructions from Public Safety, the Fire Department, or other officials.\n\n**Bias Incidents:**\n- For detailed information on bias incidents and related policies, refer to the Bias Reporting website: [Bias Reporting](https://www.stthomas.edu/deanofstudents/bias-reporting/).\n- If you witness a potential bias incident, assume it is a bias incident and contact Public Safety immediately.\n- After notifying Public Safety, inform the CD/GSA on duty, who will then contact the Associate Director of Residence Life.\n- Preserve any physical evidence of the bias incident until Public Safety arrives; do not disturb or erase it.\n- Regardless of the perceived severity or offensiveness of the act, if it relates to identity, report it to Public Safety without delay.\n- Document the situation thoroughly in an incident report.\n\n**Severe Weather Procedures:**\n\n*Tornados and Severe Thunderstorms:*\n- Public Safety will alert the CD/GSA on duty during a severe weather watch or warning.\n- The CD/GSA on duty must update the Res Life Staff GroupMe and inform all RAs on duty via the duty phones.\n- Ensure all team members are kept informed of any updates from Public Safety.\n- Upon hearing a civil defense siren, clear all floors and move to the lower level or designated safe areas in each residence hall, regardless of the current weather appearance.\n- If possible, monitor WCCO 830 AM radio, local television stations, or a reliable weather app for updates on severe weather conditions.\n- Evacuate all floors to safeguard students, as high winds can shatter glass and pose a danger.\n- Remain in safe areas until the siren ceases. Be aware that the siren may sound before the tornado is visibly close; always follow evacuation procedures promptly.",
+    "sources": [
+      {
+        "source_doc_id": "d0c50efc-b1d6-4364-b8d6-662e1fd97bf2",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/RA Manual 2025-2026.pdf",
+        "location": "{\"page\": 13}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "b95d87a3-31b8-402f-b986-13c4fd1c133a",
+    "topic": "Emergencies",
+    "section": "RA Response Procedures",
+    "text": "**RA Response Procedures**\n\n**Death of a Student**  \n- Immediately contact Public Safety followed by the CD/GSA on duty.  \n- Do not notify the student\u2019s parents/guardians or release any information about the situation or the deceased to students, friends, family, media, or any St. Thomas affiliated media.  \n- Prioritize self-care and utilize all available campus resources during and after such incidents.  \n\n**Sexual Misconduct**  \n- Refer to the Title IX policy and consult the Title IX website for resources.  \n- Inform the reporting party that you are required to report the incident to a CD/GSA, but assure them that the information will remain within the mandatory reporting structure.  \n- Immediately contact the CD/GSA on duty, who will provide resources and work with the student to address their immediate needs.  \n- Submit the Title IX Reporting Form with assistance from the CD/GSA on duty.  \n- Do not document the situation in Advocate or Roompact.  \n- You may be asked by your CD/GSA to provide additional support.  \n\n**Mental Health Concerns (Including Suicidal Ideation)**  \n- If a student indicates mental health concerns, contact the CD/GSA on duty.  \n- If immediate medical attention is required, notify Public Safety first, then contact the CD/GSA on duty.  \n- Document the situation in Advocate.  \n\n**Missing Student**  \n- Contact Public Safety immediately.  \n- Do not release information or notify the missing student\u2019s parents or guardians.  \n- Document the situation in Advocate.  \n\n**Bomb Threats**  \n- If notified directly of a bomb threat (via phone call, email, etc.), contact Public Safety immediately.  \n\n**Fire Preparation and Prevention**  \n- Discuss fire safety and prevention at the initial community meeting.  \n- Student leaders should confront irresponsible behavior and monitor floor decorations throughout the year.  \n- Refer to the Residence Life Handbook for current information on prohibited items.  \n\n**Fire Evacuation**  \n- Follow the established fire evacuation procedures as outlined in the Residence Life Handbook.  \n\nThis comprehensive guide ensures that all RAs are equipped to handle various emergency situations effectively while maintaining confidentiality and compliance with university policies.",
+    "sources": [
+      {
+        "source_doc_id": "d0c50efc-b1d6-4364-b8d6-662e1fd97bf2",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/RA Manual 2025-2026.pdf",
+        "location": "{\"page\": 12}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "549de304-5a9e-4a42-aaa0-a5860a54d49c",
+    "topic": "Emergencies",
+    "section": "Tommie Alerts / Student of Concern System",
+    "text": "ST. THOMAS CARES \u2013 TOMMIE ALERTS\n\nInstructors can submit concerns regarding students in their classes; these submissions are called alerts. If you receive an alert, understand that it is intended as a sign of care, not punishment. Through Tommie Alerts, we are trying to engage with you and connect you with the right support and resources to help you be successful.",
+    "sources": [
+      {
+        "source_doc_id": "74114bdf-bbfe-4a8c-8128-2b01d3bb1779",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/2025StudentLeaderTraining - CSA.pdf",
+        "location": "{\"page\": 9}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "967acf41-7974-454f-bc7f-984a8b6260b9",
+    "topic": "Emergencies",
+    "section": "Tommie Alerts / Emergency Notifications",
+    "text": "WHAT TO DO IF YOU RECEIVE A TOMMIE ALERT\n\nIf you receive a Tommie Alert:\n\n- Stay calm. Remember that a Tommie Alert is a way of showing care and support.\n- Respond to your instructor.\n- Return to class.\n- Connect with your advisor and any other appropriate resources as needed.\n\n8/11/2025 11",
+    "sources": [
+      {
+        "source_doc_id": "74114bdf-bbfe-4a8c-8128-2b01d3bb1779",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/resources/2025StudentLeaderTraining - CSA.pdf",
+        "location": "{\"page\": 11}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "8c79397f-b410-4407-acab-4672df94b95b",
+    "topic": "Emergencies",
+    "section": "Suicide Prevention & Mental Health Emergencies",
+    "text": "**Recognizing Suicide Warning Signs**\n\nWhen assessing potential suicide risk, be aware of four main categories of warning signs. Each category can provide important information and should be taken seriously.\n\n1. **Direct Verbal Clues**  \n   These are clear, explicit statements about wanting to die or intending self-harm. Examples include a person directly saying they want to kill themselves or expressing a desire to end their life.\n\n2. **Indirect Verbal Clues**  \n   These are less explicit statements that still suggest hopelessness, despair, or thoughts about death. A person may talk about having no reason to live, feeling like a burden, or wishing they could disappear, without directly stating suicidal intent.\n\n3. **Behavioral Clues**  \n   These involve actions or changes in behavior that may indicate increased risk. Examples include withdrawing from friends or activities, giving away possessions, sudden changes in mood or behavior, or engaging in risky or self-destructive activities.\n\n4. **Situational Clues**  \n   These are circumstances or recent events that may increase vulnerability to suicide. Examples include significant losses (such as relationships, jobs, or housing), major life changes, legal or financial problems, or other stressful or traumatic events.\n\nAll four types of clues\u2014direct verbal, indirect verbal, behavioral, and situational\u2014should be considered together when evaluating concern for a resident\u2019s safety.",
+    "sources": [
+      {
+        "source_doc_id": "8bd1c216-7df1-45ab-9876-34638f795ce1",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/important resources/UPDATED-QPR-GATEKEEPER August 2025 RA.pdf",
+        "location": "{\"page\": 18}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "3f8486da-b2fa-441b-85de-f9ce7cd61e2b",
+    "topic": "Emergencies",
+    "section": "Mental Health & Suicide Risk",
+    "text": "### Behavioral Clues of Possible Suicidal Risk\n\nBe alert to the following behavioral clues, especially when they occur together or represent a change from a person\u2019s usual behavior:\n\n- Any previous suicide attempt.  \n- Acquiring a gun or stockpiling pills.  \n- Co-occurring depression, moodiness, or expressions of hopelessness.  \n- Putting personal affairs in order (e.g., organizing finances, making final arrangements).  \n- Giving away prized possessions.  \n- A sudden interest in religion or a sudden loss of interest in religion.  \n- Drug or alcohol abuse, including relapse after a period of recovery.  \n- Unexplained anger, aggression, or irritability.",
+    "sources": [
+      {
+        "source_doc_id": "8bd1c216-7df1-45ab-9876-34638f795ce1",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/important resources/UPDATED-QPR-GATEKEEPER August 2025 RA.pdf",
+        "location": "{\"page\": 21}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "c75dbc76-c500-4185-963e-2c7fa71a071d",
+    "topic": "Emergencies",
+    "section": "Suicide Risk & Prevention",
+    "text": "### Situational Clues for Suicide Risk\n\nThe following situational factors may indicate elevated suicide risk. Any one of these alone can be significant; multiple factors occurring together may further increase concern:\n\n- Previous suicide attempt  \n- Being fired from a job or being expelled from school  \n- A recent unwanted move (e.g., forced relocation or move the person did not choose)  \n- Loss of any major relationship  \n- Death of a spouse, child, or best friend \u2014 especially if the death was by suicide  \n- Diagnosis of a serious or terminal illness  \n- Sudden, unexpected loss of freedom or fear of punishment  \n- Anticipated loss of financial security  \n- Loss of a cherished therapist, counselor, or teacher  \n- Fear of becoming a burden to others",
+    "sources": [
+      {
+        "source_doc_id": "8bd1c216-7df1-45ab-9876-34638f795ce1",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/important resources/UPDATED-QPR-GATEKEEPER August 2025 RA.pdf",
+        "location": "{\"page\": 22}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "c5b81a6b-cb0b-42f9-ac50-d0df18e81c72",
+    "topic": "Emergencies",
+    "section": "Mental Health & Suicide Risk Response",
+    "text": "**Referral Options for Supporting a Person at Risk**\n\nWhen responding to someone who may be at risk (including risk of suicide), use the strongest possible referral option available in the situation. The options, in order of preference, are:\n\n1. **Best Referral (Highest Priority)**  \n   - Personally take the person directly to someone who can help (for example, a counselor, medical professional, or other appropriate support resource).\n\n2. **Second-Best Referral**  \n   - Obtain a clear commitment from the person that they will accept help.  \n   - After securing this commitment, make the arrangements to connect them with that help (such as scheduling an appointment or contacting the resource on their behalf).\n\n3. **Third-Best Referral**  \n   - Provide the person with appropriate referral information (such as phone numbers, locations, or contact details for support services).  \n   - At the same time, try to obtain a good faith commitment from them that they will not attempt or die by suicide.",
+    "sources": [
+      {
+        "source_doc_id": "8bd1c216-7df1-45ab-9876-34638f795ce1",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/important resources/UPDATED-QPR-GATEKEEPER August 2025 RA.pdf",
+        "location": "{\"page\": 33}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "c3a6e503-f526-4595-8e08-2a13d067e0a7",
+    "topic": "Emergencies",
+    "section": "Emergency Communication & Notifications",
+    "text": "In an emergency, call Public Safety immediately and then notify your CD/GSA as soon as it is safe to do so. Do not attempt to contact the Title IX Coordinator for urgent, time-sensitive situations, as the Title IX Coordinator is not a 24/7 resource.",
+    "sources": [
+      {
+        "source_doc_id": "87c37ff0-f16d-4481-8ad5-5ac38b78dd71",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/important resources/RA Training TIX, SVP, BI 2025.pdf",
+        "location": "{\"page\": 45}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "31060a5a-3495-4467-bd92-0f4f53432a20",
+    "topic": "Emergencies",
+    "section": "Sexual Misconduct & Assault Resources",
+    "text": "Confidential Off-Campus Resources\n\nThe following confidential resources are available off campus for support related to sexual violence and assault:\n\n- **SOS \u2013 Ramsey County Victim Advocate**  \n  Phone: **651-266-1000**  \n  Provides confidential advocacy and support services for victims in Ramsey County.\n\n- **Sexual Violence Center \u2013 Hennepin County Victim Advocate**  \n  Phone: **612-871-5111**  \n  Offers confidential advocacy and support services for victims in Hennepin County.\n\n- **Sexual Assault Nurse Examiner (SANE) \u2013 Regions Hospital**  \n  A forensic exam is best completed **within 5 days** of the assault, but may still yield some evidence **within 10 days**.",
+    "sources": [
+      {
+        "source_doc_id": "87c37ff0-f16d-4481-8ad5-5ac38b78dd71",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/important resources/RA Training TIX, SVP, BI 2025.pdf",
+        "location": "{\"page\": 49}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "eb69a7ea-9aa4-47c5-abea-0c861666a852",
+    "topic": "Emergencies",
+    "section": "Counseling and Psychological Services (CAPS)",
+    "text": "Counseling and Psychological Services (CAPS)\n\nAll enrolled undergraduate and graduate students are eligible to receive CAPS services. Counseling services are included in the Health Fee, so there is no additional charge for counseling sessions.\n\nCAPS provides short-term, goal-oriented therapy with no formal session limits. Students receive individualized treatment recommendations, which may include off-campus referrals when necessary.\n\nCAPS treats a wide range of emotional and psychological concerns, including but not limited to:\n- Depression  \n- Anxiety  \n- Sexual assault  \n- Eating disorders  \n- Identity development  \n- Family issues  \n- Other emotional or mental health concerns  \n\nIn addition to counseling, CAPS offers testing for ADHD and other learning disabilities. There is a charge for this testing, which is billed to insurance.\n\nLocation: CAPS is located at the corner of Finn and Grand, approximately 200 steps from the arches.",
+    "sources": [
+      {
+        "source_doc_id": "c9c3a20a-36b7-43f8-b1b3-0bf9a835b28f",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/important resources/SLEDRA 2025.pdf",
+        "location": "{\"page\": 3}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "51fd2652-5458-4c00-9ce0-a9e8f3883d94",
+    "topic": "Emergencies",
+    "section": "Counseling & Psychological Services (CAPS) & Mental Health Support",
+    "text": "Counseling & Psychological Services: Offerings and Support\n\nCounseling & Psychological Services provides a range of clinical and consultative services to support students\u2019 mental health and well-being. Available services include:\n\n- **Group Counseling and Workshops**  \n  Structured group counseling sessions and psychoeducational workshops are offered to address common concerns, build skills, and provide peer support.\n\n- **Individual Counseling**  \n  One-on-one counseling is available for students seeking personalized support for mental health, emotional, or personal concerns.\n\n- **Substance Use Resources**  \n  Resources and support are provided for students with questions or concerns related to substance use, including education, assessment, and referral as appropriate.\n\n- **Consultation and Outreach**  \n  Staff are available to consult with students, staff, and faculty about mental health concerns and to provide outreach programming to the campus community.\n\n- **Crisis Drop-In Hours**  \n  Crisis drop-in services are available Monday through Friday from 2:00 p.m. to 4:00 p.m. for students experiencing urgent psychological concerns.\n\n- **24/7 Crisis Phone Counseling**  \n  Crisis phone counseling is available at all times, 24 hours a day, 7 days a week, for immediate support during mental health emergencies or acute distress.\n\n- **Staff Liaisons to Key Campus Areas**  \n  Counseling & Psychological Services maintains designated staff liaisons to the following areas to support communication, collaboration, and tailored services:\n  - Athletics  \n  - Veterans  \n  - LGBTQIA  \n  - Office of International Students & Scholars (OISS)  \n  - Student Diversity and Inclusion Services (SDIS)  \n  - School of Nursing  \n  - Residence Life",
+    "sources": [
+      {
+        "source_doc_id": "c9c3a20a-36b7-43f8-b1b3-0bf9a835b28f",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/important resources/SLEDRA 2025.pdf",
+        "location": "{\"page\": 4}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "dc6bc0ab-97b1-4079-a6c9-a0901b073104",
+    "topic": "Emergencies",
+    "section": "Mental Health & Crisis Resources",
+    "text": "**Crisis Support and Drop-In Hours**\n\n- **Crisis Drop-In Hours (In-Person)**\n  - Days: Monday\u2013Friday  \n  - Time: 2:00 pm \u2013 4:00 pm  \n  - Purpose: For students experiencing immediate emotional distress for any reason  \n  - No appointment needed\n\n- **Phone Crisis Counseling (24/7)**\n  - Available 24 hours a day, 7 days a week  \n  - Phone: 651-962-6750, **Option 4**\n\n- **National Suicide Hotline**\n  - Phone: **988** (National Suicide Hotline)",
+    "sources": [
+      {
+        "source_doc_id": "c9c3a20a-36b7-43f8-b1b3-0bf9a835b28f",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/important resources/SLEDRA 2025.pdf",
+        "location": "{\"page\": 6}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "8dd6d279-6ba1-4b13-9770-28e4e01ccb65",
+    "topic": "Emergencies",
+    "section": "Helping Students in Distress",
+    "text": "HELPING STUDENTS IN DISTRESS\n\nThis section title is reserved for guidance on recognizing and responding to students who may be experiencing emotional, psychological, or behavioral distress. Further content should outline specific steps, conditions, and procedures for assisting students in distress, including when and how to refer them to appropriate campus resources, how to document concerns, and how to ensure student and community safety.",
+    "sources": [
+      {
+        "source_doc_id": "c9c3a20a-36b7-43f8-b1b3-0bf9a835b28f",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/important resources/SLEDRA 2025.pdf",
+        "location": "{\"page\": 7}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "fbee1c35-e77a-46e1-aed2-a4d43b9d9867",
+    "topic": "Emergencies",
+    "section": "Referring Students to Counseling & Psychological Services",
+    "text": "### Referring a Student to CAPS\n\nWhen you believe a student could benefit from Counseling and Psychological Services (CAPS), use the following approach:\n\n- Normalize getting help by reminding the student that everyone needs to ask for help sometimes.\n- Encourage the student to contact the Center for Well-Being (CWB) to make an appointment by calling 651-962-6750 or by walking in.\n- If you are able, offer to walk over to the CWB with the student.\n- Follow up with the student at a later time to check in on how they are doing.\n- Continue to express your concern for their well-being throughout the process.",
+    "sources": [
+      {
+        "source_doc_id": "c9c3a20a-36b7-43f8-b1b3-0bf9a835b28f",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/important resources/SLEDRA 2025.pdf",
+        "location": "{\"page\": 22}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "7c96e714-bfd6-479f-9a7d-c701cdaf747d",
+    "topic": "Emergencies",
+    "section": "Crisis Support & Counseling Contacts",
+    "text": "Contact Information and Crisis Support\n\n- **Phone Number:** 651-962-6750  \n- **Location:** 35 S. Finn St., between Grand and Summit Ave.  \n\n**Crisis Drop-In Hours (In Person)**  \n- Monday\u2013Friday, 2:00 p.m. to 4:00 p.m.  \n- Visit the location at 35 S. Finn St. during these hours for crisis drop-in support.\n\n**24/7 Phone Counseling**  \n- Available at all times, including nights and weekends.  \n- Call 651-962-6750 and select **Option 4** for 24/7 phone counseling.",
+    "sources": [
+      {
+        "source_doc_id": "c9c3a20a-36b7-43f8-b1b3-0bf9a835b28f",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/important resources/SLEDRA 2025.pdf",
+        "location": "{\"page\": 25}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "506bf38f-b9f6-413d-b96b-0fc438b972fa",
+    "topic": "Emergencies",
+    "section": "Contacting Public Safety / Emergency & Non-Emergency Lines",
+    "text": "Contacting Public Safety\n\nAll on-campus calls to Public Safety must be directed through the Public Safety dispatch center.\n\nNon-Emergency Line  \n- Phone (off campus): 651-962-5100  \n- From an on-campus phone: dial 2-5100  \n\nUse the Public Safety Non-Emergency Line for the following situations:\n- You need access to your dorm, office, or other campus areas.\n- Your vehicle will not start and you need a jump start.\n- You have locked your keys in your car.\n- You would like a vehicle or walking escort.\n- You have a question for Public Safety.\n\nEmergency Line  \n- Phone (off campus): 651-962-5555  \n- From an on-campus phone: dial 2-5555  \n\nUse the Public Safety Emergency Line for the following situations:\n- You witnessed a crime.\n- You are a victim of a crime.\n- You are reporting suspicious activity.\n- Someone needs emergency help.\n- If you think it is an emergency, call the emergency line.\n\nAdditional Option  \n- You may also contact Public Safety using the Safe Zone App.",
+    "sources": [
+      {
+        "source_doc_id": "212d3b37-5408-4843-afbe-c470b1d51d8d",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/important resources/2025 Res Life Presentation.pdf",
+        "location": "{\"page\": 3}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "d5f208ee-d66b-4064-9011-376d8055c680",
+    "topic": "Emergencies",
+    "section": "Welfare Checks / Welfare Check Response Procedures",
+    "text": "Welfare Check Response Procedures\n\nPublic Safety typically receives welfare check requests first. Whenever Public Safety officers respond to a residence hall for a welfare check, they will notify Residence Life.\n\nUpon arrival at the residence hall room, officers will knock on the door. If there is no answer, officers will key into the room.\n\nIf officers enter and no one is present, they will conduct a plain-view search to look for any signs that the student has been harmed or may have self-harmed. If no one is located in the room and no immediate concerns are identified, officers will provide Residence Life with the Public Safety report number and clear from the call with the Residence Life staff member. Public Safety officers will continue attempts to locate and track down the student until the student is found. Officers will follow up with a phone call to the Hall Director (HD) to provide an update.\n\nIf the student is in the room when officers enter, officers will identify the problem and work to find an appropriate solution. Depending on the situation, this may include:\n- Allowing the student to remain in their room if officers feel comfortable with that option, or  \n- Contacting CAPS, or  \n- Contacting SPFD.\n\nFor welfare checks, Public Safety will not wait for Residence Life staff to arrive before entering the room. However, officers will remain afterward to brief Residence Life staff about the situation.",
+    "sources": [
+      {
+        "source_doc_id": "212d3b37-5408-4843-afbe-c470b1d51d8d",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/important resources/2025 Res Life Presentation.pdf",
+        "location": "{\"page\": 16}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "67bcd723-0bd8-48eb-935a-ac193e53aaa1",
+    "topic": "Emergencies",
+    "section": "Fire Alarm Response",
+    "text": "Fire Alarm Response Procedures\n\nIn the event of a fire alarm in your building, follow these steps:\n\n1. **Evacuate the Building Immediately**  \n   - If you hear a fire alarm, you must exit the building.  \n   - Direct and instruct all residents to evacuate, even if you believe the alarm may be a false alarm (for example, if you smell overcooked popcorn).\n\n2. **If You See a Fire**  \n   - If you see an actual fire, contact Public Safety immediately at **651-962-5555**.",
+    "sources": [
+      {
+        "source_doc_id": "212d3b37-5408-4843-afbe-c470b1d51d8d",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/important resources/2025 Res Life Presentation.pdf",
+        "location": "{\"page\": 18}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "6c37cc81-d481-4289-b7d0-336151380cfc",
+    "topic": "Emergencies",
+    "section": "Active Shooter Response",
+    "text": "### Active Shooter Response: Run. Hide. Fight. / ADD\n\nOur active shooter response training is based on the nationally endorsed **Run. Hide. Fight.** model, which is also supported by the FBI. We also use the acronym **ADD** to reinforce the same concepts:\n\n- **Avoid = Run**  \n- **Deny = Hide**  \n- **Defend = Fight**\n\n**Run / Avoid**  \n- Focus first on getting away from the threat if it is safe to do so.\n\n**Hide / Deny**  \n- If you cannot safely run, hide in a way that **denies** the shooter access to you.  \n- Research has shown that in active shooter emergencies, the majority of those injured or killed are people who were hiding.  \n- Common failures include:\n  - Forgetting to **barricade** themselves.\n  - Hiding in a way that does **not** allow an effective transition to **fight/defend** if necessary.\n\n**Fight / Defend**  \n- If you cannot run or effectively deny access, be prepared to **defend** yourself as a last resort.\n\nA critical part of **Run. Hide. Fight.** is **preparation and planning** through a **personal safety plan**. Staff and residents should think in advance about how they would avoid, deny, and defend in different locations so they can act quickly and effectively in an emergency.",
+    "sources": [
+      {
+        "source_doc_id": "212d3b37-5408-4843-afbe-c470b1d51d8d",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/important resources/2025 Res Life Presentation.pdf",
+        "location": "{\"page\": 22}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "480e5f14-7b66-4b04-be1f-35fe81d30c65",
+    "topic": "Emergencies",
+    "section": "Reporting Crimes and Safety Incidents",
+    "text": "Where to Report Crimes\n\nAll crimes or suspected criminal activity connected to Residence Life must be reported promptly through the following channels:\n\n- Submit a Residence Life report.\n- Notify Residence Life professional staff.\n- Report the incident to Public Safety.\n\nWhen you are unsure how or where to report, always ask a Residence Life professional staff member or Public Safety for guidance.",
+    "sources": [
+      {
+        "source_doc_id": "212d3b37-5408-4843-afbe-c470b1d51d8d",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/important resources/2025 Res Life Presentation.pdf",
+        "location": "{\"page\": 10}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "cbc9cbc2-0c98-41ef-ac48-ee78003c3ad1",
+    "topic": "Emergencies",
+    "section": "Severe Weather Procedures",
+    "text": "**Severe Weather Procedures**\n\nIf our campus is in the warning area of severe weather, seek shelter immediately. For designated shelter locations, refer to the Campus Emergency Guide.\n\nWhen a Severe Weather Watch or Warning is issued for our area, Public Safety initiates the Weather Emergency Protocol. As part of this protocol, the following departments are contacted and advised of the storm:\n\n- On-Call Hall Director for Residence Life  \n- Circulation Desk for the LIB  \n- ASC Duty Phone  \n- Facilities Management  \n\nIn situations where the storm has been known to produce significant damage, our Public Safety Director may make a notification of our systems.",
+    "sources": [
+      {
+        "source_doc_id": "212d3b37-5408-4843-afbe-c470b1d51d8d",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/important resources/2025 Res Life Presentation.pdf",
+        "location": "{\"page\": 19}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "dc69c69d-a9d8-4662-9c00-0a9b4ac0080c",
+    "topic": "Emergencies",
+    "section": "Emergency Notifications & Alerts",
+    "text": "Where to Go for Information\n\nFor general information, always refer to the St. Thomas website as your primary source.\n\nTo receive notifications about incidents on campus, go to Murphy Online and add your cell phone number. Once your number is entered in Murphy Online, you will receive UST Alerts for campus incidents.",
+    "sources": [
+      {
+        "source_doc_id": "212d3b37-5408-4843-afbe-c470b1d51d8d",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/important resources/2025 Res Life Presentation.pdf",
+        "location": "{\"page\": 17}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "e5c24cae-1ae9-4373-b69f-18ad797c5525",
+    "topic": "Emergencies",
+    "section": "Personal Safety / Active Threat Response",
+    "text": "### Personal Safety Plan\n\nA personal safety plan is an opportunity to prepare in advance using scenario-based response planning. The goal is to build \u201cmuscle memory\u201d so that, in an actual emergency, you can draw on practiced responses and your prior experiences as tools to help you survive. You will never be able to imagine exactly how a real incident will look, but planning ahead and practicing scenarios improves your ability to respond effectively.\n\nA key framework for personal safety planning is **Run. Hide. Fight.** This is not a checklist to be followed in order; all three are options, and you choose based on what is safest and most realistic in the moment. A personal safety plan should include:\n\n- Planning ahead.\n- Scenario-based exercises.\n- Breaking down and practicing each element of Run. Hide. Fight.\n\n#### Run\n- Run far and run long.\n- Do not wait to start moving to safety.\n- When you encounter law enforcement, keep your hands up.\n\n#### Hide\n- Lock and/or barricade doors.\n- Treat property as non-essential; it is not an issue if you need to damage it to stay safe (for example, break a window).\n- Turn lights out.\n- Keep your phone on silent.\n\n#### Fight\n- Commit fully: this is an all-in response.\n- Get to the assailant\u2019s level (engage directly if you must).\n- Do not hesitate.",
+    "sources": [
+      {
+        "source_doc_id": "212d3b37-5408-4843-afbe-c470b1d51d8d",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/important resources/2025 Res Life Presentation.pdf",
+        "location": "{\"page\": 24}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "49f6d364-04b9-4db1-ae3b-3a3a3e26e03a",
+    "topic": "Emergencies",
+    "section": "Mental Health & Wellness Concerns",
+    "text": "### Responding to Supervisor Outreach About a Resident\u2019s Mental Well-Being Concern\n\n**Scenario:**  \nYour supervisor emails you to inform you that they have been trying to get in touch with one of your residents. The outreach is in response to a concern raised by the resident\u2019s professor, who contacted the Dean of Student\u2019s Office about the resident\u2019s mental well-being. Your supervisor has already attempted to knock on the resident\u2019s door and call them, but the resident has not responded. Your supervisor asks you to connect with the resident to help get them connected to resources and to encourage them to respond to outreach attempts.\n\nThis section outlines how you might begin, what type of touch point to use, what that touch point might look like, and what follow-up steps to consider.\n\n---\n\n### 1. Where to Start\n\n1. Review the information provided by your supervisor:\n   - Note that the concern originated from a professor.\n   - Understand that the concern has already reached the Dean of Student\u2019s Office.\n   - Acknowledge that your supervisor has already tried door knocks and phone calls without success.\n\n2. Consider the resident\u2019s known patterns and context:\n   - Any prior interactions you have had with the resident.\n   - Their typical responsiveness to email, text, or in-person contact.\n   - Any relevant information about their schedule or habits that might affect how and when you reach out.\n\n3. Plan an initial outreach that:\n   - Aims to establish contact in a supportive, non-threatening way.\n   - Clearly communicates care and availability.\n   - Encourages the resident to respond and engage with available resources.\n\n---\n\n### 2. Choosing Between a Formal or Informal Touch Point\n\nWhen deciding whether a formal or informal touch point is more applicable, consider:\n\n- The seriousness of the concern (mental well-being concern escalated to the Dean of Student\u2019s Office).\n- The fact that your supervisor\u2019s attempts (door knocks and calls) have not received a response.\n- Your existing relationship with the resident (if any).\n\n**Informal touch point:**  \n- May be more appropriate as an initial step if you have some rapport with the resident or if you believe a lower-pressure approach will increase the likelihood of a response.  \n- Can feel more personal and less intimidating, which may encourage the resident to open up.\n\n**Formal touch point:**  \n- May be appropriate if informal attempts are unsuccessful, if you have no prior relationship with the resident, or if your supervisor or institutional practice indicates a need for more structured documentation and follow-up.  \n- Can help clearly outline concern, expectations, and available resources in a documented way.\n\nYou may choose to start informally and then move to a more formal approach if the resident does not respond.\n\n---\n\n### 3. What the Touch Point Might Look Like\n\nDepending on whether you choose an informal or formal approach, the touch point could include:\n\n**Informal touch point examples:**\n- A casual, supportive email or message:\n  - Expressing that you\u2019ve noticed outreach attempts from staff.\n  - Letting the resident know you are available to talk or meet.\n  - Emphasizing care, support, and confidentiality within your role\u2019s limits.\n- A friendly in-person attempt:\n  - Knocking on their door at a time they are likely to be home.\n  - Introducing the conversation in a non-pressuring way if they answer.\n  - Offering to talk in a comfortable, private space.\n\n**Formal touch point examples:**\n- A more structured email or written message:\n  - Identifying yourself and your role.\n  - Noting that campus staff (including your supervisor and the Dean of Student\u2019s Office) have been trying to reach them due to concern for their well-being.\n  - Clearly inviting them to schedule a time to meet.\n  - Listing specific campus resources (e.g., counseling services, Dean of Student\u2019s Office, other support services) and how to access them.\n- A scheduled, documented meeting:\n  - If the resident responds, arranging a set time and place to talk.\n  - Using the meeting to listen, share resources, and encourage connection with appropriate offices.\n\nIn all cases, the tone should be:\n- Nonjudgmental and empathetic.\n- Focused on support and options, not demands.\n- Clear that the goal is to connect them with help, not to punish or discipline.\n\n---\n\n### 4. Follow-Up Steps to Consider\n\nAfter the initial touch point, consider the following follow-up actions:\n\n1. **If the resident responds and engages:**\n   - Meet with them (if appropriate) to:\n     - Listen to their concerns.\n     - Provide information about relevant resources (e.g., counseling, Dean of Student\u2019s Office, academic support).\n     - Encourage them to follow up with the offices that have reached out (e.g., Dean of Student\u2019s Office).\n   - Check in after the meeting:\n     - A brief follow-up message or conversation to see how they are doing.\n     - Ask if they were able to connect with the suggested resources.\n   - Communicate with your supervisor as required by your role:\n     - Share that contact was made.\n     - Note any next steps you and the resident agreed upon, within privacy and reporting guidelines.\n\n2. **If the resident does not respond:**\n   - Try an alternate method of contact:\n     - If you started informally (e.g., a casual message), consider a more formal email or written note.\n     - Attempt another in-person check at a different time of day.\n   - Document your attempts as required:\n     - Note dates, times, and methods of outreach.\n   - Update your supervisor:\n     - Inform them of all attempts and lack of response.\n     - Ask if there are additional steps they would like you to take or if the situation should be escalated further.\n\n3. **Ongoing considerations:**\n   - Continue to be observant:\n     - If you see the resident around the building, consider a brief, supportive check-in.\n   - Maintain appropriate boundaries:\n     - Offer support and connection to resources without taking on the role of counselor or therapist.\n   - Follow any additional instructions from your supervisor or institutional protocols related to mental well-being concerns and non-responsiveness.\n\n---\n\nThis process is intended to guide you in responding when your supervisor asks you to help connect a resident to resources and encourage them to respond to outreach attempts, particularly when there is a concern for their mental well-being that has already reached the Dean of Student\u2019s Office.",
+    "sources": [
+      {
+        "source_doc_id": "f77296c8-a621-49cf-b49e-1b348a139302",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/communications/Creating Connections & Touch Points 25-26.pptx",
+        "location": "{\"slide\": 22}"
+      }
+    ]
+  }
+]

@@ -1,0 +1,394 @@
+[
+  {
+    "canonical_id": "d5ca5b19-65e6-4e59-a283-bd1bf98c0e59",
+    "topic": "Procedures",
+    "section": "Documentation & Reporting",
+    "text": "Standard Reports for Documentation:\n\n1. **Duty Log (Roompact)**: This report is essential for maintaining a comprehensive record of daily activities and incidents within the residence life operations. It serves as a primary tool for tracking and documenting occurrences and actions taken by staff.\n\n2. **Advocate (Incident Reports and FYIs)**: This system is utilized for filing detailed incident reports and For Your Information (FYI) notes. It ensures that all incidents are documented accurately and are accessible for future reference and analysis.\n\n3. **Title IX Email RJ1**: This specific email protocol is used for reporting and addressing issues related to Title IX. It is crucial for ensuring compliance with federal regulations and for the protection of students' rights within the residence life environment.\n\nThese reports form the backbone of our documentation procedures, ensuring that all incidents and relevant information are systematically recorded and managed.",
+    "sources": [
+      {
+        "source_doc_id": "97b37455-884a-41a9-8141-ec24c2fece94",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/Duty Expectations.pdf",
+        "location": "{\"page\": 15}"
+      },
+      {
+        "source_doc_id": "1a566f48-a4d8-46cd-a3ea-7622dceb3db5",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/duty+/Duty Expectations.pdf",
+        "location": "{\"page\": 15}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "f5935e01-db4e-4613-ad2a-c75410899c7a",
+    "topic": "Procedures",
+    "section": "Duty & On-Call Procedures",
+    "text": "**RA Response Procedures and Key Use Guidelines**\n\n**Evacuation Areas for Tornado or High Winds:**\n\n- **Brady:** Proceed to the lower level.\n- **Dowling:** Move to all lower level areas.\n- **Flynn:** Use the parking ramp.\n- **Frey:** Go to the lower level of the Parking Garage.\n- **Grace:** Stay in the general area of the lower level, away from windows, and lay face down.\n- **Ireland:** Head to the lower level wings, keep away from windows, and lay face down.\n- **Mid-Campus:** Use the lower level, specifically the interior hallway.\n- **Morrison:** Utilize the parking ramp; stairwells are only for necessary use.\n- **Murray:** Stay on the lower level, as close to the center as possible.\n- **Tommie North:** Use the parking garage.\n\n**Use of Sequential or Master Keys:**\n\nThe University of St. Thomas Residence Life Office prioritizes resident privacy. Student leaders must not enter a student's room without explicit permission from at least one resident, except in specific situations:\n\n1. **Emergency Situations:** Such as rule violations in progress or life-threatening conditions.\n2. **Noise Issues:** If there is persistent noise (e.g., a ringing telephone or alarm clock) from an apparently empty room, follow these steps before entry:\n   - Attempt to locate a resident.\n   - Confirm entry with your supervisor or the CD/GSA on call.\n   - Ensure another student leader or staff member accompanies you.\n   - Knock loudly and identify yourself before entering. If unanswered, knock again, announce your intent to key in, open the door partially, and identify yourself before proceeding.\n   - After entry, send a follow-up email detailing the reason for entry, and CC your supervisor. (This does not apply to mass room entries like routine health and safety inspections.)\n\n3. **Routine Inspections:** Entry for scheduled inspections, such as pre-vacation or break period checks, is generally conducted by two Student Leaders.\n\n**Master Key Access:**\n\n- RAs must obtain CD/GSA permission before keying into a room.\n- Never loan out a master key; always unlock the door personally.\n- Keep the master key in a secure location and use it judiciously, strictly for emergencies.",
+    "sources": [
+      {
+        "source_doc_id": "d0c50efc-b1d6-4364-b8d6-662e1fd97bf2",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/RA Manual 2025-2026.pdf",
+        "location": "{\"page\": 14}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "1ab6670f-79ed-4e7c-a702-26683e6a17ba",
+    "topic": "Procedures",
+    "section": "Room Access, Keys & Lockouts",
+    "text": "**RA Response Procedures**\n\n1. **Room Access for Non-Residents:**\n   - Do not open a room for someone who is not a resident of that room. If a non-resident needs access, they must wait for the room's resident to return. Direct any questions to the CD/GSA or Public Safety.\n\n2. **Room Access Verification:**\n   - Do not open a room for a resident you do not recognize without verifying their identity. Use a picture ID and cross-check it against the Residence Life roster or Roompact to confirm they are the actual occupant.\n\n3. **Room Entry and Search:**\n   - Refer to the Resident Student Handbook section on Room Entry and Room Search for detailed information. Always consult with the CD/GSA on duty, your CD/GSA, or another professional staff member before entering a room.\n\n4. **Master Key and Access Card Protocol:**\n   - Notify your CD/GSA immediately if you lose the master key or sequential key. All RAs have access to a master key. In buildings with card access, your student ID serves as the master key. In communities using physical keys, each RA receives an individually numbered access key that fits one of two locks on the sequential lock, with the other lock holding the master key. Your CD/GSA will demonstrate how to access this lock.\n   - If you temporarily lose or misplace your ID card with master access, contact the CD/GSA on duty immediately. If you lose your key or ID card (without master access), notify your CD/GSA immediately via email.\n   - RAs are financially responsible for replacing any keys or access cards they possess or check out, as well as for all cores accessed if a key or access card is lost.\n\n5. **Lost Keys and ID Cards:**\n   - If a resident loses their key, instruct them to report it to the Residence Life Office in Koch 120, where they will be charged accordingly. Residence Life can also provide a spare key.\n   - If a resident loses their ID card, direct them to the card office (open Monday \u2013 Friday, 8:30 am \u2013 4:00 pm). Outside office hours, they should go to Public Safety.\n\n6. **Lockouts:**\n   - If a student is locked out of their room, they should seek assistance from an RA or CD/GSA. If they cannot find one, they can go to the Residence Life Office in Koch 120, where limited staff will be available to assist with lockouts.",
+    "sources": [
+      {
+        "source_doc_id": "d0c50efc-b1d6-4364-b8d6-662e1fd97bf2",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/RA Manual 2025-2026.pdf",
+        "location": "{\"page\": 15}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "4fd82997-ac2a-48a0-a53a-15abb2c2932d",
+    "topic": "Procedures",
+    "section": "Event Attendance Tracking",
+    "text": "**Event Attendance Tracking Procedures**\n\nAttendance tracking is mandatory for all Residential Connection Events using TommieLink, while Community Meeting attendance is managed through Roompact. There are three methods to track attendance effectively:\n\n1. **Track Attendance Button**: This option allows for manual attendance management. You can add attendees, modify their status (attended, absent, or excused), and include comments next to each name. Additionally, you can download an Excel file by clicking \"export,\" which provides a list of names, emails, attendance status, and details on who tracked the attendance and when.\n\n2. **Access Code & Check-In App**: To use this method, download the Check-In app from the [Apple Store](https://itunes.apple.com/us/app/campus-labs-event-check-in/id1221503400?mt=8) or [Google Play](https://play.google.com/store/apps/details?id=com.campuslabs.checkins&hl=en). A detailed tutorial is available on the [Event Resource: Using the Check-In App for Attendance](https://stthomas.instructure.com/courses/84343/pages/event-resource-using-the-check-in-app-for-attendance-2) page. Within the app, enter the access code and sign into your UST account. You can then check attendees in and out using their event pass (QR code), email, or by searching their name. The app also allows you to view their RSVP or invited status.\n\nEnsure all attendance is accurately tracked and recorded as per the guidelines provided.",
+    "sources": [
+      {
+        "source_doc_id": "2dd8ea51-492d-45ba-9d74-244c509a23a0",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/Event Resource_ Tracking Attendance_ Resident Advisors 2025-2026.pdf",
+        "location": "{\"page\": 1}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "48e9da67-1ec6-402e-9a08-b3523472ccfa",
+    "topic": "Procedures",
+    "section": "General Administrative Procedures",
+    "text": "Prize Specific Guidelines:\n\n- The prize must have a value of less than $75.00.\n- Prizes cannot be in the form of gift cards. Please refer to the separate instructions for gift card prizes.\n- You must provide the following information for each prize winner:\n  - Student's first and last name\n  - Student's UST email address\n  - Student's ID number\n  - Receipt of purchase\n\nOnce you have gathered the necessary information, you should either email it to accountspay@stthomas.edu or deliver it in person to Accounts Payable located in AQU 302. Ensure that the list includes all required details. For example, the prize winner information should be formatted as follows:\n\n- Name: Tommie Mascot\n- Email: tomm1234@stthomas.edu\n- ID Number: 11223344\n- Receipt: Attached\n\nThis ensures that Accounts Payable can process the prize distribution efficiently.",
+    "sources": [
+      {
+        "source_doc_id": "4d97cd4f-c33f-4ea2-bc50-ee9ed9bc3871",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/Event Policy_ Gift Card & Prize Guidelines_ Resident Advisors 2025-2026.pdf",
+        "location": "{\"page\": 2}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "7a4c2f8b-d2c4-443c-babe-eaf698a5e4a1",
+    "topic": "Procedures",
+    "section": "Event Planning & Promotion",
+    "text": "Any event occurring off campus must include the Activity Release questions in the RSVP section. Only event approvers (CD/GSAs) are able to add these Activity Release questions to the RSVP section.\n\n**Post-Event Feedback (Page 3)**  \nCreate a custom survey in Tommie Link to collect feedback from attendees after the event. On the survey setup page, check the box at the top to automatically send your survey to attendees after the event.\n\n**Event Cover Photo (Page 4)**  \nThe Event Cover Photo is the image displayed on your event page. If you do not have a prepared image or you skip this page, a default photo supplied by the system will be used, based on the event theme you selected.\n\nYour Cover Photo helps draw attention to your event. To ensure your image looks great, choose a high-resolution photo that is eye-catching, high quality, and has a clear central focal point.\n\nGuidelines for image files:\n- **Dimensions:** Image should be 1300px by 780px or larger and horizontal in orientation. All images will be cropped to a 1.67:1 aspect ratio.\n- **File Type:** JPG, JPEG, GIF, PNG, and PDF are accepted.\n- **File Size:** Use a photo that is no larger than 10MB.\n- **General:**\n  - Avoid images that contain text or logos.\n  - PDF files will not have a preview and cannot be cropped.\n\n**Custom Fields (Page 5)**  \nContinue to the Custom Fields section if any of the following applies to your event:\n- You need to indicate who is hosting the event (e.g., RA, CEB).\n- You need to add additional event details.",
+    "sources": [
+      {
+        "source_doc_id": "2d45c1d4-0333-4e8f-b964-0e905b993ed6",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/Event Resource_ Creating Events in TommieLink_ Resident Advisors 2025-2026.pdf",
+        "location": "{\"page\": 3}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "b07ba4d2-11e1-408f-b62f-656714fb33f5",
+    "topic": "Procedures",
+    "section": "Event Management / TommieLink Events",
+    "text": "Event Resource: Creating Events in TommieLink  \n\nAll Residence Life events must be added to TommieLink. Creating an event in TommieLink allows your organization to advertise events to the St. Thomas community and manage RSVPs, guest attendance, and event evaluations in one place.\n\nAccessing Event Tools  \n- Confirm that you have access/permission to post events for your organization.  \n- Open your organization\u2019s page and navigate to the organizational tool drawer.  \n- Click on the \u201cEvents\u201d tab in the organizational tool drawer.\n\nManage Events Page  \n- On the Manage Events page, you can view all current and past events, including those that were approved, denied, or cancelled.  \n- Click on an event name to view further details about that specific event.  \n- To begin a new event submission, click the blue \u201cCreate Event\u201d button located in the top right side of the page.\n\nCompleting the Event Form  \n- Page 1: Basic Details  \n  - Any section marked with an asterisk (*) is required and must be completed before you can proceed.",
+    "sources": [
+      {
+        "source_doc_id": "2d45c1d4-0333-4e8f-b964-0e905b993ed6",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/Event Resource_ Creating Events in TommieLink_ Resident Advisors 2025-2026.pdf",
+        "location": "{\"page\": 1}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "83d8735a-f058-4665-8ed3-01a07dfa3986",
+    "topic": "Procedures",
+    "section": "Event Planning & Submission",
+    "text": "Event Submission: Additional Details, Budget, and Review Process\n\nWhen submitting an event, you must complete the additional details and budget sections accurately and then review your submission before final confirmation. The information you provide here is used by the CD/GSA to review your event and to share relevant university policies with you. If any information in this section does not match your event description, your event will be denied and you will be required to resubmit with all questions answered properly.\n\n1. Additional Event Details (Page 6)\n\nOn this page, you must provide specific information about your event, including:\n\n- **Communities this event is for (select all that apply)**  \n  Indicate all communities that the event is intended to serve.\n\n- **Location reserved appropriately**  \n  Confirm that the event location has been reserved correctly and is appropriate for the event.\n\n- **Partnering / Co-Hosting**  \n  Indicate whether you are partnering or co-hosting with another group, office, or organization.\n\n- **Offering Food**  \n  Specify whether food will be offered at the event.\n\n- **Promotion outside TommieLink**  \n  Indicate if you will promote the event outside of TommieLink.\n\n- **How will you facilitate connection among residents?**  \n  Describe how the event will foster connection and interaction among residents.\n\n2. Budget & Event Supplies Request (Page 6)\n\nYou must also provide complete budget and supply information:\n\n- **Total budget requested**  \n  State the total amount of money you are requesting for the event.\n\n- **Provide a cost breakdown of the budget requested**  \n  Itemize how the requested funds will be used (e.g., supplies, food, decorations).\n\n- **Link to specific supplies**  \n  Include links to the specific supplies you plan to purchase.\n\nThese questions help the CD/GSA gather the additional information they need to review the event and to provide you with information on university policies that apply to your specific event.\n\n3. Review and Submission (Page 7)\n\nOn the final page:\n\n- **Review your submission for final confirmation of your event details.**  \n  Carefully check all sections (event description, additional details, budget, and supplies) to ensure they are accurate and consistent.\n\n- **If you are satisfied with everything, click on \u201csubmit\u201d at the bottom of the page.**  \n  Submitting indicates that you have verified all information and that it matches across all sections.\n\n4. CD/GSA Review, Denials, and Fixing Errors\n\nAfter you click \u201csubmit,\u201d the CD/GSA will review your event using the information you provided, including:\n\n- Intended communities\n- Location and reservation status\n- Partnering/co-hosting details\n- Food plans\n- Promotion plans (including outside TommieLink)\n- Plans to facilitate connection among residents\n- Total budget, cost breakdown, and supply links\n\nIf the information in your event description does not match your responses in the additional details and budget sections, or if questions are not answered properly, your event will be denied. In that case:\n\n- You will be notified that the event has been denied.\n- You will be asked to correct the errors or inconsistencies.\n- You must resubmit the event with all questions answered properly and with matching information across all sections.\n\nCarefully completing Page 6 and thoroughly reviewing your submission on Page 7 reduces the likelihood of denial and the need to resubmit.",
+    "sources": [
+      {
+        "source_doc_id": "2d45c1d4-0333-4e8f-b964-0e905b993ed6",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/Event Resource_ Creating Events in TommieLink_ Resident Advisors 2025-2026.pdf",
+        "location": "{\"page\": 4}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "7a67b6ee-0dc3-4c20-afac-b8fe3294ef08",
+    "topic": "Procedures",
+    "section": "Event Planning & Programming",
+    "text": "Event Creation and Configuration Guidelines\n\nWhen creating an event, complete all of the following components. Do not skip any required fields or statements.\n\n1. Basic Event Information  \n   - Create a clear, descriptive event title.  \n   - Select an appropriate theme for the event.  \n   - Write an event description that:  \n     - Explains what the event is about.  \n     - Includes specific instructions on how to locate the event (e.g., building name, room number, landmarks, or online access details).  \n     - Lists any important details attendees should know prior to attending (e.g., what to bring, expectations, or preparation needed).  \n     - Provides contact information for questions or concerns.  \n\n2. Required Accessibility Statement  \n   - All event descriptions must include the following accessibility statement exactly, with the appropriate contact information inserted:  \n     - \u201cTo make a disability accommodation request, please contact the event coordinator [insert Community/Hall Director name] at [insert Community/Hall Director email address] at least one week prior to the event date.\u201d\n\n3. Time and Place  \n   - Enter the event date(s) and start/end times.  \n   - If the same activity occurs multiple times, use the \u201c+ Add another date\u201d option to create multiple occurrences of the same event.  \n   - Provide location details:  \n     - For in-person events, specify the physical location clearly.  \n     - For online events, click \u201cOnline Location\u201d to add your meeting link and any necessary online instructions.\n\n4. Event Visibility Settings  \n   - Select who can see the event by choosing one of the following visibility options:  \n     - **The Public**: Both logged in and not logged in users can view the event.  \n       - Use this option so parents and families can view events.  \n     - **Students & staff**: Only logged in users can view the event.  \n     - **Organization Members**: Only members listed on your club roster can view the event.  \n     - **Invited users only**: Only those specifically invited can view the event.\n\n5. Event Categories and Perks  \n   - Select all applicable event categories and perks.  \n   - Proper categorization ensures users can find your event using the event directory search filters.  \n   - Example: If a student is searching for a diversity and inclusion event that serves free food, and you have correctly categorized your event under relevant categories and perks, your event will appear in their search and they may attend.\n\n6. RSVP Options  \n   - Configure RSVP settings as needed:  \n     - Select who can RSVP.  \n     - Set how many people can RSVP (capacity limits).  \n     - Indicate whether guests are allowed.  \n     - Add any custom questions for attendees, such as:  \n       - Food preferences  \n       - Dietary restrictions  \n       - Guest information  \n       - Shirt sizes  \n   - Ensure all necessary information for planning (e.g., catering, materials, apparel) is captured through these custom questions.\n\n7. Off Campus Activity Release  \n   - If the event involves off-campus activity, ensure the Off Campus Activity Release process is addressed in accordance with applicable procedures.",
+    "sources": [
+      {
+        "source_doc_id": "2d45c1d4-0333-4e8f-b964-0e905b993ed6",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/Event Resource_ Creating Events in TommieLink_ Resident Advisors 2025-2026.pdf",
+        "location": "{\"page\": 2}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "17c5e841-aabd-4f12-979e-68e7acd18de3",
+    "topic": "Procedures",
+    "section": "General Residence Life Operations Procedures",
+    "text": "Procedures for Residence Life Operations\n\nThe following outlines the procedures for residence life operations, ensuring a smooth and efficient management of residential facilities. These procedures are designed to maintain a safe, welcoming, and organized environment for all residents.\n\n1. **Check-In Process**: Residents must complete the check-in process at the designated times provided by the residence life office. This includes verifying personal information, receiving room keys, and signing the housing agreement. Any discrepancies in personal information should be reported immediately to the residence life staff.\n\n2. **Room Assignments**: Room assignments are determined based on the preferences submitted during the application process, subject to availability. Changes to room assignments can be requested through the residence life office but are not guaranteed and depend on space availability and administrative approval.\n\n3. **Maintenance Requests**: Residents are responsible for reporting any maintenance issues in their rooms or common areas. Maintenance requests should be submitted through the online portal or directly to the residence life office. Emergency maintenance issues, such as water leaks or electrical failures, should be reported immediately to the on-call staff.\n\n4. **Community Standards**: All residents are expected to adhere to the community standards outlined in the residence life handbook. This includes respecting quiet hours, maintaining cleanliness in shared spaces, and treating fellow residents and staff with respect. Violations of community standards may result in disciplinary action.\n\n5. **Safety and Security**: Residents must ensure that their rooms are locked when unoccupied and report any security concerns to the residence life office. The residence halls are equipped with security cameras and require keycard access for entry. In case of an emergency, residents should follow the evacuation procedures posted in each building.\n\n6. **Check-Out Process**: At the end of the academic year or upon termination of the housing agreement, residents must complete the check-out process. This includes returning room keys, ensuring the room is clean and free of personal belongings, and completing a room inspection with a residence life staff member. Any damages or missing items may result in additional charges.\n\nThese procedures are essential for maintaining a well-functioning residential community and ensuring the safety and satisfaction of all residents. For any questions or further clarification, residents should contact the residence life office directly.",
+    "sources": [
+      {
+        "source_doc_id": "3dab6bce-9ebe-419b-b565-2178694bec53",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/Enforcing Policies and Following Procedures.pdf",
+        "location": "{\"page\": 7}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "09bdc7eb-55d2-436d-a2cf-e92d4d27bb95",
+    "topic": "Procedures",
+    "section": "Event Planning & Programming",
+    "text": "Backwards Scaffolding Event Planning 101\n\nUse the following backwards-planning timeline to prepare and execute your event. All steps, deadlines, and requirements must be followed as listed.\n\n**One Month Before the Event**\n- Brainstorm event ideas.\n- Run your ideas by your CD/GSA for feedback and approval to move forward.\n\n**Three Weeks Before the Event**\n- Review all event guidelines.\n- Submit your TommieLink event for approval.\n  - Be sure to include all supply requests.\n  - Be sure to include all catering requests.\n\n**Two Weeks Before the Event**\n- Begin marketing your event.\n- Use 3 unique methods to market (e.g., different platforms or strategies).\n\n**One Week Before the Event**\n- Confirm that you have all necessary supplies for the event.\n- Start promoting the event in GroupMe.\n- Continue promoting the event via word of mouth.\n\n**Day of the Event**\n- Arrive early to set up the space and materials.\n- Take at least one photo during the event.\n- Clean up the event space after the program concludes.\n- Submit the Roompact Form following the event.",
+    "sources": [
+      {
+        "source_doc_id": "86952e12-60a8-4697-8a2b-1ba454e0b106",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/RL-Residential Connection Events1 (1).pdf",
+        "location": "{\"page\": 11}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "4bc6de5e-8918-4950-97b1-b3b7eabc28d3",
+    "topic": "Procedures",
+    "section": "Event Planning",
+    "text": "### Event Planning 101: Budget & Supplies\n\nWhen planning an event, follow these budgeting and supply guidelines:\n\n1. **Confirm Your Budget**\n   - Check in with your CD/GSA regarding the budget available for your area.\n   - Discuss event costs and limits before making any purchases or commitments.\n\n2. **Use Available Supplies**\n   - Check the resource room for supplies before buying anything new.\n   - Utilize existing materials whenever possible to stay within budget.\n\n3. **Food and Snacks**\n   - You may only utilize **in-house catering** and **Summit Marketplace** for snacks.\n   - Do not purchase food or snacks from outside vendors.\n\n4. **Brainstorming and Support**\n   - If you need help brainstorming event ideas or planning details, communicate with your supervisor **in advance**.\n   - Use established channels such as:\n     - 1:1 meetings  \n     - Weekly reports  \n     - Emails  \n\nEnsure all budget and supply decisions are reviewed with your supervisor (CD/GSA) ahead of time.",
+    "sources": [
+      {
+        "source_doc_id": "86952e12-60a8-4697-8a2b-1ba454e0b106",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/RL-Residential Connection Events1 (1).pdf",
+        "location": "{\"page\": 12}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "e3398278-6e62-4255-ac81-09bbb3c957d4",
+    "topic": "Procedures",
+    "section": "Programming & Events",
+    "text": "**Departmental Expectations for Events (Both Communities)**\n\nFor every event, the following steps are required:\n\n1. **TommieLink Posting and Attendance**\n   - Every event must be posted on TommieLink.\n   - Attendance must be captured at the event using TommieLink.\n\n2. **Residential Connection Event Form (Roompact)**\n   - After the event, you must complete the Residential Connection Event form in Roompact.\n   - This form requires you to upload a photo from your event.\n   - The photo you upload must not be an .HEIC file (the default format on iPhones). Make sure to convert .HEIC images to a compatible format (e.g., .jpg or .png) before uploading.",
+    "sources": [
+      {
+        "source_doc_id": "86952e12-60a8-4697-8a2b-1ba454e0b106",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/RL-Residential Connection Events1 (1).pdf",
+        "location": "{\"page\": 18}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "afc8295a-9b67-4bb0-8acc-a44c78e4e10a",
+    "topic": "Procedures",
+    "section": "Programming & Events",
+    "text": "### Finishing Up Your Event\n\nAfter your event concludes, complete all of the following steps:\n\n1. **Clean the Space**\n   - Fully clean up the event area and leave no trace of the event.\n\n2. **Return Supplies**\n   - Bring all leftover supplies to the RA resource room.\n   - Put all supplies away in their proper place.\n\n3. **Handle Leftover Food and Beverages**\n   - First, offer any leftover food and beverages to event guests.\n   - Then, send a message in GroupMe to let others know about remaining food and beverages.\n\n4. **Remove Advertising**\n   - Take down all event advertising (flyers, posters, signs, etc.).\n\n5. **Submit Required Documentation**\n   - Submit the Roompact Form after the event.",
+    "sources": [
+      {
+        "source_doc_id": "86952e12-60a8-4697-8a2b-1ba454e0b106",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/RL-Residential Connection Events1 (1).pdf",
+        "location": "{\"page\": 21}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "564cc123-75fb-46f7-9cfa-8ceb0d867404",
+    "topic": "Procedures",
+    "section": "Programming & Events",
+    "text": "Create and publish your event in Tommie Link by following these steps:\n\n1. Log in to Tommie Link.\n2. Create the event under your specific community.\n3. Provide a clear description of the event.\n4. Include your flyer or a picture for the event.\n5. Complete all required details of the event specifics.",
+    "sources": [
+      {
+        "source_doc_id": "86952e12-60a8-4697-8a2b-1ba454e0b106",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/RL-Residential Connection Events1 (1).pdf",
+        "location": "{\"page\": 20}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "081c0c43-6b9c-411b-b2ae-3ac437dc764a",
+    "topic": "Procedures",
+    "section": "Programming & Events",
+    "text": "### Departmental Event Expectations  \n_For First-Year and Second-Year Communities_\n\n#### J-Term (Both First-Year and Second-Year Communities)\n- No formally required events.\n- Engagement with residents occurs via GroupMe.\n\n---\n\n### First-Year Communities\n\n**Fall Semester**\n\n- **September**\n  - 1 Individual RA Event  \n  - 1 Building/Community Event  \n\n- **October**\n  - Homecoming Parade  \n  - 1 Paired RA Event (per RA)  \n  - 1 Building/Community Event  \n\n- **November**\n  - 1 Building/Community Event  \n\n- **December**\n  - 1 Building/Community Event  \n\n**Spring Semester**\n\n- **February**\n  - 1 Individual RA Event  \n  - 1 Building/Community Event  \n\n- **March**\n  - 1 Building/Community Event  \n\n- **April**\n  - 1 Building/Community Event  \n\n- **May**\n  - 1 Building/Community Event  \n\n---\n\n### Second-Year Communities\n\n**Fall Semester**\n\n- **September**\n  - 1 Paired RA Event  \n  - 1 Building/Community Event  \n\n- **October**\n  - Homecoming Parade  \n  - 1 Building/Community Event  \n\n- **November**\n  - 1 Building/Community Event  \n\n- **December**\n  - None required  \n\n**Spring Semester**\n\n- **February**\n  - 1 Paired RA Event  \n  - 1 Building/Community Event  \n\n- **March**\n  - 1 Building/Community Event  \n\n- **April**\n  - 1 Building/Community Event  \n\n- **May**\n  - None required",
+    "sources": [
+      {
+        "source_doc_id": "86952e12-60a8-4697-8a2b-1ba454e0b106",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/RL-Residential Connection Events1 (1).pdf",
+        "location": "{\"page\": 16}"
+      },
+      {
+        "source_doc_id": "86952e12-60a8-4697-8a2b-1ba454e0b106",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/RL-Residential Connection Events1 (1).pdf",
+        "location": "{\"page\": 17}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "7aad91d2-4d83-4867-88bd-de56b472ca4e",
+    "topic": "Procedures",
+    "section": "Meetings & Attendance Follow-Up",
+    "text": "Attendance at required meetings will not always be 100%; there will be students who do not attend. The information shared in these meetings is still necessary for all students, including those who were absent, so you must follow up with them.\n\nFollow-up should include:\n- 1:1 conversations with students who did not attend.\n- Sharing all relevant information from the meeting with those students after you speak with them.\n\nIf many people did not attend the meeting, consider hosting the meeting a second time. In that situation, you should also talk to your supervisor about why there may have been low attendance.",
+    "sources": [
+      {
+        "source_doc_id": "1e25619b-ad83-4e33-96b3-e7814d6ca730",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/communications/Community Meetings SLED 2025 (1).pdf",
+        "location": "{\"page\": 17}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "e97a8b9a-318a-4d13-9bcc-ed0c69b6365a",
+    "topic": "Procedures",
+    "section": "Programs & Meetings",
+    "text": "Program/Meeting Procedure\n\nFor all programs or meetings, follow this standard process:\n\n1. **TommieLink Setup**\n   - Create and publish the event on TommieLink **one week in advance**.\n\n2. **Attendance Tracking**\n   - Take attendance using the designated **Roompact Form** during the event.\n\n3. **Roompact Submission**\n   - After the event, **submit the completed attendance form in Roompact**.\n\n4. **Feedback Form**\n   - If a feedback form is required for the event, **submit the feedback form** as applicable.\n\n5. **Resident Follow-Up**\n   - **Follow up with residents who could not make it** to share key information, resources, or next opportunities to engage.\n\n6. **Environment**\n   - Maintain **good vibes** throughout planning, implementation, and follow-up to foster a positive community atmosphere.",
+    "sources": [
+      {
+        "source_doc_id": "1e25619b-ad83-4e33-96b3-e7814d6ca730",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/communications/Community Meetings SLED 2025 (1).pdf",
+        "location": "{\"page\": 16}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "943bab5e-63f2-4d7c-82e4-06e7eb2eeff6",
+    "topic": "Procedures",
+    "section": "Community Communications",
+    "text": "Your supervisor will provide you with the content you need to communicate, along with specific steps on how to publicize the information. This may include:\n\n- An email template to send to your residents  \n- A bulletin board design or materials to staple up in your community  \n- A GroupMe message to post in your group chats to spark engagement  \n\nTo execute Community Communications, follow the instructions and materials provided by your supervisor, using the designated channels (email, bulletin boards, GroupMe, etc.) as directed.",
+    "sources": [
+      {
+        "source_doc_id": "c5f8a5c0-6194-4c70-bca1-4c5101e48124",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/communications/Community Communications.pdf",
+        "location": "{\"page\": 3}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "e1486b50-cfbf-43d8-a81b-d78ec97e67de",
+    "topic": "Procedures",
+    "section": "Touch Base Meetings",
+    "text": "**Touch Base Meetings \u2013 Goals and Purpose**\n\nTouch Base Meetings are brief, intentional check-ins between RAs and residents. The goals of these meetings are to:\n\n- Briefly check in with every resident.  \n- Connect residents to their RA and begin building a relationship.  \n- Ensure residents know what supports and resources RAs can offer.  \n- Support residents in completing their roommate agreements.  \n- Provide an opportunity for residents to ask any lingering questions.  \n- Ensure residents are in the Group Chat.",
+    "sources": [
+      {
+        "source_doc_id": "4af34471-0d78-44c6-9510-3a21e7deadd1",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/communications/Touch Base Meetings.pdf",
+        "location": "{\"page\": 8}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "e3bb489e-0857-4539-a70b-8a86713f47e7",
+    "topic": "Procedures",
+    "section": "RA Touch Base Meetings",
+    "text": "Resident Assistants (RAs) have significant flexibility in how they schedule and complete their responsibilities, including Touch Base Meetings. RAs should work directly with their Community Director (CD) and/or Graduate Student Assistant (GSA) to create a plan for scheduling and completing Touch Base Meetings that works well for both the RA and their residents.",
+    "sources": [
+      {
+        "source_doc_id": "4af34471-0d78-44c6-9510-3a21e7deadd1",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/communications/Touch Base Meetings.pdf",
+        "location": "{\"page\": 9}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "95ee2911-ef30-465c-9ab9-83d5ee8a12e2",
+    "topic": "Procedures",
+    "section": "Touch Base Meetings",
+    "text": "If you are using scheduled sign\u2011ups for Touch Base Meetings and arrive at a room where only one resident is present because they did not check their roommate(s)\u2019 schedule when signing up, you should still engage with the resident who is there. Conduct the Touch Base Meeting with the present resident, and then follow up separately to ensure you also meet with the absent roommate(s). Do not skip the opportunity to connect with the resident who did show up, but make sure you later coordinate with the missing roommate(s) to complete their required meeting(s).\n\nIf you are using Touch Base Meeting Hours and have most of your meetings completed, but you do not have anything scheduled for a particular evening and notice two roommates hanging out near the laundry room waiting for their laundry to finish\u2014and you have not yet met with them\u2014you should take advantage of this opportunity. Approach them, explain that you still need to complete their Touch Base Meetings, and, if they are willing and it is an appropriate time, conduct their meetings then. This allows you to complete required meetings efficiently and build rapport in a casual setting, even outside of pre\u2011scheduled hours.",
+    "sources": [
+      {
+        "source_doc_id": "4af34471-0d78-44c6-9510-3a21e7deadd1",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/communications/Touch Base Meetings.pdf",
+        "location": "{\"page\": 12}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "75f04f31-a733-4fe2-b4fa-888ad37d572c",
+    "topic": "Procedures",
+    "section": "Touch Base Meetings",
+    "text": "**Touch Base Meetings \u2013 Options for Completion**\n\nYou have several options for completing your Touch Base Meetings with residents. You may use one or a combination of the following:\n\n1. **Hold \u201cTouch Base Meeting Hours\u201d in a Common Area**  \n   - Schedule specific hours when you are available in a common area.  \n   - Residents come to meet with you during these designated hours.\n\n2. **Door-to-Door Meetings**  \n   - Knock on resident doors and complete Touch Base Meetings in their rooms or at their doors.\n\n3. **Scheduled Meetings via Sign-Up Link**  \n   - Schedule Touch Base Meetings in advance using Bookings or another sign-up link.  \n   - Residents select a time slot that works for them.\n\n4. **Impromptu Meetings**  \n   - Conduct unscheduled Touch Base Meetings when everyone is present (for example, when residents are already gathered).  \n   - This option should **not** be your primary plan.  \n   - Use impromptu meetings only as needed to complete your meetings, and only if you are adequately prepared in the moment.",
+    "sources": [
+      {
+        "source_doc_id": "4af34471-0d78-44c6-9510-3a21e7deadd1",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/communications/Touch Base Meetings.pdf",
+        "location": "{\"page\": 11}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "73f244f5-60ed-4b93-817e-46b3c8277212",
+    "topic": "Procedures",
+    "section": "Documentation & Follow-Up",
+    "text": "Roompact Form: Ongoing Resident Notes & Roommate Conflict Tracking  \n**Section: Documentation & Follow-Up**\n\nThis section outlines the use of the Roompact form for ongoing resident notes and roommate conflict tracking, with a focus on documentation and follow-up.\n\nThe **Roompact Form \u2013 Ongoing Resident Notes / Roommate Conflict Tracking Form** is used to:\n\n- Record **ongoing resident notes** related to behavior, concerns, and general residential life interactions.\n- Track **roommate conflicts**, including initial concerns, developing issues, and any changes over time.\n- Maintain consistent **documentation** of all relevant interactions, observations, and interventions.\n- Support appropriate **follow-up** by staff, ensuring continuity and accountability in addressing resident needs and roommate issues.\n\nAll entries in the Roompact Form must:\n\n- Be completed in a timely manner whenever there is a relevant resident interaction or roommate conflict development.\n- Include sufficient detail to clearly document the situation, actions taken, and any planned or required follow-up.\n- Be updated as follow-up occurs, so the record reflects both the initial documentation and all subsequent steps.",
+    "sources": [
+      {
+        "source_doc_id": "4af34471-0d78-44c6-9510-3a21e7deadd1",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/communications/Touch Base Meetings.pdf",
+        "location": "{\"page\": 13}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "ead9a941-82f2-4c0d-b7ab-59688fa9142a",
+    "topic": "Procedures",
+    "section": "RA Touch Base Meetings",
+    "text": "**Touch Base Meeting Expectations**\n\nResident Assistants are expected to complete a Touch Base Meeting with all residents and to prepare thoroughly in advance. The following guidelines apply:\n\n1. **Completion with All Residents**\n   - A Touch Base Meeting must be completed with every resident.\n   - For single rooms, the meeting must be completed with the individual resident.\n   - For rooms with more than one resident, the meeting must be completed with all roommates present.\n   - If it is not possible to meet with all roommates together (due to schedules or other conflicts), you may complete the meeting with roommates at separate times.\n\n2. **Preparation and Ongoing Responsibilities**\n   - Prepare appropriately for each Touch Base Meeting.\n   - Regularly check Roommate Agreement completion.\n   - Track group chat membership to ensure residents are included as needed.\n   - Review the facilitation guide before conducting meetings.\n   - Practice ahead of time using the facilitation guide and any related materials.",
+    "sources": [
+      {
+        "source_doc_id": "4af34471-0d78-44c6-9510-3a21e7deadd1",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/communications/Touch Base Meetings.pdf",
+        "location": "{\"page\": 10}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "6fa76f0a-c1c0-477c-9135-36bf56539d08",
+    "topic": "Procedures",
+    "section": "Bulletin Boards",
+    "text": "### Bulletin Boards: Formatting and Presentation Standards\n\nCreating content that residents want to read is essential to ensure they actually engage with the information we are communicating. Although bulletin boards are designed and created by the CD team and your responsibility is only to post them, you are still expected to organize and present the materials in a way that is visually clear and easy to read.\n\nEach bulletin board must meet the following standards:\n\n- **Background**\n  - Use a background in **black, white, or purple**.\n  - The background must be **replaced when faded**, and **at least once during J-Term** each year.\n\n- **Border**\n  - Use a **consistent border** around the board.\n  - The border must be **secured around the entire perimeter** of the board.\n\n- **Placement of Materials**\n  - All materials must be **placed evenly and in order**.\n  - Each item must be **secured with staples in all four corners**.\n\n- **Missing Materials**\n  - **Any missing materials must be reported immediately**.\n  - Missing items should be **replaced as soon as possible**.\n\nThese guidelines apply to all bulletin boards as part of the **Formatting for Delivery: Bulletin Boards** standards.",
+    "sources": [
+      {
+        "source_doc_id": "c5f8a5c0-6194-4c70-bca1-4c5101e48124",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/communications/Community Communications.pdf",
+        "location": "{\"page\": 4}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "2730d7c4-bfc5-49c4-80e6-80580b41cb2e",
+    "topic": "Procedures",
+    "section": "Conflict Resolution",
+    "text": "WHAT RESIDENTS EXPECT: Conflict Resolution\n\nResidents expect clear, fair, and timely support in resolving conflicts that arise in the residential community. This includes situations involving roommates, suitemates, neighbors, and shared spaces, as well as conflicts related to a single room.\n\nResidents expect that:\n\n- Conflict resolution resources and processes are available when issues occur in a single room (for example, between roommates or among occupants of the same room).\n- Staff will listen to all parties involved, treat each person with respect, and maintain appropriate confidentiality.\n- The process for addressing conflicts will be explained clearly, including any steps residents are expected to take.\n- Efforts will be made to resolve conflicts informally when possible, before moving to more formal interventions.\n- Any follow-up actions, room changes, or other outcomes will be communicated in a timely and transparent manner.",
+    "sources": [
+      {
+        "source_doc_id": "a07b3464-da71-45ad-8c68-40791cce432a",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/communications/Roommate Agreement & Conflict Resolution Process.pdf",
+        "location": "{\"page\": 14}"
+      },
+      {
+        "source_doc_id": "a07b3464-da71-45ad-8c68-40791cce432a",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/communications/Roommate Agreement & Conflict Resolution Process.pdf",
+        "location": "{\"page\": 15}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "3db17a2d-561a-4550-9952-d9dcce753aee",
+    "topic": "Procedures",
+    "section": "Conflict Resolution Process",
+    "text": "### Conflict Resolution Process\n\nUse the following steps as needed, in order. Move to the next step only if the previous one does not resolve the situation.\n\n1. **RA Individual Support Meeting**  \n   - First, the Resident Assistant (RA) meets individually with the involved resident(s) to provide support, listen to concerns, and clarify the issues.\n\n2. **RA-Facilitated Roommate Meeting**  \n   - If additional support is needed, the RA facilitates a roommate meeting to help the residents discuss concerns, expectations, and possible solutions together.\n\n3. **CD/GSA Individual Coaching**  \n   - If the conflict persists, the Community Director (CD) or Graduate Staff Assistant (GSA) provides individual coaching to the resident(s), offering higher-level guidance and strategies for resolution.\n\n4. **CD/GSA Roommate Mediation**  \n   - If needed after individual coaching, the CD or GSA conducts a formal roommate mediation, directly mediating the conversation between roommates to work toward an agreement.",
+    "sources": [
+      {
+        "source_doc_id": "a07b3464-da71-45ad-8c68-40791cce432a",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/communications/Roommate Agreement & Conflict Resolution Process.pdf",
+        "location": "{\"page\": 20}"
+      }
+    ]
+  },
+  {
+    "canonical_id": "465213b6-8602-4fa0-ab65-469e758d9d06",
+    "topic": "Procedures",
+    "section": "Student Conduct",
+    "text": "RA-Facilitated Roommate Meeting\n\nUse this structure when conducting an RA-facilitated meeting with roommates:\n\n1. Getting Started  \n   - Begin the meeting and explain its purpose.\n\n2. Introductions  \n   - Have all participants introduce themselves.\n\n3. Talking Piece  \n   - Introduce and explain the use of a talking piece so only the person holding it speaks.\n\n4. Ground Rules  \n   - Establish ground rules for the conversation (e.g., respect, listening, no interruptions).\n\n5. Roommate Agreement (if not completed)  \n   - If a Roommate Agreement has not yet been completed, work with the roommates to complete it at this time.\n\n6. Facilitated Conversation  \n   - Guide a structured conversation that includes:\n     - Biggest concerns: Ask each roommate to share their biggest concerns.  \n     - Clarification: Help clarify any misunderstandings or unclear points.  \n     - Suggesting solutions: Support roommates in suggesting possible solutions to the concerns raised.\n\n7. Agreements  \n   - Help the roommates reach clear agreements based on the discussion and document what has been agreed upon.",
+    "sources": [
+      {
+        "source_doc_id": "a07b3464-da71-45ad-8c68-40791cce432a",
+        "path": "/Users/oligurmessa/personal intelligence/hallhub/nlp/documents/communications/Roommate Agreement & Conflict Resolution Process.pdf",
+        "location": "{\"page\": 25}"
+      }
+    ]
+  }
+]

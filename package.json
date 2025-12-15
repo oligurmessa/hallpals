@@ -1,0 +1,26 @@
+{
+  "name": "hallpals",
+  "version": "0.0.1",
+  "description": "HallPals monorepo - Residence hall management platform",
+  "private": true,
+  "scripts": {
+    "emulators": "cd firebase && firebase emulators:start",
+    "emulators:export": "cd firebase && firebase emulators:start --export-on-exit=./emulator-data",
+    "emulators:import": "cd firebase && firebase emulators:start --import=./emulator-data",
+    "deploy:dev": "cd firebase && firebase use dev && firebase deploy",
+    "deploy:prod": "cd firebase && firebase use prod && firebase deploy",
+    "deploy:rules:dev": "cd firebase && firebase use dev && firebase deploy --only firestore:rules,storage:rules",
+    "deploy:rules:prod": "cd firebase && firebase use prod && firebase deploy --only firestore:rules,storage:rules",
+    "deploy:functions:dev": "cd firebase && firebase use dev && firebase deploy --only functions",
+    "deploy:functions:prod": "cd firebase && firebase use prod && firebase deploy --only functions",
+    "functions:build": "cd firebase/functions && npm run build",
+    "functions:install": "cd firebase/functions && npm install"
+  },
+  "workspaces": [
+    "firebase/functions",
+    "shared"
+  ],
+  "devDependencies": {
+    "firebase-tools": "^13.0.0"
+  }
+}
