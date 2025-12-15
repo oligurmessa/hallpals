@@ -75,7 +75,7 @@ export default function FAQSection() {
             Frequently asked questions
           </h2>
           <p className="mx-auto max-w-[500px] text-neutral-500 text-sm dark:text-neutral-400">
-            Can't find the answer you're looking for?{" "}
+            Can&apos;t find the answer you&apos;re looking for?{" "}
             <button
               className="font-medium text-black/80 underline underline-offset-2 transition-colors hover:text-black/70 dark:text-white/80 dark:hover:text-white/70"
               type="button"
