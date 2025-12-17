@@ -19,36 +19,32 @@ const steps: Step[] = [
   {
     id: "001",
     number: "01",
-    title: "Capture Moments",
+    title: "Join Your Hall",
     description:
-      "Start by capturing life experiences through text, photos, voice notes, and emotion tracking.",
+      "Sign in, select your hall, and verify your role. This instantly scopes your experience to the right people, events, and resources.",
     image: "/1212.gif",
-    features: [
-      "Text journaling",
-      "Photo attachments",
-      "Voice recordings",
-    ],
-    stats: { label: "Setup time", value: "<2min" },
+    features: ["Hall selection onboarding", "Role verification code", "Hall-scoped access"],
+    stats: { label: "Setup time", value: "<1 min" },
   },
   {
     id: "002",
     number: "02",
-    title: "AI Analysis",
+    title: "Connect & Request Help",
     description:
-      "Our AI processes your content to identify patterns, themes, and meaningful connections across your experiences.",
+      "Chat with your RA (DMs or group chats), submit noise reports, and file maintenance requests—each action routes to the right recipients automatically.",
     image: "/1213.gif",
-    features: ["Pattern recognition", "Emotion analysis", "Context understanding"],
-    stats: { label: "Insights", value: "Real-time" },
+    features: ["DMs + group chats", "Noise reports (urgency + location)", "Maintenance requests (category + status)"],
+    stats: { label: "Response routing", value: "Instant" },
   },
   {
     id: "003",
     number: "03",
-    title: "Track Growth",
+    title: "Stay Informed",
     description:
-      "Receive personalized insights and track your personal development journey with AI-powered recommendations.",
+      "See who’s on duty, browse hall events, and access verified residence-life resources. AskAI helps answer common questions from the knowledge base.",
     image: "/13D88BFC-BACA-4969-BF49-000F90072A32.gif",
-    features: ["Growth analytics", "Personal insights", "Goal tracking"],
-    stats: { label: "Progress", value: "Daily" },
+    features: ["On-duty RA visibility", "Events feed + details", "Resources + AskAI (KB-grounded)"],
+    stats: { label: "Updates", value: "Real-time" },
   },
 ];
 
@@ -97,10 +93,10 @@ export default function HowItWorksSection() {
               </div>
             </div>
             <h2 className="font-semibold text-3xl text-neutral-900 tracking-tight sm:text-4xl dark:text-neutral-50">
-              Transform your growth
+              A resident workflow that just works
             </h2>
-            <p className="mx-auto max-w-[500px] text-neutral-500 text-sm dark:text-neutral-400">
-              Three simple steps to unlock AI-powered personal development
+            <p className="mx-auto max-w-[540px] text-neutral-500 text-sm dark:text-neutral-400">
+              Three steps: verify your hall, contact the right people, and stay up to date with duty, events, and resources.
             </p>
           </div>
 
@@ -254,7 +250,7 @@ export default function HowItWorksSection() {
               type="button"
             >
               <span className="font-medium text-black/80 text-sm tracking-tighter dark:text-white/80">
-                Ready to grow?
+                See it in action
               </span>
               <ArrowRight className="h-3.5 w-3.5 text-blue-400 transition-transform group-hover:translate-x-0.5" />
             </button>

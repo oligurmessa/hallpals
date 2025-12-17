@@ -14,7 +14,10 @@ import {
     LogOut,
     ShieldAlert,
     Menu,
-    X
+    X,
+    Users,
+    HelpCircle,
+    ClipboardList
 } from "lucide-react";
 
 const SIDEBAR_ITEMS = [
@@ -24,7 +27,10 @@ const SIDEBAR_ITEMS = [
     { label: "Schedule", href: "/dashboard/roster", icon: Calendar },
     { label: "Rounds", href: "/dashboard/rounds", icon: ShieldAlert },
     { label: "Inspections", href: "/dashboard/inspections", icon: ClipboardCheck },
+    { label: "Meetings", href: "/dashboard/meetings", icon: Users },
     { label: "Bulletin & Tasks", href: "/dashboard/tasks", icon: ListTodo },
+    { label: "Move-Out", href: "/dashboard/move-out", icon: ClipboardList },
+    { label: "Hall FAQs", href: "/dashboard/faqs", icon: HelpCircle },
 ];
 
 export default function DashboardLayout({

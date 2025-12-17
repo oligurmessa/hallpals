@@ -1,8 +1,14 @@
 rules_version = '2';
 
 // HallPals Firestore Security Rules
-// Phase C3.2: Global Chat with tenantId boundary
-// Reference: Backend Contract v1
+// V1 Release: Privacy, Push, Roster, Chat
+//
+// Key V1 Contracts:
+// - /users/{userId}: SELF-READ ONLY (privacy)
+// - Room inspections: RA/Staff only (residents cannot see)
+// - Roster: RA/Staff only
+// - email_index: Cloud Functions only
+// - fcmToken: single token field on /users/{uid}
 
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -59,21 +65,31 @@ service cloud.firestore {
     }
 
     // ============================================================
+    // /email_index/{email}
+    // V1: Server-maintained email -> uid lookup
+    // Cloud Functions only - no client access
+    // ============================================================
+    match /email_index/{email} {
+      // No client reads or writes - Cloud Functions only
+      allow read, write: if false;
+    }
+
+    // ============================================================
     // /users/{userId}
-    // Semi-private: Own user has full read, others can read limited fields
-    // displayName is needed for chat participant names
+    // V1 PRIVACY: SELF-READ ONLY
+    // User can only read their own document
+    // Cloud Functions have admin access for other operations
     // ============================================================
     match /users/{userId} {
-      // User can read their own full document
-      // Other authenticated users can also read (limited to displayName for chat)
-      // Note: Firestore rules can't field-level restrict, but we only query displayName
-      allow read: if isAuthenticated();
+      // V1: User can ONLY read their own full document
+      // This prevents users from reading other users' data
+      allow read: if isAuthenticated() && authUid() == userId;
 
       // SECURITY: Client cannot create user documents
       // User documents are created by Cloud Functions (joinHallWithCode)
       allow create: if false;
 
-      // User can only update displayName, fcmTokens, and updatedAt
+      // V1: User can only update displayName, fcmToken, and updatedAt
       // SECURITY: Cannot modify role, hallId, email, createdAt, tenantId
       allow update: if isAuthenticated() &&
         authUid() == userId &&
@@ -90,13 +106,24 @@ service cloud.firestore {
     }
 
     // ============================================================
+    // SECURE COLLECTION GROUP QUERIES
+    // ============================================================
+    // Allow a user to find their own Membership records across all halls
+    // This allows "Which hall am I in?" queries
+    match /{path=**}/members/{memberId} {
+      allow read: if isAuthenticated() && resource.data.userId == authUid();
+    }
+
+    // ============================================================
     // /halls/{hallId}
     // LOCKED DOWN: Only Cloud Functions can create/modify halls
     // ============================================================
     match /halls/{hallId} {
       // Members can read hall info
+      // Also allow users whose user doc has this hallId (for initial load before membership created)
       // Also allow global 'staff' users to read all halls (for Dashboard listing)
-      allow read: if isHallMember(hallId) || 
+      allow read: if isHallMember(hallId) ||
+        get(/databases/$(database)/documents/users/$(authUid())).data.hallId == hallId ||
         get(/databases/$(database)/documents/users/$(authUid())).data.role in ['staff', 'admin', 'leadership'];
 
       // SECURITY: All writes are Cloud Functions only
@@ -137,16 +164,9 @@ service cloud.firestore {
         allow read, write: if isRaOrStaff(hallId) || 
           get(/databases/$(database)/documents/users/$(authUid())).data.role in ['staff', 'admin', 'leadership'];
       }
+      
+      // Removed /halls/{hallId}/staff subcollection - use /profiles with role='ra' or 'staff'
 
-      // ----------------------------------------------------------
-      // /halls/{hallId}/staff/{staffDocId}
-      // Defines the "Staff Manifest" for this hall
-      // ----------------------------------------------------------
-      match /staff/{staffDocId} {
-        // Staff (Directors) can read/write staff list
-        allow read, write: if isRaOrStaff(hallId) || 
-          get(/databases/$(database)/documents/users/$(authUid())).data.role in ['staff', 'admin', 'leadership'];
-      }
 
       // ----------------------------------------------------------
       // /halls/{hallId}/rooms/{roomId}
@@ -160,21 +180,74 @@ service cloud.firestore {
 
       // ----------------------------------------------------------
       // /halls/{hallId}/room_inspections/{inspectionId}
+      // V1: RA/Staff ONLY - Residents cannot see room inspections
       // ----------------------------------------------------------
       match /room_inspections/{inspectionId} {
-        // RA and Staff can read and write all inspections
+        // V1: Only RA and Staff can read and write inspections
+        // Residents are explicitly excluded for privacy
         allow read, write: if isRaOrStaff(hallId);
-        // Residents can read inspections for their assigned room
-        // Note: The query filters by roomNumber which matches their room assignment
-        allow read: if isHallMember(hallId);
+        // REMOVED: Resident read access removed per V1 contract
+      }
+
+      // ----------------------------------------------------------
+      // /halls/{hallId}/inspection_templates/{templateId}
+      // Templates for room inspections (checklist items)
+      // ----------------------------------------------------------
+      match /inspection_templates/{templateId} {
+        // RA, Staff, Leadership can read and write templates
+        allow read, write: if isRaOrStaff(hallId) ||
+          get(/databases/$(database)/documents/users/$(authUid())).data.role in ['staff', 'admin', 'leadership'];
+      }
+
+      // ----------------------------------------------------------
+      // /halls/{hallId}/inspection_rounds/{roundId}
+      // Assigned inspection rounds with rooms and checklists
+      // Admin creates rounds, RAs complete inspections
+      // ----------------------------------------------------------
+      match /inspection_rounds/{roundId} {
+        // RA, Staff, Leadership can read inspection rounds
+        allow read: if isRaOrStaff(hallId) ||
+          get(/databases/$(database)/documents/users/$(authUid())).data.role in ['staff', 'admin', 'leadership'];
+
+        // Staff, Admin, Leadership can create rounds
+        allow create: if get(/databases/$(database)/documents/users/$(authUid())).data.role in ['staff', 'admin', 'leadership'];
+
+        // RA, Staff, Admin, Leadership can update rounds (RAs update room statuses)
+        allow update: if isRaOrStaff(hallId) ||
+          get(/databases/$(database)/documents/users/$(authUid())).data.role in ['staff', 'admin', 'leadership'];
+
+        // Only Staff, Admin, Leadership can delete rounds
+        allow delete: if get(/databases/$(database)/documents/users/$(authUid())).data.role in ['staff', 'admin', 'leadership'];
       }
 
       // ----------------------------------------------------------
       // /halls/{hallId}/bulletin_tasks/{taskId}
+      // General tasks from admin for all RAs in the hall
       // ----------------------------------------------------------
       match /bulletin_tasks/{taskId} {
-        // RA and Staff can read and write bulletin tasks
-        allow read, write: if isRaOrStaff(hallId);
+        // RA, Staff, Leadership can read and write bulletin tasks
+        allow read, write: if isRaOrStaff(hallId) ||
+          get(/databases/$(database)/documents/users/$(authUid())).data.role in ['staff', 'admin', 'leadership'];
+      }
+
+      // ----------------------------------------------------------
+      // /halls/{hallId}/community_meetings/{meetingId}
+      // Community meetings scheduled by admin for RAs to conduct
+      // ----------------------------------------------------------
+      match /community_meetings/{meetingId} {
+        // RA, Staff, Leadership can read community meetings
+        allow read: if isRaOrStaff(hallId) ||
+          get(/databases/$(database)/documents/users/$(authUid())).data.role in ['staff', 'admin', 'leadership'];
+
+        // Staff, Admin, Leadership can create meetings
+        allow create: if get(/databases/$(database)/documents/users/$(authUid())).data.role in ['staff', 'admin', 'leadership'];
+
+        // RA, Staff, Admin, Leadership can update meetings (RAs update topics/status)
+        allow update: if isRaOrStaff(hallId) ||
+          get(/databases/$(database)/documents/users/$(authUid())).data.role in ['staff', 'admin', 'leadership'];
+
+        // Only Staff, Admin, Leadership can delete meetings
+        allow delete: if get(/databases/$(database)/documents/users/$(authUid())).data.role in ['staff', 'admin', 'leadership'];
       }
 
       // ----------------------------------------------------------
@@ -231,21 +304,36 @@ service cloud.firestore {
       }
 
       // ----------------------------------------------------------
+      // /halls/{hallId}/move_out_templates/{templateId}
+      // Move-out checklist templates created by staff
+      // ----------------------------------------------------------
+      match /move_out_templates/{templateId} {
+        // All hall members can read published templates
+        allow read: if isHallMember(hallId) && resource.data.isPublished == true;
+        // Staff can read all templates (including drafts)
+        allow read: if isRaOrStaff(hallId);
+        // Only staff can create/update/delete templates
+        allow create, update, delete: if isRaOrStaff(hallId);
+      }
+
+      // ----------------------------------------------------------
       // /halls/{hallId}/move_out_checklists/{checklistId}
-      // Move-out checklists for residents
+      // Move-out checklists for residents (their progress)
       // ----------------------------------------------------------
       match /move_out_checklists/{checklistId} {
         // RA and Staff can read all checklists
         allow read: if isRaOrStaff(hallId);
         // Residents can read their own checklist
         allow read: if isHallMember(hallId) && resource.data.residentId == authUid();
+        // Residents can create their own checklist
+        allow create: if isHallMember(hallId) && request.resource.data.residentId == authUid();
         // Residents can update their own checklist items
         allow update: if isHallMember(hallId) &&
           resource.data.residentId == authUid() &&
           !request.resource.data.diff(resource.data).affectedKeys()
-            .hasAny(["residentId", "roomNumber", "createdAt"]);
-        // Only staff can create/delete
-        allow create, delete: if isRaOrStaff(hallId);
+            .hasAny(["residentId", "roomNumber", "createdAt", "checklistId"]);
+        // Only staff can delete
+        allow delete: if isRaOrStaff(hallId);
       }
 
       // ----------------------------------------------------------
@@ -272,34 +360,78 @@ service cloud.firestore {
 
       // ----------------------------------------------------------
       // /halls/{hallId}/faqs/{faqId}
-      // Hall FAQs
+      // Hall FAQs - Admins create/manage, residents view published
       // ----------------------------------------------------------
       match /faqs/{faqId} {
-        // All hall members can read FAQs
-        allow read: if isHallMember(hallId);
-        // Only RA/Staff can manage FAQs
-        allow write: if isRaOrStaff(hallId);
+        // All hall members can read published FAQs
+        allow read: if isHallMember(hallId) && resource.data.isPublished == true;
+        // Staff/Admin/Leadership can read all FAQs (including drafts)
+        allow read: if isRaOrStaff(hallId) ||
+          get(/databases/$(database)/documents/users/$(authUid())).data.role in ['staff', 'admin', 'leadership'];
+        // Staff/Admin/Leadership can manage FAQs
+        allow write: if isRaOrStaff(hallId) ||
+          get(/databases/$(database)/documents/users/$(authUid())).data.role in ['staff', 'admin', 'leadership'];
+      }
+
+      // ----------------------------------------------------------
+      // /halls/{hallId}/concerns/{concernId}
+      // Resident concerns reported to on-duty RA
+      // ----------------------------------------------------------
+      match /concerns/{concernId} {
+        // Residents can create concerns (report issues)
+        // Residents can only read their own concerns
+        allow create: if isHallMember(hallId) &&
+          request.resource.data.residentUid == authUid();
+
+        // Residents can read their own concerns
+        // RAs can read all concerns
+        allow read: if isHallMember(hallId) &&
+          (resource.data.residentUid == authUid() || isRaOrStaff(hallId));
+
+        // Only RA/Staff can update concerns (change status, add notes)
+        allow update: if isRaOrStaff(hallId);
+
+        // No deletes - concerns are permanent records
+        allow delete: if false;
+      }
+
+      // ----------------------------------------------------------
+      // /halls/{hallId}/ra_tasks/{taskId}
+      // RA task assignments
+      // ----------------------------------------------------------
+      match /ra_tasks/{taskId} {
+        // RAs and Staff can read and write tasks
+        allow read, write: if isRaOrStaff(hallId);
+      }
+
+      // ----------------------------------------------------------
+      // /halls/{hallId}/roster/{email}
+      // PENDING ROSTER: Imported from Excel.
+      // ----------------------------------------------------------
+      match /roster/{email} {
+        // STRICT: Residents cannot see the roster (they only see active profiles).
+        // RAs and Staff need to see pending roster for management.
+        allow read, write: if isRaOrStaff(hallId);
       }
 
       // ----------------------------------------------------------
       // /halls/{hallId}/shifts/{shiftId}
       // ----------------------------------------------------------
       match /shifts/{shiftId} {
-        // User can read shifts where they are the assignee
-        allow read: if isAuthenticated() &&
-          isHallMember(hallId) &&
-          resource.data.userId == authUid();
-        // Client writes denied (sync function only)
-        allow write: if false;
+        // PERMISSIVE: Allow any authenticated user to manage shifts.
+        // Required for "Declare Schedule" bulk import tool.
+        allow read, write: if request.auth != null;
       }
 
       // ----------------------------------------------------------
       // /halls/{hallId}/rounds_sessions/{sessionId}
+      // Rounds sessions from iOS app - RAs create, admins view all
       // ----------------------------------------------------------
       match /rounds_sessions/{sessionId} {
-        // RA can read their own sessions; staff can read all
+        // RA can read their own sessions; staff/admin/leadership can read all
         allow read: if isRaOrStaff(hallId) &&
-          (resource.data.userId == authUid() || hasRole(hallId, ["staff"]));
+          (resource.data.userId == authUid() || hasRole(hallId, ["staff"])) ||
+          get(/databases/$(database)/documents/users/$(authUid())).data.role in ['staff', 'admin', 'leadership'];
 
         // RA can create session only if userId == auth uid
         allow create: if hasRole(hallId, ["ra", "staff"]) &&
@@ -319,9 +451,10 @@ service cloud.firestore {
         // /halls/{hallId}/rounds_sessions/{sessionId}/floor_visits/{visitId}
         // ----------------------------------------------------
         match /floor_visits/{visitId} {
-          // Same rules as parent session
+          // Same rules as parent session - RA own, staff/admin/leadership all
           allow read: if isRaOrStaff(hallId) &&
-            (isSessionOwner(hallId, sessionId) || hasRole(hallId, ["staff"]));
+            (isSessionOwner(hallId, sessionId) || hasRole(hallId, ["staff"])) ||
+            get(/databases/$(database)/documents/users/$(authUid())).data.role in ['staff', 'admin', 'leadership'];
 
           allow create, update: if hasRole(hallId, ["ra", "staff"]) &&
             isSessionOwner(hallId, sessionId);
@@ -333,7 +466,8 @@ service cloud.firestore {
           // ------------------------------------------------
           match /segments/{segmentId} {
             allow read: if isRaOrStaff(hallId) &&
-              (isSessionOwner(hallId, sessionId) || hasRole(hallId, ["staff"]));
+              (isSessionOwner(hallId, sessionId) || hasRole(hallId, ["staff"])) ||
+              get(/databases/$(database)/documents/users/$(authUid())).data.role in ['staff', 'admin', 'leadership'];
 
             allow create, update: if hasRole(hallId, ["ra", "staff"]) &&
               isSessionOwner(hallId, sessionId);
@@ -403,23 +537,19 @@ service cloud.firestore {
         return isAuthenticated() && getUserRole() in allowedRoles;
       }
 
-      // Read: RA, Staff, Leadership (Global Roles)
+      // Read: RA, Staff, Admin, Leadership (Global Roles)
       // Note: "resident" is EXCLUDED from read access per requirements
-      allow read: if hasGlobalRole(["ra", "staff", "leadership"]);
+      allow read: if hasGlobalRole(["ra", "staff", "admin", "leadership"]);
 
-      // Write: Staff, Leadership only
-      allow create, update, delete: if hasGlobalRole(["staff", "leadership"]) &&
-        request.resource.data.updatedBy == authUid() &&
-        (request.resource.data.updatedAt == request.time || request.resource.data.updatedAt == null);
+      // Write: Staff, Admin, Leadership only
+      allow create, update, delete: if hasGlobalRole(["staff", "admin", "leadership"]);
 
       match /entries/{entryId} {
-        // Read: RA, Staff, Leadership
-        allow read: if hasGlobalRole(["ra", "staff", "leadership"]);
+        // Read: RA, Staff, Admin, Leadership
+        allow read: if hasGlobalRole(["ra", "staff", "admin", "leadership"]);
 
-        // Write: Staff, Leadership only
-        allow create, update, delete: if hasGlobalRole(["staff", "leadership"]) &&
-          request.resource.data.text is string &&
-          request.resource.data.text.size() > 0;
+        // Write: Staff, Admin, Leadership only
+        allow create, update, delete: if hasGlobalRole(["staff", "admin", "leadership"]);
       }
     }
 

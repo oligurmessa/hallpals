@@ -12,7 +12,6 @@ const tabs = [
   { name: "Features", id: "features" },
   { name: "How it Works", id: "how-it-works" },
   { name: "Use Cases", id: "use-cases" },
-  { name: "Pricing", id: "pricing" },
   { name: "FAQ", id: "faq" },
 ]
 

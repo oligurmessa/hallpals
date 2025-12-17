@@ -7,7 +7,7 @@ const MOBILE_LINKS = [
   { name: "Features", href: "#features" },
   { name: "How it Works", href: "#how-it-works" },
   { name: "Use Cases", href: "#use-cases" },
-  { name: "Pricing", href: "#pricing" },
+
   { name: "FAQ", href: "#faq" },
 ];
 

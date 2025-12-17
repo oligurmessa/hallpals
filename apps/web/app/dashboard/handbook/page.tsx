@@ -2,23 +2,23 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Link as LinkIcon, Search, Plus, Book, FileText, Upload, Sparkles } from "lucide-react";
-import { useDocs } from "@/hooks/useDocs";
+import { Link as LinkIcon, Search, Plus, Book, Upload, Sparkles, Pencil } from "lucide-react";
+import { useDocs, DocMeta } from "@/hooks/useDocs";
 import { doc, writeBatch, collection } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import AIChatModal from "@/components/AIChatModal";
 
 export default function HandbookPage() {
     const router = useRouter();
-    const { docs, loading, createDoc } = useDocs();
+    const { docs, loading, createDoc, updateDocMeta } = useDocs();
     const [search, setSearch] = useState("");
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isAIChatOpen, setIsAIChatOpen] = useState(false);
     const [importing, setImporting] = useState(false);
+    const [editingDoc, setEditingDoc] = useState<DocMeta | null>(null);
 
     const [formData, setFormData] = useState({
         title: "",
-        slug: "",
         category: "General"
     });
 
@@ -30,28 +30,48 @@ export default function HandbookPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await createDoc(formData.slug, {
-                title: formData.title,
-                category: formData.category,
-                isPublished: false
-            });
+            if (editingDoc) {
+                // Update existing doc
+                await updateDocMeta(editingDoc.id, {
+                    title: formData.title,
+                    category: formData.category
+                });
+            } else {
+                // Create new doc - generate slug from title
+                const slug = formData.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+                await createDoc(slug, {
+                    title: formData.title,
+                    category: formData.category,
+                    isPublished: false
+                });
+            }
             closeModal();
         } catch (err) {
-            alert("Error creating doc: " + err);
+            alert("Error saving doc: " + err);
         }
     };
 
     const closeModal = () => {
         setIsModalOpen(false);
-        setFormData({ title: "", slug: "", category: "General" });
-    }
+        setEditingDoc(null);
+        setFormData({ title: "", category: "General" });
+    };
 
-    // Generate slug from title
-    const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const title = e.target.value;
-        const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-        setFormData({ ...formData, title, slug });
-    }
+    const openEditModal = (docToEdit: DocMeta, e: React.MouseEvent) => {
+        e.stopPropagation(); // Prevent navigation to doc detail
+        setEditingDoc(docToEdit);
+        setFormData({
+            title: docToEdit.title,
+            category: docToEdit.category
+        });
+        setIsModalOpen(true);
+    };
+
+    const openCreateModal = () => {
+        setEditingDoc(null);
+        setFormData({ title: "", category: "General" });
+        setIsModalOpen(true);
+    };
 
     const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -153,7 +173,7 @@ export default function HandbookPage() {
                     </button>
 
                     <button
-                        onClick={() => setIsModalOpen(true)}
+                        onClick={openCreateModal}
                         className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-xl text-sm font-medium transition-colors"
                     >
                         <Plus className="w-4 h-4" />
@@ -168,27 +188,41 @@ export default function HandbookPage() {
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {filteredDocs.map((doc) => (
+                    {filteredDocs.map((docItem) => (
                         <div
-                            key={doc.id}
-                            onClick={() => router.push(`/dashboard/handbook/${doc.id}`)} // Use doc.id (which is the slug in our case or the docId)
-                            className="bg-zinc-900 border border-white/5 rounded-2xl p-6 hover:border-white/10 transition-all cursor-pointer group hover:-translate-y-1"
+                            key={docItem.id}
+                            onClick={() => router.push(`/dashboard/handbook/${docItem.id}`)}
+                            className="bg-zinc-900 border border-white/5 rounded-2xl p-6 hover:border-white/10 transition-all cursor-pointer group hover:-translate-y-1 relative"
                         >
                             <div className="flex justify-between items-start mb-4">
                                 <div className="w-10 h-10 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center">
                                     <Book className="w-5 h-5" />
                                 </div>
-                                <span className={`text-xs px-2 py-1 rounded-full ${doc.isPublished ? 'bg-emerald-500/10 text-emerald-400' : 'bg-zinc-800 text-zinc-400'}`}>
-                                    {doc.category}
-                                </span>
+                                <div className="flex items-center gap-2">
+                                    <button
+                                        onClick={(e) => openEditModal(docItem, e)}
+                                        className="p-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white transition-colors opacity-0 group-hover:opacity-100"
+                                        title="Edit doc info"
+                                    >
+                                        <Pencil className="w-3.5 h-3.5" />
+                                    </button>
+                                    <span className={`text-xs px-2 py-1 rounded-full ${docItem.isPublished ? 'bg-emerald-500/10 text-emerald-400' : 'bg-zinc-800 text-zinc-400'}`}>
+                                        {docItem.category}
+                                    </span>
+                                </div>
                             </div>
 
                             <h3 className="text-lg font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">
-                                {doc.title}
+                                {docItem.title}
                             </h3>
-                            <div className="flex items-center gap-2 text-xs text-zinc-500 font-mono">
-                                <LinkIcon className="w-3 h-3" />
-                                <span>/{doc.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}</span>
+                            <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-2 text-xs text-zinc-500 font-mono">
+                                    <LinkIcon className="w-3 h-3" />
+                                    <span>/{docItem.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}</span>
+                                </div>
+                                <span className={`text-xs px-2 py-0.5 rounded-full ${docItem.isPublished ? 'bg-emerald-500/10 text-emerald-400' : 'bg-yellow-500/10 text-yellow-400'}`}>
+                                    {docItem.isPublished ? "Published" : "Draft"}
+                                </span>
                             </div>
                         </div>
                     ))}
@@ -199,26 +233,18 @@ export default function HandbookPage() {
             {isModalOpen && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
                     <div className="bg-zinc-900 border border-white/10 rounded-2xl p-6 w-full max-w-md shadow-2xl">
-                        <h2 className="text-xl font-bold text-white mb-4">Create New Document</h2>
+                        <h2 className="text-xl font-bold text-white mb-4">
+                            {editingDoc ? "Edit Document" : "Create New Document"}
+                        </h2>
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <div>
                                 <label className="block text-sm font-medium text-zinc-400 mb-1">Title</label>
                                 <input
                                     type="text"
                                     value={formData.title}
-                                    onChange={handleTitleChange}
+                                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                                     className="w-full px-4 py-2 bg-zinc-800 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-purple-500/50"
-                                    required
-                                />
-                            </div>
-
-                            <div>
-                                <label className="block text-sm font-medium text-zinc-400 mb-1">Slug (URL)</label>
-                                <input
-                                    type="text"
-                                    value={formData.slug}
-                                    onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
-                                    className="w-full px-4 py-2 bg-zinc-800 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-purple-500/50 font-mono text-sm"
+                                    placeholder="Enter document title"
                                     required
                                 />
                             </div>
@@ -250,7 +276,7 @@ export default function HandbookPage() {
                                     type="submit"
                                     className="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-xl font-medium"
                                 >
-                                    Create Doc
+                                    {editingDoc ? "Save Changes" : "Create Doc"}
                                 </button>
                             </div>
                         </form>

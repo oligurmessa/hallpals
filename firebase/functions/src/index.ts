@@ -1,6 +1,13 @@
 /**
  * HallPals Cloud Functions
- * Phase C3.2: Global Chat with tenantId boundary
+ * V1 Release: Push, Roster, Chat, Privacy
+ *
+ * Key V1 Contracts:
+ * - Single FCM token per user at /users/{uid}.fcmToken
+ * - Roster import preserves claims, last row wins
+ * - No hall switching once assigned
+ * - /users self-read only (privacy)
+ * - email_index for RA lookup
  */
 
 import * as functions from "firebase-functions";
@@ -24,9 +31,12 @@ type MemberStatus = "active" | "left" | "banned";
 type MemberRole = "member" | "admin";
 
 interface JoinHallRequest {
-  code: string;
-  hallId?: string; // Optional, defaults to "hall-001"
+  hallId?: string; // Optional - if not provided, discover from roster or admin assigns later
+  code?: string; // Optional - special access code for staff promotion (e.g., "DEVLEAD")
 }
+
+// Staff promotion access code
+const STAFF_ACCESS_CODE = "DEVLEAD";
 
 interface JoinHallResponse {
   success: boolean;
@@ -45,6 +55,12 @@ interface HallChangeRequest {
     floors?: number[];
     wings?: string[];
     isActive?: boolean;
+    hallDirector?: {
+      uid?: string;
+      name: string;
+      email?: string;
+      phone?: string;
+    };
   };
 }
 
@@ -91,31 +107,12 @@ interface UpdateLastReadRequest {
 }
 
 // ============================================================
-// ROLE CODE MAPPING
-// Dev codes bypass manifest check; production codes require manifest
+// ROLE CODES REMOVED - Roles now determined by roster lookup
+// During signup:
+// 1. Search roster for user's email
+// 2. If found: use role from roster (ra or resident)
+// 3. If not found: default to resident
 // ============================================================
-
-const DEV_ROLE_CODES: Record<string, UserRole> = {
-  "DEVRES": "resident",
-  "DEVRA": "ra",
-  "DEVLEAD": "staff",
-};
-
-// Production codes (would require manifest verification)
-const PROD_ROLE_CODES: Record<string, UserRole> = {
-  // Add production codes here when ready
-};
-
-// Combined codes for validation
-const ROLE_CODES: Record<string, UserRole> = {
-  ...DEV_ROLE_CODES,
-  ...PROD_ROLE_CODES,
-};
-
-// Check if code is a dev code (bypasses manifest)
-function isDevCode(code: string): boolean {
-  return code in DEV_ROLE_CODES;
-}
 
 // ============================================================
 // HEALTH CHECK
@@ -132,6 +129,7 @@ export const healthCheck = functions.https.onRequest((req, res) => {
 // ============================================================
 // joinHallWithCode
 // Callable function for user registration with role assignment
+// V2: Role determined by roster lookup, no access codes required
 // ============================================================
 
 export const joinHallWithCode = functions.https.onCall(
@@ -148,153 +146,386 @@ export const joinHallWithCode = functions.https.onCall(
       throw new HttpsError("invalid-argument", "User email is required");
     }
 
-    // 2. Validate code
-    const code = data.code?.toUpperCase().trim();
-    if (!code) {
-      throw new HttpsError("invalid-argument", "Code is required");
-    }
+    // 2. Determine hall ID - priority order:
+    //    a) Explicitly provided hallId
+    //    b) Existing user's hallId (if they already have one)
+    //    c) Discover from roster collection group query (email -> hallId)
+    let hallId = data.hallId || null;
 
-    const requestedRole = ROLE_CODES[code];
-    if (!requestedRole) {
-      throw new HttpsError("invalid-argument", "Invalid code");
-    }
-
-    // 3. Determine hall ID
-    const hallId = data.hallId || "hall-001";
-
-    // 4. Ensure hall exists (auto-create default hall if missing)
-    const hallRef = db.collection("halls").doc(hallId);
-    const hallDoc = await hallRef.get();
-
-    if (!hallDoc.exists) {
-      // Auto-create hall-001 (default hall) if it doesn't exist
-      if (hallId === "hall-001") {
-        console.log("Auto-creating default hall-001");
-        const now = admin.firestore.FieldValue.serverTimestamp();
-        await hallRef.set({
-          name: "Default Hall",
-          shortName: "DH",
-          address: "",
-          floors: [1, 2, 3],
-          isActive: true,
-          createdAt: now,
-          updatedAt: now,
-          createdBy: "system",
-        });
-      } else {
-        // Non-default halls must be created explicitly by staff
-        throw new HttpsError("not-found", `Hall ${hallId} does not exist`);
-      }
-    }
-
-    // 5. Role validation via manifest (for elevated roles)
-    // Dev codes bypass manifest check for easier testing
-    let finalRole = requestedRole;
-
-    if (isDevCode(code)) {
-      // Dev codes grant role directly without manifest check
-      console.log(`Dev code used: ${code} -> ${requestedRole} for ${email}`);
-    } else if (requestedRole === "ra") {
-      // Production: Check if email is in RA manifest
-      const raManifest = await db
-        .collection("role_manifests")
-        .doc("ra")
-        .collection("emails")
-        .doc(email)
-        .get();
-
-      if (!raManifest.exists) {
-        console.log(`Email ${email} not in RA manifest, defaulting to resident`);
-        finalRole = "resident";
-      }
-    } else if (requestedRole === "staff") {
-      // Production: Check if email is in staff/leadership manifest
-      const staffManifest = await db
-        .collection("role_manifests")
-        .doc("staff")
-        .collection("emails")
-        .doc(email)
-        .get();
-
-      if (!staffManifest.exists) {
-        console.log(`Email ${email} not in staff manifest, defaulting to resident`);
-        finalRole = "resident";
-      }
-    }
-    // resident role needs no manifest check
-
-    // 6. Create/update user document (with tenantId for global chat)
-    const now = admin.firestore.FieldValue.serverTimestamp();
+    // 3. V1 CRITICAL: No hall switching - check if user already has a different hall
     const userRef = db.collection("users").doc(uid);
-    const userDoc = await userRef.get();
+    const existingUserDoc = await userRef.get();
+    const existingHallId = existingUserDoc.data()?.hallId;
 
-    if (userDoc.exists) {
+    console.log(`joinHallWithCode: uid=${uid}, email=${email}`);
+    console.log(`joinHallWithCode: userDoc.exists=${existingUserDoc.exists}`);
+    console.log(`joinHallWithCode: existingHallId=${JSON.stringify(existingHallId)}`);
+    console.log(`joinHallWithCode: providedHallId=${JSON.stringify(hallId)}`);
+
+    // Only check for hall switching if a new hallId is being assigned
+    if (hallId && existingHallId && existingHallId !== "" && existingHallId !== hallId) {
+      console.log(`User ${uid} tried to switch from hall ${existingHallId} to ${hallId} - blocked`);
+      throw new HttpsError(
+        "failed-precondition",
+        "Hall switching disabled in V1. Contact staff to change your hall assignment."
+      );
+    }
+
+    // 4. Check for staff access code (DEVLEAD)
+    const accessCode = data.code?.toUpperCase().trim();
+    const isStaffPromotion = accessCode === STAFF_ACCESS_CODE;
+
+    if (isStaffPromotion) {
+      console.log(`Staff promotion: ${email} used access code ${accessCode}`);
+    }
+
+    // 5. Role determination via roster lookup or staff code
+    //    Priority: staff code > roster role > default resident
+    let finalRole: UserRole = isStaffPromotion ? "staff" : "resident";
+    let rosterDoc: FirebaseFirestore.QueryDocumentSnapshot | null = null;
+
+    // 6. Search roster for user's email to discover both hallId AND role
+    //    Note: Staff role from access code takes priority over roster role
+    const shouldSearchRoster = !hallId && !existingHallId;
+    console.log(`joinHallWithCode: shouldSearchRoster=${shouldSearchRoster}`);
+    console.log(`joinHallWithCode: !hallId=${!hallId}, !existingHallId=${!existingHallId}`);
+
+    if (shouldSearchRoster) {
+      console.log(`No hallId for ${email} - searching roster for hallId and role...`);
+
+      try {
+        const rosterQuery = await db.collectionGroup("roster")
+          .where("email", "==", email)
+          .limit(1)
+          .get();
+
+        if (!rosterQuery.empty) {
+          rosterDoc = rosterQuery.docs[0];
+          const rosterData = rosterDoc.data();
+
+          // Extract hallId from path: halls/{hallId}/roster/{email}
+          const discoveredHallId = rosterDoc.ref.parent.parent?.id;
+
+          if (discoveredHallId) {
+            hallId = discoveredHallId;
+            console.log(`Roster discovery: Found ${email} in hall ${hallId}`);
+          }
+
+          // Get role from roster document (only if not staff via access code)
+          if (!isStaffPromotion) {
+            const rosterRole = rosterData?.role?.toLowerCase();
+            if (rosterRole === "ra") {
+              finalRole = "ra";
+              console.log(`Roster discovery: ${email} has RA role`);
+            } else {
+              finalRole = "resident";
+              console.log(`Roster discovery: ${email} has resident role`);
+            }
+          } else {
+            console.log(`Roster discovery: ${email} keeping staff role from access code`);
+          }
+        } else {
+          console.log(`Roster discovery: ${email} not found - keeping current role: ${finalRole}`);
+        }
+      } catch (rosterError) {
+        console.error("Roster discovery error:", rosterError);
+        // Continue with default resident role
+      }
+    } else if (hallId || existingHallId) {
+      // User already has a hall - check their roster entry for role
+      const targetHallId = hallId || existingHallId;
+      console.log(`Checking roster in hall ${targetHallId} for ${email}...`);
+
+      try {
+        const rosterRef = db.collection("halls").doc(targetHallId).collection("roster").doc(email);
+        const rosterDocSnap = await rosterRef.get();
+
+        if (rosterDocSnap.exists) {
+          // Get role from roster document (only if not staff via access code)
+          if (!isStaffPromotion) {
+            const rosterData = rosterDocSnap.data();
+            const rosterRole = rosterData?.role?.toLowerCase();
+
+            if (rosterRole === "ra") {
+              finalRole = "ra";
+              console.log(`Roster lookup: ${email} is RA in hall ${targetHallId}`);
+            } else {
+              finalRole = "resident";
+              console.log(`Roster lookup: ${email} is resident in hall ${targetHallId}`);
+            }
+          } else {
+            console.log(`Roster lookup: ${email} keeping staff role from access code`);
+          }
+        } else {
+          console.log(`Roster lookup: ${email} not in hall ${targetHallId} roster - keeping role: ${finalRole}`);
+        }
+      } catch (lookupError) {
+        console.error("Roster lookup error:", lookupError);
+      }
+    }
+
+    // 6. Verify hall exists if hallId is provided/discovered
+    if (hallId) {
+      const hallRef = db.collection("halls").doc(hallId);
+      const hallDoc = await hallRef.get();
+
+      if (!hallDoc.exists) {
+        console.log(`Hall ${hallId} does not exist - clearing hallId`);
+        hallId = null;
+      }
+    }
+
+    // 8. Create/update user document (with tenantId for global chat)
+    const now = admin.firestore.FieldValue.serverTimestamp();
+
+    // Determine final hallId: use provided hallId, or keep existing, or empty string for unassigned
+    const finalHallId = hallId || existingHallId || "";
+
+    if (existingUserDoc.exists) {
       // Update existing user - also ensure tenantId is set
-      await userRef.update({
+      // Only update hallId if a new one is provided or user doesn't have one
+      const updateData: Record<string, unknown> = {
         role: finalRole,
-        hallId: hallId,
         tenantId: DEFAULT_TENANT_ID,
         updatedAt: now,
-      });
+      };
+      // Sync displayName from Auth profile (may have been set after user doc was created)
+      const authDisplayName = context.auth.token.name;
+      if (authDisplayName) {
+        updateData.displayName = authDisplayName;
+      }
+      // Only set hallId if we have one to set (don't overwrite existing with empty)
+      if (hallId) {
+        updateData.hallId = hallId;
+      } else if (!existingHallId) {
+        updateData.hallId = ""; // New user with no hall assignment
+      }
+      await userRef.update(updateData);
     } else {
       // Create new user with tenantId
       await userRef.set({
         email: email,
         displayName: context.auth.token.name || "",
         role: finalRole,
-        hallId: hallId,
+        hallId: finalHallId,
         tenantId: DEFAULT_TENANT_ID,
         createdAt: now,
         updatedAt: now,
       });
     }
 
-    // 7. Create hall membership
-    const memberRef = db
-      .collection("halls")
-      .doc(hallId)
-      .collection("members")
-      .doc(uid);
-
-    const memberDoc = await memberRef.get();
-
-    if (!memberDoc.exists) {
-      await memberRef.set({
-        role: finalRole,
-        joinedAt: now,
-        isActive: true,
-      });
-    } else {
-      // Update existing membership
-      await memberRef.update({
-        role: finalRole,
-        isActive: true,
-      });
-    }
-
-    // 8. Create/update public profile (privacy: no email, limited fields)
-    const displayName = context.auth.token.name || "";
-    const profileRef = db
-      .collection("halls")
-      .doc(hallId)
-      .collection("profiles")
-      .doc(uid);
-
-    await profileRef.set({
-      displayName: displayName,
-      role: finalRole,
+    // 9. V1: Update email_index for reverse lookup (email -> uid)
+    // This enables resident "My RA" feature
+    await db.collection("email_index").doc(email).set({
+      uid: uid,
       updatedAt: now,
-    }, { merge: true });
+    });
+    console.log(`email_index updated: ${email} -> ${uid}`);
 
-    console.log(`User ${uid} joined hall ${hallId} as ${finalRole}`);
+    // 10. Create hall membership (only if user has a hall assigned)
+    if (finalHallId) {
+      const memberRef = db
+        .collection("halls")
+        .doc(finalHallId)
+        .collection("members")
+        .doc(uid);
+
+      const memberDoc = await memberRef.get();
+
+      // ROSTER CLAIM LOGIC: Check if this user is in the pending roster
+      // We treat the roster as the source of truth for assignments
+      const rosterRef = db.collection("halls").doc(finalHallId).collection("roster").doc(email);
+      const rosterDoc = await rosterRef.get();
+
+      let roomNumber = "";
+      let floor: number | null = null;
+      let wing: string | null = null;
+      let assignedRaEmail: string | null = null;
+      let assignedRaUid: string | null = null;
+
+      // Get display name from roster or auth token
+      let rosterDisplayName = "";
+
+      if (rosterDoc.exists) {
+        const rosterData = rosterDoc.data();
+
+        // Always try to get display name from roster
+        if (rosterData?.firstName && rosterData?.lastName) {
+          rosterDisplayName = `${rosterData.firstName} ${rosterData.lastName}`.trim();
+        } else if (rosterData?.name) {
+          rosterDisplayName = rosterData.name;
+        } else if (rosterData?.displayName) {
+          rosterDisplayName = rosterData.displayName;
+        }
+
+        // Only claim roster if not already claimed
+        if (!rosterData?.isClaimed) {
+          roomNumber = rosterData?.roomNumber || "";
+          floor = rosterData?.floor ? parseInt(rosterData.floor, 10) : null;
+          wing = rosterData?.wing || null;
+          assignedRaEmail = rosterData?.assignedRaEmail?.toLowerCase().trim() || null;
+
+          // Mark roster as claimed
+          await rosterRef.update({
+            isClaimed: true,
+            claimedByUid: uid,
+            claimedAt: now,
+          });
+
+          // V1: Resolve assigned RA email to UID via email_index
+          if (assignedRaEmail) {
+            const raIndexDoc = await db.collection("email_index").doc(assignedRaEmail).get();
+            if (raIndexDoc.exists) {
+              const raUid = raIndexDoc.data()?.uid;
+              // Validate that this RA is actually in the hall with role "ra"
+              if (raUid) {
+                const raMemberDoc = await db
+                  .collection("halls")
+                  .doc(finalHallId)
+                  .collection("members")
+                  .doc(raUid)
+                  .get();
+
+                if (raMemberDoc.exists &&
+                  raMemberDoc.data()?.role === "ra" &&
+                  raMemberDoc.data()?.isActive !== false) {
+                  assignedRaUid = raUid;
+                  console.log(`Resolved assignedRaEmail ${assignedRaEmail} to UID ${raUid}`);
+                } else {
+                  console.log(`assignedRaEmail ${assignedRaEmail} resolved to ${raUid} but not an active RA in hall`);
+                }
+              }
+            } else {
+              console.log(`assignedRaEmail ${assignedRaEmail} not found in email_index`);
+            }
+          }
+        }
+      }
+
+      // Determine final display name: roster name > auth token name > empty
+      const finalDisplayName = rosterDisplayName || context.auth.token.name || "";
+
+      // Update user document with roster display name if available
+      // This ensures /users/{uid}.displayName shows the proper name from roster
+      if (finalDisplayName) {
+        await userRef.update({
+          displayName: finalDisplayName,
+          updatedAt: now,
+        });
+        console.log(`Updated /users/${uid} displayName to: ${finalDisplayName}`);
+      }
+
+      // Build member data
+      const memberData: Record<string, unknown> = {
+        role: finalRole,
+        isActive: true,
+        userId: uid,
+        updatedAt: now,
+      };
+
+      // Add display name if available
+      if (finalDisplayName) memberData.displayName = finalDisplayName;
+
+      // Add roster data if available
+      if (roomNumber) memberData.roomNumber = roomNumber;
+      if (floor !== null) memberData.floor = floor;
+      if (wing) memberData.wing = wing;
+      if (assignedRaEmail) memberData.assignedRaEmail = assignedRaEmail;
+      if (assignedRaUid) memberData.assignedRaUid = assignedRaUid;
+
+      if (!memberDoc.exists) {
+        memberData.joinedAt = now;
+        await memberRef.set(memberData);
+      } else {
+        // Update existing membership
+        await memberRef.update(memberData);
+      }
+
+      // 11. Create/update public profile (privacy: no email, limited fields)
+      // Use the same finalDisplayName computed earlier
+      const profileRef = db
+        .collection("halls")
+        .doc(finalHallId)
+        .collection("profiles")
+        .doc(uid);
+
+      await profileRef.set({
+        displayName: finalDisplayName,
+        role: finalRole,
+        updatedAt: now,
+      }, { merge: true });
+
+      // 12. V1: Backfill assignedRaUid for residents when RA signs up
+      // If this user is an RA, find all residents who have this RA's email as assignedRaEmail
+      // and update their assignedRaUid
+      if (finalRole === "ra") {
+        try {
+          console.log(`RA ${uid} (${email}) joined hall ${finalHallId} - checking for residents to backfill`);
+
+          // Query members where assignedRaEmail == this RA's email
+          const residentsToBackfill = await db
+            .collection("halls")
+            .doc(finalHallId)
+            .collection("members")
+            .where("assignedRaEmail", "==", email)
+            .where("role", "==", "resident")
+            .get();
+
+          if (!residentsToBackfill.empty) {
+            console.log(`Found ${residentsToBackfill.size} residents to backfill with assignedRaUid`);
+
+            // Batch update all matching residents
+            let batchCount = 0;
+            let batch = db.batch();
+            let totalUpdated = 0;
+
+            for (const residentDoc of residentsToBackfill.docs) {
+              // Only update if assignedRaUid is not already set
+              const currentRaUid = residentDoc.data().assignedRaUid;
+              if (!currentRaUid) {
+                batch.update(residentDoc.ref, {
+                  assignedRaUid: uid,
+                  updatedAt: now,
+                });
+                batchCount++;
+                totalUpdated++;
+
+                // Commit every 450 writes (Firestore batch limit is 500)
+                if (batchCount >= 450) {
+                  await batch.commit();
+                  batch = db.batch();
+                  batchCount = 0;
+                }
+              }
+            }
+
+            // Commit remaining updates
+            if (batchCount > 0) {
+              await batch.commit();
+            }
+
+            console.log(`Backfilled assignedRaUid for ${totalUpdated} residents`);
+          } else {
+            console.log(`No residents found with assignedRaEmail=${email}`);
+          }
+        } catch (backfillError) {
+          // Don't fail the join if backfill fails - log and continue
+          console.error("Error during assignedRaUid backfill:", backfillError);
+        }
+      }
+
+      console.log(`User ${uid} joined hall ${finalHallId} as ${finalRole}`);
+    } else {
+      console.log(`User ${uid} registered as ${finalRole} (no hall assigned - admin will assign later)`);
+    }
 
     return {
       success: true,
       role: finalRole,
-      hallId: hallId,
-      message: requestedRole !== finalRole ?
-        `Joined as ${finalRole} (${requestedRole} requires manifest approval)` :
-        `Successfully joined as ${finalRole}`,
+      hallId: finalHallId,
+      message: finalHallId ?
+        `Successfully joined as ${finalRole}` :
+        `Registered as ${finalRole}. You will be assigned to a hall by your administrator.`,
     };
   }
 );
@@ -377,6 +608,7 @@ export const requestHallChange = functions.https.onCall(
         address: hallData?.address || "",
         floors: hallData?.floors || [1, 2, 3],
         isActive: hallData?.isActive ?? true,
+        hallDirector: hallData?.hallDirector || null,
         createdAt: now,
         updatedAt: now,
         createdBy: uid,
@@ -387,6 +619,7 @@ export const requestHallChange = functions.https.onCall(
         role: "staff",
         isActive: true,
         joinedAt: now,
+        userId: uid,
       });
 
       // Also create profile
@@ -406,6 +639,38 @@ export const requestHallChange = functions.https.onCall(
         role: "staff",
         updatedAt: now,
       });
+
+      // If hall director is specified and has a uid, grant them staff status
+      if (hallData?.hallDirector?.uid) {
+        const hdUid = hallData.hallDirector.uid;
+        const hdName = hallData.hallDirector.name;
+
+        // Add hall director as staff member in the hall
+        await db.collection("halls").doc(hallId).collection("members").doc(hdUid).set({
+          role: "staff",
+          isActive: true,
+          isHallDirector: true,
+          joinedAt: now,
+          userId: hdUid,
+        });
+
+        // Create/update hall director's profile in the hall
+        await db.collection("halls").doc(hallId).collection("profiles").doc(hdUid).set({
+          displayName: hdName,
+          role: "staff",
+          isHallDirector: true,
+          updatedAt: now,
+        }, { merge: true });
+
+        // Update hall director's user document to staff role
+        await db.collection("users").doc(hdUid).update({
+          role: "staff",
+          hallId: hallId,
+          updatedAt: now,
+        });
+
+        console.log(`Hall director ${hdUid} (${hdName}) granted staff status for hall ${hallId}`);
+      }
 
       console.log(`Hall ${hallId} created by ${uid}`);
 
@@ -455,8 +720,69 @@ export const requestHallChange = functions.https.onCall(
       if (hallData.floors !== undefined) updateData.floors = hallData.floors;
       if (hallData.wings !== undefined) updateData["wings"] = hallData.wings;
       if (hallData.isActive !== undefined) updateData.isActive = hallData.isActive;
+      if (hallData.hallDirector !== undefined) updateData.hallDirector = hallData.hallDirector;
 
       await db.collection("halls").doc(hallId).update(updateData);
+
+      // If hall director is being updated and has a uid, grant them staff status
+      if (hallData.hallDirector?.uid) {
+        const hdUid = hallData.hallDirector.uid;
+        const hdName = hallData.hallDirector.name;
+        const now = admin.firestore.FieldValue.serverTimestamp();
+
+        // Get the old hall director to potentially remove their HD flag
+        const oldHallDoc = hallDoc.data();
+        const oldHdUid = oldHallDoc?.hallDirector?.uid;
+
+        // If there was a previous hall director, remove their isHallDirector flag
+        if (oldHdUid && oldHdUid !== hdUid) {
+          const oldHdMemberRef = db.collection("halls").doc(hallId).collection("members").doc(oldHdUid);
+          const oldHdMember = await oldHdMemberRef.get();
+          if (oldHdMember.exists) {
+            await oldHdMemberRef.update({
+              isHallDirector: false,
+              updatedAt: now,
+            });
+          }
+
+          const oldHdProfileRef = db.collection("halls").doc(hallId).collection("profiles").doc(oldHdUid);
+          const oldHdProfile = await oldHdProfileRef.get();
+          if (oldHdProfile.exists) {
+            await oldHdProfileRef.update({
+              isHallDirector: false,
+              updatedAt: now,
+            });
+          }
+
+          console.log(`Removed hall director status from ${oldHdUid}`);
+        }
+
+        // Add new hall director as staff member in the hall
+        await db.collection("halls").doc(hallId).collection("members").doc(hdUid).set({
+          role: "staff",
+          isActive: true,
+          isHallDirector: true,
+          joinedAt: now,
+          userId: hdUid,
+        }, { merge: true });
+
+        // Create/update hall director's profile in the hall
+        await db.collection("halls").doc(hallId).collection("profiles").doc(hdUid).set({
+          displayName: hdName,
+          role: "staff",
+          isHallDirector: true,
+          updatedAt: now,
+        }, { merge: true });
+
+        // Update hall director's user document to staff role
+        await db.collection("users").doc(hdUid).update({
+          role: "staff",
+          hallId: hallId,
+          updatedAt: now,
+        });
+
+        console.log(`Hall director ${hdUid} (${hdName}) granted staff status for hall ${hallId}`);
+      }
 
       console.log(`Hall ${hallId} updated by ${uid}`);
 
@@ -839,6 +1165,118 @@ export const removeFromRoleManifest = functions.https.onCall(
 );
 
 // ============================================================
+// importRoster
+// Callable function for staff to import Excel/CSV roster data
+// V1 Contract:
+// - Preserve claims on re-import (never overwrite isClaimed/claimedByUid/claimedAt)
+// - Last row wins (deduplicate by email within payload)
+// - Proper batch handling (new batch after each commit)
+// ============================================================
+
+interface RosterEntry {
+  email: string;
+  firstName: string;
+  lastName: string;
+  roomNumber: string;
+  floor: string;
+  wing?: string;
+  role: "resident" | "ra";
+  assignedRaEmail?: string;
+}
+
+interface ImportRosterRequest {
+  hallId: string;
+  data: RosterEntry[];
+}
+
+export const importRoster = functions.https.onCall(
+  async (data: ImportRosterRequest, context): Promise<{ success: boolean; count: number }> => {
+    // 1. Auth & Perms
+    if (!context.auth) {
+      throw new HttpsError("unauthenticated", "User must be authenticated");
+    }
+
+    // Check if user is staff/ra in the hall using a helper or raw db check
+    const uid = context.auth.uid;
+    const { hallId, data: rosterData } = data;
+
+    if (!hallId || !rosterData || !Array.isArray(rosterData)) {
+      throw new HttpsError("invalid-argument", "Valid hallId and roster data required");
+    }
+
+    // Check membership role: must be 'staff' or 'ra'
+    const memberDoc = await db.collection("halls").doc(hallId).collection("members").doc(uid).get();
+    const userRole = memberDoc.data()?.role;
+    const isGlobalAdmin = (await db.collection("users").doc(uid).get()).data()?.role === "admin";
+
+    if (!isGlobalAdmin && (!memberDoc.exists || !["staff", "ra"].includes(userRole))) {
+      throw new HttpsError("permission-denied", "Only Staff/RAs can import rosters");
+    }
+
+    // V1: Last row wins - deduplicate by email, keeping last occurrence
+    const deduplicatedMap: Map<string, RosterEntry> = new Map();
+    for (const entry of rosterData) {
+      const normalizedEmail = entry.email.toLowerCase().trim();
+      if (normalizedEmail) {
+        deduplicatedMap.set(normalizedEmail, entry);
+      }
+    }
+
+    const uniqueEntries = Array.from(deduplicatedMap.entries());
+    let count = 0;
+    let batchCount = 0;
+    let batch = db.batch();
+
+    // 2. Process deduplicated entries
+    for (const [email, entry] of uniqueEntries) {
+      const ref = db.collection("halls").doc(hallId).collection("roster").doc(email);
+
+      // V1 CRITICAL: Never touch claim fields during import
+      // Import only writes: firstName, lastName, roomNumber, floor, wing, role, assignedRaEmail, importedBy, updatedAt
+      // Claim fields (isClaimed, claimedByUid, claimedAt) are NEVER written by import
+      const rosterPayload = {
+        email: email,
+        firstName: entry.firstName || "",
+        lastName: entry.lastName || "",
+        roomNumber: entry.roomNumber || "",
+        floor: entry.floor || "",
+        wing: entry.wing || "",
+        role: entry.role || "resident",
+        assignedRaEmail: entry.assignedRaEmail?.toLowerCase().trim() || null,
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        importedBy: uid,
+        // NOTE: isClaimed, claimedByUid, claimedAt are intentionally NOT included
+        // They will be preserved if doc exists, or absent for new docs (unclaimed by default)
+      };
+
+      batch.set(ref, rosterPayload, { merge: true });
+      batchCount++;
+      count++;
+
+      // V1: Correct batch handling - commit and create NEW batch every 450 writes
+      if (batchCount >= 450) {
+        await batch.commit();
+        batch = db.batch(); // Create new batch after commit
+        batchCount = 0;
+        console.log(`importRoster: Committed batch, ${count} entries processed so far`);
+      }
+    }
+
+    // Commit remaining entries
+    if (batchCount > 0) {
+      await batch.commit();
+    }
+
+    console.log(
+      `importRoster: Imported ${count} unique entries ` +
+      `(from ${rosterData.length} input rows) into hall ${hallId}`
+    );
+    return { success: true, count };
+  }
+);
+
+
+// ============================================================
 // askAI
 // Callable function to interact with Google Vertex AI (Gemini)
 // ============================================================
@@ -1076,13 +1514,14 @@ export const createOrGetDM = functions.https.onCall(
       }
 
       // Create new conversation with tenantId
+      // Set lastMessageAt = createdAt so conversations appear in queries immediately
       transaction.set(convRef, {
         type: "dm" as ConversationType,
         tenantId: callerTenantId,
         participantIds: [uid, otherUid],
         createdAt: now,
         lastMessagePreview: null,
-        lastMessageAt: null,
+        lastMessageAt: now, // Always set to createdAt for query consistency
       });
 
       // Create member docs for both users
@@ -1186,6 +1625,7 @@ export const createGroupConversation = functions.https.onCall(
     const batch = db.batch();
 
     // Create conversation doc with tenantId
+    // Set lastMessageAt = createdAt so conversations appear in queries immediately
     batch.set(convRef, {
       type: "group" as ConversationType,
       tenantId: callerTenantId,
@@ -1193,7 +1633,7 @@ export const createGroupConversation = functions.https.onCall(
       participantIds: allMemberUids,
       createdAt: now,
       lastMessagePreview: null,
-      lastMessageAt: null,
+      lastMessageAt: now, // Always set to createdAt for query consistency
     });
 
     // Create member docs
@@ -1401,6 +1841,12 @@ export const updateLastRead = functions.https.onCall(
 // Updates conversation lastMessageAt and lastMessagePreview
 // Sends push notifications to other participants
 // Global path: /conversations/{cid}/messages/{mid}
+//
+// V1 Push Token Contract:
+// - Read token from /users/{uid}.fcmToken (single token per user)
+// - Build {uid, token} pairs to track ownership correctly
+// - Clean up invalid tokens by UID, not by array index
+// - Always send badge = 1 (not accurate, acceptable for V1)
 // ============================================================
 
 export const onMessageCreate = functions.firestore
@@ -1471,21 +1917,35 @@ export const onMessageCreate = functions.firestore
         return;
       }
 
-      // Fetch FCM tokens for all recipients
-      const tokenPromises = recipientIds.map(async (uid: string) => {
+      // V1 FIX: Build {uid, token} pairs to track ownership correctly
+      // This prevents the index mismatch bug when cleaning up tokens
+      interface TokenPair {
+        uid: string;
+        token: string;
+      }
+
+      const tokenPairs: TokenPair[] = [];
+
+      for (const uid of recipientIds) {
         const userDoc = await db.collection("users").doc(uid).get();
-        const userData = userDoc.data();
-        return userData?.fcmToken as string | undefined;
-      });
+        const token = userDoc.data()?.fcmToken;
+        // Only include users with valid tokens
+        if (token && typeof token === "string" && token.length > 0) {
+          tokenPairs.push({ uid, token });
+        } else {
+          console.log(`No FCM token for user ${uid}, skipping`);
+        }
+      }
 
-      const tokens = (await Promise.all(tokenPromises)).filter(
-        (token): token is string => !!token
-      );
-
-      if (tokens.length === 0) {
-        console.log("No FCM tokens found for recipients");
+      if (tokenPairs.length === 0) {
+        console.log("No FCM tokens found for any recipients");
         return;
       }
+
+      console.log(`Found ${tokenPairs.length} FCM tokens for ${recipientIds.length} recipients`);
+
+      // Extract just tokens for the multicast call
+      const tokens = tokenPairs.map((p) => p.token);
 
       // Build the message payload
       const payload: admin.messaging.MulticastMessage = {
@@ -1501,11 +1961,20 @@ export const onMessageCreate = functions.firestore
           type: "chat_message",
         },
         apns: {
+          headers: {
+            "apns-priority": "10",
+            "apns-push-type": "alert",
+          },
           payload: {
             aps: {
+              "alert": {
+                "title": notificationTitle,
+                "body": preview || "New message",
+              },
               "sound": "default",
-              "badge": 1,
+              "badge": 1, // V1: Always badge=1 (not accurate, acceptable)
               "mutable-content": 1,
+              "content-available": 1,
             },
           },
         },
@@ -1525,36 +1994,43 @@ export const onMessageCreate = functions.firestore
         `${response.failureCount} failed`
       );
 
-      // Clean up invalid tokens
+      // V1 FIX: Clean up invalid tokens using the paired UID (not array index)
       if (response.failureCount > 0) {
-        const invalidTokens: string[] = [];
+        const cleanupPromises: Promise<void>[] = [];
 
         response.responses.forEach((resp, idx) => {
           if (!resp.success) {
             const errorCode = resp.error?.code;
+            const errorMsg = resp.error?.message;
+            const pair = tokenPairs[idx]; // Correct mapping via pairs array
+
+            console.error(
+              `FCM send failed for user ${pair.uid} (token ${pair.token.substring(0, 20)}...): ` +
+              `code=${errorCode}, message=${errorMsg}`
+            );
+
             // Remove invalid/unregistered tokens
             if (
               errorCode === "messaging/invalid-registration-token" ||
               errorCode === "messaging/registration-token-not-registered"
             ) {
-              invalidTokens.push(tokens[idx]);
+              console.log(`Cleaning up invalid token for user ${pair.uid}`);
+              cleanupPromises.push(
+                db.collection("users").doc(pair.uid).update({
+                  fcmToken: admin.firestore.FieldValue.delete(),
+                }).then(() => {
+                  console.log(`Deleted fcmToken for user ${pair.uid}`);
+                }).catch((err) => {
+                  console.error(`Failed to delete fcmToken for user ${pair.uid}:`, err);
+                })
+              );
             }
           }
         });
 
-        // Remove invalid tokens from user documents
-        if (invalidTokens.length > 0) {
-          console.log(`Cleaning up ${invalidTokens.length} invalid tokens`);
-
-          const cleanupPromises = recipientIds.map(async (uid: string, idx: number) => {
-            if (invalidTokens.includes(tokens[idx])) {
-              await db.collection("users").doc(uid).update({
-                fcmToken: admin.firestore.FieldValue.delete(),
-              });
-            }
-          });
-
+        if (cleanupPromises.length > 0) {
           await Promise.all(cleanupPromises);
+          console.log(`Cleaned up ${cleanupPromises.length} invalid tokens`);
         }
       }
     } catch (error) {
@@ -1644,20 +2120,35 @@ export const submitNoiseReport = functions.https.onCall(
     console.log(`Noise report ${reportRef.id} created by ${uid} in hall ${hallId}`);
 
     // Find on-duty RA to notify
+    // V1 FIX: Firestore cannot do inequality filters on two fields.
+    // Query by start <= now, then filter in-memory for end > now
     try {
       const nowDate = new Date();
+      const nowTimestamp = admin.firestore.Timestamp.fromDate(nowDate);
+
       const dutyShiftsSnapshot = await db
         .collection("halls")
         .doc(hallId)
         .collection("duty_shifts")
-        .where("start", "<=", admin.firestore.Timestamp.fromDate(nowDate))
-        .where("end", ">", admin.firestore.Timestamp.fromDate(nowDate))
-        .limit(1)
+        .where("start", "<=", nowTimestamp)
+        .orderBy("start", "desc")
+        .limit(10)
         .get();
 
-      if (!dutyShiftsSnapshot.empty) {
-        const dutyShift = dutyShiftsSnapshot.docs[0].data();
-        const onDutyRaUid = dutyShift.odRAuid || dutyShift.userId;
+      // Find first active shift (in-memory filter for end > now)
+      let activeShift: FirebaseFirestore.DocumentData | null = null;
+      for (const doc of dutyShiftsSnapshot.docs) {
+        const shiftData = doc.data();
+        const endTime = shiftData.end as admin.firestore.Timestamp | undefined;
+        if (endTime && endTime.toMillis() > nowTimestamp.toMillis()) {
+          activeShift = shiftData;
+          break;
+        }
+      }
+
+      if (activeShift) {
+        // V1: Support both field names (userId is canonical)
+        const onDutyRaUid = activeShift.userId || activeShift.odRAuid;
 
         if (onDutyRaUid) {
           // Get RA's FCM token
@@ -1667,11 +2158,14 @@ export const submitNoiseReport = functions.https.onCall(
           if (fcmToken) {
             // Send push notification to on-duty RA
             const urgencyLabel = urgency.charAt(0).toUpperCase() + urgency.slice(1);
+            const notificationTitle = `${urgencyLabel} Priority Noise Report`;
+            const notificationBody = `Noise reported at ${location.trim()}`;
+
             const payload: admin.messaging.Message = {
               token: fcmToken,
               notification: {
-                title: `${urgencyLabel} Priority Noise Report`,
-                body: `${reporterName} reported noise at ${location.trim()}`,
+                title: notificationTitle,
+                body: notificationBody,
               },
               data: {
                 type: "noise_report",
@@ -1680,10 +2174,20 @@ export const submitNoiseReport = functions.https.onCall(
                 urgency: urgency,
               },
               apns: {
+                headers: {
+                  "apns-priority": urgency === "high" ? "10" : "5",
+                  "apns-push-type": "alert",
+                },
                 payload: {
                   aps: {
-                    sound: urgency === "high" ? "critical" : "default",
-                    badge: 1,
+                    "alert": {
+                      title: notificationTitle,
+                      body: notificationBody,
+                    },
+                    "sound": urgency === "high" ? "default" : "default",
+                    "badge": 1,
+                    "mutable-content": 1,
+                    "content-available": 1,
                   },
                 },
               },
@@ -1697,7 +2201,7 @@ export const submitNoiseReport = functions.https.onCall(
             };
 
             await admin.messaging().send(payload);
-            console.log(`Push notification sent to on-duty RA ${onDutyRaUid}`);
+            console.log(`Push notification sent to on-duty RA ${onDutyRaUid} for noise report`);
           }
         }
       } else {
@@ -1712,6 +2216,134 @@ export const submitNoiseReport = functions.https.onCall(
       success: true,
       reportId: reportRef.id,
       message: "Noise report submitted successfully",
+    };
+  }
+);
+
+// ============================================================
+// getOnDutyRa
+// V1: Callable function for residents to get current on-duty RA info
+// Used by "Contact Duty RA" feature
+//
+// V1 FIX: Firestore cannot do inequality filters on two fields.
+// We query by start <= now, then filter in-memory for end > now.
+// ============================================================
+
+interface GetOnDutyRaRequest {
+  hallId: string;
+}
+
+interface GetOnDutyRaResponse {
+  success: boolean;
+  onDuty: boolean;
+  raUid?: string;
+  displayName?: string;
+  email?: string;
+  shiftStart?: admin.firestore.Timestamp;
+  shiftEnd?: admin.firestore.Timestamp;
+}
+
+export const getOnDutyRa = functions.https.onCall(
+  async (data: GetOnDutyRaRequest, context): Promise<GetOnDutyRaResponse> => {
+    // Require authentication
+    if (!context.auth) {
+      throw new HttpsError("unauthenticated", "User must be authenticated");
+    }
+
+    const uid = context.auth.uid;
+    const { hallId } = data;
+
+    if (!hallId) {
+      throw new HttpsError("invalid-argument", "hallId is required");
+    }
+
+    // Verify user is a member of the hall
+    const memberDoc = await db
+      .collection("halls")
+      .doc(hallId)
+      .collection("members")
+      .doc(uid)
+      .get();
+
+    if (!memberDoc.exists) {
+      throw new HttpsError("permission-denied", "You are not a member of this hall");
+    }
+
+    // V1 FIX: Firestore does not allow inequality filters on two fields.
+    // Query: where("start", "<=", now) + orderBy("start", "desc") + limit(10)
+    // Then filter in-memory for end > now
+    const nowDate = new Date();
+    const nowTimestamp = admin.firestore.Timestamp.fromDate(nowDate);
+
+    const dutyShiftsSnapshot = await db
+      .collection("halls")
+      .doc(hallId)
+      .collection("duty_shifts")
+      .where("start", "<=", nowTimestamp)
+      .orderBy("start", "desc")
+      .limit(10)
+      .get();
+
+    // Find the first shift where end > now (in-memory filter)
+    let activeShift: FirebaseFirestore.DocumentData | null = null;
+    for (const doc of dutyShiftsSnapshot.docs) {
+      const shiftData = doc.data();
+      const endTime = shiftData.end as admin.firestore.Timestamp | undefined;
+      if (endTime && endTime.toMillis() > nowTimestamp.toMillis()) {
+        activeShift = shiftData;
+        break;
+      }
+    }
+
+    if (!activeShift) {
+      console.log(`No on-duty RA found for hall ${hallId} at ${nowDate.toISOString()}`);
+      return {
+        success: true,
+        onDuty: false,
+      };
+    }
+
+    // V1: Support both field names during transition (userId is canonical)
+    const onDutyRaUid = activeShift.userId || activeShift.odRAuid;
+
+    if (!onDutyRaUid) {
+      console.log(`Duty shift found but no RA UID in hall ${hallId}`);
+      return {
+        success: true,
+        onDuty: false,
+      };
+    }
+
+    // Get RA's profile from the hall for displayName
+    const raProfileDoc = await db
+      .collection("halls")
+      .doc(hallId)
+      .collection("profiles")
+      .doc(onDutyRaUid)
+      .get();
+
+    let displayName = "";
+    if (raProfileDoc.exists) {
+      displayName = raProfileDoc.data()?.displayName || "";
+    }
+
+    // V1: Email exposure is allowed - get from /users/{raUid}
+    let email = "";
+    const raUserDoc = await db.collection("users").doc(onDutyRaUid).get();
+    if (raUserDoc.exists) {
+      email = raUserDoc.data()?.email || "";
+    }
+
+    console.log(`On-duty RA for hall ${hallId}: ${onDutyRaUid} (${displayName})`);
+
+    return {
+      success: true,
+      onDuty: true,
+      raUid: onDutyRaUid,
+      displayName: displayName,
+      email: email,
+      shiftStart: activeShift.start || undefined,
+      shiftEnd: activeShift.end || undefined,
     };
   }
 );
@@ -2109,6 +2741,414 @@ export const seedKnowledgeBaseDocs = functions.https.onCall(
       entriesCreated,
       errors,
       dryRun,
+    };
+  }
+);
+
+// ============================================================
+// getTenantUsers
+// Returns all users in the same tenant for chat search
+// Callable by any authenticated user in the tenant
+// ============================================================
+
+interface TenantUserInfo {
+  uid: string;
+  displayName: string;
+  email: string | null;
+  firstName: string | null;
+  lastName: string | null;
+}
+
+interface GetTenantUsersRequest {
+  excludeSelf?: boolean;
+}
+
+interface GetTenantUsersResponse {
+  users: TenantUserInfo[];
+}
+
+export const getTenantUsers = functions.https.onCall(
+  async (data: GetTenantUsersRequest, context): Promise<GetTenantUsersResponse> => {
+    if (!context.auth) {
+      throw new HttpsError("unauthenticated", "User must be authenticated");
+    }
+
+    const uid = context.auth.uid;
+    const excludeSelf = data?.excludeSelf !== false; // Default to true
+
+    // Get caller's tenantId
+    const callerTenantId = await getTenantId(uid);
+
+    // Query all users in the same tenant
+    const usersSnapshot = await db
+      .collection("users")
+      .where("tenantId", "==", callerTenantId)
+      .limit(500) // Reasonable limit for chat search
+      .get();
+
+    const users: TenantUserInfo[] = [];
+
+    for (const doc of usersSnapshot.docs) {
+      // Skip self if excludeSelf is true
+      if (excludeSelf && doc.id === uid) {
+        continue;
+      }
+
+      const userData = doc.data();
+      const email = userData.email || null;
+
+      // Build display name from available sources
+      let displayName = userData.displayName || "";
+      const firstName = userData.firstName || null;
+      const lastName = userData.lastName || null;
+
+      // If no displayName, try to build from firstName + lastName
+      if (!displayName && (firstName || lastName)) {
+        displayName = [firstName, lastName].filter(Boolean).join(" ").trim();
+      }
+
+      // Fallback to email prefix if no name available
+      if (!displayName && email) {
+        displayName = email.split("@")[0];
+      }
+
+      // Ultimate fallback to first 8 chars of uid (shouldn't happen often)
+      if (!displayName) {
+        displayName = doc.id.substring(0, 8);
+      }
+
+      users.push({
+        uid: doc.id,
+        displayName,
+        email,
+        firstName,
+        lastName,
+      });
+    }
+
+    console.log(`getTenantUsers: Returned ${users.length} users for tenant ${callerTenantId}`);
+
+    return { users };
+  }
+);
+
+// ============================================================
+// getUserDisplayName
+// Returns display name for a specific user (for chat sender names)
+// Callable by any authenticated user in the same tenant
+// ============================================================
+
+interface GetUserDisplayNameRequest {
+  uid: string;
+}
+
+interface GetUserDisplayNameResponse {
+  uid: string;
+  displayName: string;
+}
+
+export const getUserDisplayName = functions.https.onCall(
+  async (data: GetUserDisplayNameRequest, context): Promise<GetUserDisplayNameResponse> => {
+    if (!context.auth) {
+      throw new HttpsError("unauthenticated", "User must be authenticated");
+    }
+
+    const callerUid = context.auth.uid;
+    const targetUid = data?.uid;
+
+    if (!targetUid) {
+      throw new HttpsError("invalid-argument", "uid is required");
+    }
+
+    // Get caller's tenantId
+    const callerTenantId = await getTenantId(callerUid);
+
+    // Get target user's data
+    const userDoc = await db.collection("users").doc(targetUid).get();
+
+    if (!userDoc.exists) {
+      // Return fallback for non-existent user
+      return {
+        uid: targetUid,
+        displayName: targetUid.substring(0, 8),
+      };
+    }
+
+    const userData = userDoc.data()!;
+
+    // Verify same tenant (security check)
+    if (userData.tenantId !== callerTenantId) {
+      throw new HttpsError(
+        "permission-denied",
+        "Cannot get user info from different organization"
+      );
+    }
+
+    const email = userData.email || null;
+
+    // Build display name from available sources
+    let displayName = userData.displayName || "";
+    const firstName = userData.firstName || null;
+    const lastName = userData.lastName || null;
+
+    // If no displayName, try to build from firstName + lastName
+    if (!displayName && (firstName || lastName)) {
+      displayName = [firstName, lastName].filter(Boolean).join(" ").trim();
+    }
+
+    // Fallback to email prefix if no name available
+    if (!displayName && email) {
+      displayName = email.split("@")[0];
+    }
+
+    // Ultimate fallback to first 8 chars of uid
+    if (!displayName) {
+      displayName = targetUid.substring(0, 8);
+    }
+
+    return {
+      uid: targetUid,
+      displayName,
+    };
+  }
+);
+
+// ============================================================
+// submitConcern
+// Callable function for residents to submit concerns/complaints
+// Sends push notification to on-duty RA (or all RAs in hall)
+// ============================================================
+
+interface SubmitConcernRequest {
+  hallId: string;
+  category: string; // "noise" | "maintenance" | "safety" | "roommate" | "other"
+  message: string;
+  location?: string;
+  isAnonymous?: boolean;
+}
+
+interface SubmitConcernResponse {
+  success: boolean;
+  concernId: string;
+  message: string;
+}
+
+export const submitConcern = functions.https.onCall(
+  async (data: SubmitConcernRequest, context): Promise<SubmitConcernResponse> => {
+    // Require authentication
+    if (!context.auth) {
+      throw new HttpsError("unauthenticated", "User must be authenticated");
+    }
+
+    const uid = context.auth.uid;
+    const { hallId, category, message, location, isAnonymous } = data;
+
+    // Validate required fields
+    if (!hallId) {
+      throw new HttpsError("invalid-argument", "hallId is required");
+    }
+
+    if (!category) {
+      throw new HttpsError("invalid-argument", "category is required");
+    }
+
+    const validCategories = ["noise", "maintenance", "safety", "roommate", "other"];
+    if (!validCategories.includes(category)) {
+      throw new HttpsError("invalid-argument", "Invalid category");
+    }
+
+    if (!message || message.trim().length === 0) {
+      throw new HttpsError("invalid-argument", "message is required");
+    }
+
+    // Verify user is a member of the hall
+    const memberDoc = await db
+      .collection("halls")
+      .doc(hallId)
+      .collection("members")
+      .doc(uid)
+      .get();
+
+    if (!memberDoc.exists || !memberDoc.data()?.isActive) {
+      throw new HttpsError("permission-denied", "You are not a member of this hall");
+    }
+
+    // Get reporter's info (unless anonymous)
+    const userDoc = await db.collection("users").doc(uid).get();
+    const userData = userDoc.data();
+    const reporterName = isAnonymous ? "Anonymous" : (userData?.displayName || "Resident");
+    const reporterRoom = isAnonymous ? null : (memberDoc.data()?.roomNumber || null);
+
+    // Find on-duty RA
+    let onDutyRaUid: string | null = null;
+    let onDutyRaName: string | null = null;
+
+    try {
+      const nowDate = new Date();
+      const nowTimestamp = admin.firestore.Timestamp.fromDate(nowDate);
+
+      const dutyShiftsSnapshot = await db
+        .collection("halls")
+        .doc(hallId)
+        .collection("duty_shifts")
+        .where("start", "<=", nowTimestamp)
+        .orderBy("start", "desc")
+        .limit(10)
+        .get();
+
+      // Find first active shift (in-memory filter for end > now)
+      for (const doc of dutyShiftsSnapshot.docs) {
+        const shiftData = doc.data();
+        const endTime = shiftData.end as admin.firestore.Timestamp | undefined;
+        if (endTime && endTime.toMillis() > nowTimestamp.toMillis()) {
+          onDutyRaUid = shiftData.userId || shiftData.odRAuid || null;
+          onDutyRaName = shiftData.displayName || shiftData.name || null;
+          break;
+        }
+      }
+    } catch (error) {
+      console.error("Error finding on-duty RA:", error);
+    }
+
+    // Create the concern
+    const now = admin.firestore.FieldValue.serverTimestamp();
+    const concernRef = db
+      .collection("halls")
+      .doc(hallId)
+      .collection("concerns")
+      .doc();
+
+    await concernRef.set({
+      category: category,
+      message: message.trim(),
+      location: location?.trim() || null,
+      residentUid: isAnonymous ? null : uid,
+      residentName: reporterName,
+      residentRoom: reporterRoom,
+      onDutyRAUid: onDutyRaUid,
+      onDutyRAName: onDutyRaName,
+      isAnonymous: isAnonymous || false,
+      status: "pending",
+      createdAt: now,
+      resolvedAt: null,
+      resolvedBy: null,
+      raNote: null,
+    });
+
+    console.log(`Concern ${concernRef.id} created by ${isAnonymous ? "anonymous" : uid} in hall ${hallId}`);
+
+    // Send push notification to on-duty RA (if available), otherwise all RAs in hall
+    try {
+      const fcmTokens: string[] = [];
+
+      if (onDutyRaUid) {
+        // Get on-duty RA's FCM token
+        const raDoc = await db.collection("users").doc(onDutyRaUid).get();
+        const fcmToken = raDoc.data()?.fcmToken;
+        if (fcmToken) {
+          fcmTokens.push(fcmToken);
+        }
+      }
+
+      // If no on-duty RA or no token, notify all RAs in the hall
+      if (fcmTokens.length === 0) {
+        const membersSnapshot = await db
+          .collection("halls")
+          .doc(hallId)
+          .collection("members")
+          .where("role", "==", "ra")
+          .where("isActive", "==", true)
+          .get();
+
+        for (const memberDoc of membersSnapshot.docs) {
+          const raUid = memberDoc.data().userId || memberDoc.id;
+          if (raUid) {
+            const raUserDoc = await db.collection("users").doc(raUid).get();
+            const fcmToken = raUserDoc.data()?.fcmToken;
+            if (fcmToken && !fcmTokens.includes(fcmToken)) {
+              fcmTokens.push(fcmToken);
+            }
+          }
+        }
+      }
+
+      if (fcmTokens.length > 0) {
+        // Format category for display
+        const categoryLabels: Record<string, string> = {
+          noise: "Noise",
+          maintenance: "Maintenance",
+          safety: "Safety",
+          roommate: "Roommate",
+          other: "General",
+        };
+        const categoryLabel = categoryLabels[category] || "General";
+
+        const notificationTitle = `New ${categoryLabel} Concern`;
+        const notificationBody = isAnonymous
+          ? `Anonymous report: ${message.trim().substring(0, 100)}${message.length > 100 ? "..." : ""}`
+          : `${reporterName}: ${message.trim().substring(0, 100)}${message.length > 100 ? "..." : ""}`;
+
+        // Send to all collected tokens
+        const sendPromises = fcmTokens.map((token) => {
+          const payload: admin.messaging.Message = {
+            token: token,
+            notification: {
+              title: notificationTitle,
+              body: notificationBody,
+            },
+            data: {
+              type: "concern",
+              concernId: concernRef.id,
+              hallId: hallId,
+              category: category,
+            },
+            apns: {
+              headers: {
+                "apns-priority": category === "safety" ? "10" : "5",
+                "apns-push-type": "alert",
+              },
+              payload: {
+                aps: {
+                  "alert": {
+                    title: notificationTitle,
+                    body: notificationBody,
+                  },
+                  "sound": "default",
+                  "badge": 1,
+                  "mutable-content": 1,
+                  "content-available": 1,
+                },
+              },
+            },
+            android: {
+              notification: {
+                sound: "default",
+                channelId: "concerns",
+                priority: category === "safety" ? "high" : "default",
+              },
+            },
+          };
+
+          return admin.messaging().send(payload).catch((err) => {
+            console.error(`Failed to send notification to token: ${err}`);
+            return null;
+          });
+        });
+
+        await Promise.all(sendPromises);
+        console.log(`Push notifications sent to ${fcmTokens.length} RA(s) for concern`);
+      } else {
+        console.log("No RA FCM tokens found for notification");
+      }
+    } catch (error) {
+      // Don't fail the concern if notification fails
+      console.error("Error sending notification to RA(s):", error);
+    }
+
+    return {
+      success: true,
+      concernId: concernRef.id,
+      message: "Concern submitted successfully",
     };
   }
 );

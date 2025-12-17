@@ -29,8 +29,32 @@
 
 #### `/halls/{hallId}/members/{userId}`
 - role: "ra" | "staff" | "resident"
-- room: string?
+- userId: string (Synced for Collection Group Queries)
+- roomNumber: string?
+- assignedRaEmail: string?
 - joinedAt: timestamp
+- isActive: boolean
+
+#### `/halls/{hallId}/profiles/{userId}` (Public Read)
+- displayName: string
+- role: "ra" | "staff" | "resident"
+- isHallDirector: boolean?
+- updatedAt: timestamp
+
+#### `/halls/{hallId}/roster/{email}` (Pending Roster)
+- email: string (ID)
+- firstName: string
+- lastName: string
+- roomNumber: string
+- floor: string
+- wing: string?
+- role: "resident" | "ra"
+- assignedRaEmail: string?
+- isClaimed: boolean
+- claimedByUid: string?
+- claimedAt: timestamp?
+- importedBy: string
+- importedAt: timestamp
 
 #### `/halls/{hallId}/residents/{residentId}`
 - name: string
@@ -169,3 +193,17 @@
 - **Errors**:
   - `unauthenticated`: User must be logged in.
   - `internal`: API configuration missing or upstream error.
+
+## 9. Management Functions
+
+#### `importRoster` (Callable)
+- **Input**:
+  - `hallId` (string)
+  - `data` (Apply[]): Array of roster entries.
+- **Output**:
+  - `success` (boolean)
+  - `count` (number)
+- **Permissions**: Staff or RA of the hall only.
+
+#### `joinHallWithCode` (Callable - Updated)
+- **Logic**: Now performs "Roster Claim". Checks `roster/{email}`. If found, marks claimed and copies `roomNumber` + `assignedRaEmail` to member record.

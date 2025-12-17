@@ -3,15 +3,22 @@
 import React, { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useDoc, DocEntry } from "@/hooks/useDocs";
-import { ArrowLeft, Save, Plus, Trash2, GripVertical } from "lucide-react";
+import { ArrowLeft, Save, Plus, Trash2, GripVertical, Eye, EyeOff } from "lucide-react";
 
 export default function HandbookDetailPage() {
     const { slug } = useParams() as { slug: string };
     const router = useRouter();
-    const { docMeta, entries, loading, updateEntry, addEntry, deleteEntry } = useDoc(slug);
+    const { docMeta, entries, loading, updateEntry, addEntry, deleteEntry, togglePublish } = useDoc(slug);
 
     const [isAddOpen, setIsAddOpen] = useState(false);
     const [newEntryData, setNewEntryData] = useState({ section: "General", text: "" });
+    const [publishing, setPublishing] = useState(false);
+
+    const handleTogglePublish = async () => {
+        setPublishing(true);
+        await togglePublish();
+        setPublishing(false);
+    };
 
     if (loading) {
         return (
@@ -41,23 +48,46 @@ export default function HandbookDetailPage() {
 
     return (
         <div className="max-w-5xl mx-auto pb-20">
-            <div className="flex items-center gap-4 mb-6">
-                <button
-                    onClick={() => router.back()}
-                    className="p-2 hover:bg-white/5 rounded-lg text-zinc-400 hover:text-white transition-colors"
-                >
-                    <ArrowLeft className="w-5 h-5" />
-                </button>
-                <div>
-                    <h1 className="text-2xl font-bold text-white">{docMeta.title}</h1>
-                    <div className="flex items-center gap-2 mt-1">
-                        <span className="text-sm text-zinc-500 uppercase tracking-wider">{docMeta.category}</span>
-                        <span className="w-1 h-1 bg-zinc-700 rounded-full" />
-                        <span className={`text-xs px-2 py-0.5 rounded-full ${docMeta.isPublished ? 'bg-emerald-500/10 text-emerald-400' : 'bg-yellow-500/10 text-yellow-400'}`}>
-                            {docMeta.isPublished ? "Published" : "Draft"}
-                        </span>
+            <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-4">
+                    <button
+                        onClick={() => router.back()}
+                        className="p-2 hover:bg-white/5 rounded-lg text-zinc-400 hover:text-white transition-colors"
+                    >
+                        <ArrowLeft className="w-5 h-5" />
+                    </button>
+                    <div>
+                        <h1 className="text-2xl font-bold text-white">{docMeta.title}</h1>
+                        <div className="flex items-center gap-2 mt-1">
+                            <span className="text-sm text-zinc-500 uppercase tracking-wider">{docMeta.category}</span>
+                            <span className="w-1 h-1 bg-zinc-700 rounded-full" />
+                            <span className={`text-xs px-2 py-0.5 rounded-full ${docMeta.isPublished ? 'bg-emerald-500/10 text-emerald-400' : 'bg-yellow-500/10 text-yellow-400'}`}>
+                                {docMeta.isPublished ? "Published" : "Draft"}
+                            </span>
+                        </div>
                     </div>
                 </div>
+                <button
+                    onClick={handleTogglePublish}
+                    disabled={publishing}
+                    className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
+                        docMeta.isPublished
+                            ? 'bg-yellow-500/10 text-yellow-400 hover:bg-yellow-500/20'
+                            : 'bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20'
+                    } disabled:opacity-50`}
+                >
+                    {docMeta.isPublished ? (
+                        <>
+                            <EyeOff className="w-4 h-4" />
+                            {publishing ? "Unpublishing..." : "Unpublish"}
+                        </>
+                    ) : (
+                        <>
+                            <Eye className="w-4 h-4" />
+                            {publishing ? "Publishing..." : "Publish"}
+                        </>
+                    )}
+                </button>
             </div>
 
             <div className="space-y-6">

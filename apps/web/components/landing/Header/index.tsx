@@ -8,10 +8,9 @@ import { MobileMenuButton } from "@/components/landing/Header/MobileMenuButton"
 import { MobileNav } from "@/components/landing/Header/MobileNav"
 
 const tabs = [
+  { name: "Dashboard", href: "/dashboard" },
   { name: "Features", id: "features" },
-  { name: "How it Works", id: "how-it-works" },
   { name: "Use Cases", id: "use-cases" },
-  { name: "Pricing", id: "pricing" },
   { name: "FAQ", id: "faq" },
 ]
 
@@ -79,9 +78,7 @@ export function Header() {
 
           {/* Logo Section */}
           <div className="md:pl-4 md:pr-1">
-            <div className="scale-90 origin-left">
-              <Logo />
-            </div>
+            <Logo />
           </div>
 
           {/* Divider (Desktop Only) */}
@@ -91,7 +88,7 @@ export function Header() {
           <nav className="relative hidden md:flex items-center">
             {/* Hover Background */}
             <div
-              className="absolute h-[28px] transition-all duration-300 ease-out bg-black/5 dark:bg-white/10 rounded-lg flex items-center"
+              className="absolute h-[34px] transition-all duration-300 ease-out bg-black/5 dark:bg-white/10 rounded-lg flex items-center"
               style={{
                 ...hoverStyle,
                 opacity: hoveredIndex !== null ? 1 : 0,
@@ -109,23 +106,25 @@ export function Header() {
             />
 
             {tabs.map((tab, index) => (
-              <a
+              <Link
                 key={tab.name}
-                ref={(el) => { tabRefs.current[index] = el }}
+                ref={(el) => { tabRefs.current[index] = el as any }}
                 className={`
-                  relative px-3 py-0.5 cursor-pointer text-xs font-medium transition-colors duration-300 select-none
+                  relative px-4 py-1.5 cursor-pointer text-sm font-medium transition-colors duration-300 select-none
                   ${index === activeIndex ? "text-black dark:text-white" : "text-black/60 dark:text-white/60 hover:text-black/80 dark:hover:text-white/80"}
                 `}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
                 onClick={(e) => {
-                  e.preventDefault()
-                  handleTabClick(index, tab.id)
+                  if (tab.id) {
+                    e.preventDefault()
+                    handleTabClick(index, tab.id)
+                  }
                 }}
-                href={`#${tab.id}`}
+                href={tab.href || `#${tab.id}`}
               >
                 {tab.name}
-              </a>
+              </Link>
             ))}
           </nav>
 

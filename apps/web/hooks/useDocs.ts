@@ -39,7 +39,14 @@ export function useDocs() {
         });
     };
 
-    return { docs, loading, createDoc };
+    const updateDocMeta = async (docId: string, data: Partial<DocMeta>) => {
+        await setDoc(doc(db, "docs", docId), {
+            ...data,
+            updatedAt: new Date()
+        }, { merge: true });
+    };
+
+    return { docs, loading, createDoc, updateDocMeta };
 }
 
 export interface DocEntry {
@@ -110,5 +117,13 @@ export function useDoc(slug: string) {
         await deleteDoc(doc(db, "docs", slug, "entries", entryId));
     };
 
-    return { docMeta, entries, loading, updateEntry, addEntry, deleteEntry };
+    const togglePublish = async () => {
+        if (!docMeta) return;
+        await setDoc(doc(db, "docs", slug), {
+            isPublished: !docMeta.isPublished,
+            updatedAt: new Date()
+        }, { merge: true });
+    };
+
+    return { docMeta, entries, loading, updateEntry, addEntry, deleteEntry, togglePublish };
 }

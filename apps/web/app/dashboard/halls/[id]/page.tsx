@@ -5,9 +5,10 @@ import { useParams, useRouter } from "next/navigation";
 import { useRoster, Resident } from "@/hooks/useRoster";
 import { useHallStaff, HallStaff } from "@/hooks/useHallStaff";
 import { useHalls, Hall } from "@/hooks/useHalls";
-import { ArrowLeft, User, Plus, Trash2, Edit2, Shield, Users, Settings, X, Upload, UserPlus, MoreVertical } from "lucide-react";
+import { ArrowLeft, User, Plus, Trash2, Edit2, Shield, Users, Settings, X, Upload, UserPlus, MoreVertical, ClipboardCheck } from "lucide-react";
 import { collection, query, where, getDocs, writeBatch, doc } from "firebase/firestore"; // Import direclty for batch ops
 import { db } from "@/lib/firebase";
+import { DeclareRosterModal } from "@/components/dashboard/DeclareRosterModal";
 
 export default function HallDetailsPage() {
     const params = useParams();
@@ -15,16 +16,19 @@ export default function HallDetailsPage() {
     const hallId = params.id as string;
 
     // Data Hooks
-    const { residents, loading: residentsLoading, addResident, updateResident, deleteResident, addResidentsBulk, deleteAllResidents } = useRoster(hallId);
-    const { staff, loading: staffLoading, addStaff, removeStaff, addStaffBulk, deleteAllStaff } = useHallStaff(hallId);
+    const { residents, loading: residentsLoading, addResident, updateResident, deleteResident } = useRoster(hallId);
+    const { staff, loading: staffLoading } = useHallStaff(hallId);
 
     // Hall Config Hook
     const { halls, updateHall } = useHalls();
     const currentHall = halls.find((h: Hall) => h.id === hallId);
 
+    // Modals
+
     // View State
     const [activeFloor, setActiveFloor] = useState<number>(1);
     const [activeWing, setActiveWing] = useState<string | null>(null); // Null means default view (if no wings) or first wing
+    const [isDeclareModalOpen, setIsDeclareModalOpen] = useState(false);
 
     // Resident Modal State
     const [isResidentModalOpen, setIsResidentModalOpen] = useState(false);
@@ -75,9 +79,10 @@ export default function HallDetailsPage() {
     }, [hasWings, wings, activeWing]);
 
     // Derived Roster View
-    const filteredResidents = residents.filter(r =>
-        r.floor == activeFloor && (activeWing ? r.wing === activeWing : true)
-    );
+    const filteredResidents = residents
+        .filter(r => r.floor == activeFloor && (activeWing ? r.wing === activeWing : true))
+        .sort((a, b) => a.roomNumber.localeCompare(b.roomNumber, undefined, { numeric: true }));
+
     const filteredRAs = staff.filter(s =>
         s.floor == activeFloor && s.role === 'ra' && (activeWing ? (s as any).wing === activeWing : true)
     );
@@ -90,73 +95,7 @@ export default function HallDetailsPage() {
     // --- Actions ---
 
     const handleImportClick = () => {
-        fileInputRef.current?.click();
-
-    };
-
-    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (!file) return;
-
-        setIsImporting(true);
-        try {
-            const XLSX = await import("xlsx");
-            const reader = new FileReader();
-
-            reader.onload = async (evt) => {
-                try {
-                    const bstr = evt.target?.result;
-                    const wb = XLSX.read(bstr, { type: 'binary' });
-                    const wsname = wb.SheetNames[0];
-                    const ws = wb.Sheets[wsname];
-                    const data = XLSX.utils.sheet_to_json(ws);
-
-                    // Import Logic
-                    const residentsToImport = data.map((row: any) => {
-                        const email = row['UST Email'] || row['Email'] || row['email'] || '';
-                        const firstName = row['First Name'] || row['firstName'] || '';
-                        const lastName = row['Last Name'] || row['lastName'] || '';
-                        const room = String(row['Bed Space'] || row['Room'] || row['roomNumber'] || '');
-
-                        // Floor inference
-                        let floor = Number(row['Floor'] || row['floor']);
-                        if (!floor && room) {
-                            const numericPart = room.replace(/\D/g, '');
-                            if (numericPart.length === 3) floor = Number(numericPart[0]);
-                            else if (numericPart.length === 4) floor = Number(numericPart.substring(0, 2));
-                        }
-
-                        return {
-                            firstName,
-                            lastName,
-                            email,
-                            roomNumber: room,
-                            floor: floor || 1,
-                            status: 'active',
-                            wing: activeWing || undefined
-                        };
-                    }).filter((r: any) => r.email && r.firstName);
-
-                    if (residentsToImport.length > 0) {
-                        await addResidentsBulk(residentsToImport as any);
-                        alert(`Successfully imported ${residentsToImport.length} residents${activeWing ? ` to ${activeWing}` : ''}.`);
-                    } else {
-                        alert("No valid residents found in file.");
-                    }
-
-                } catch (err: any) {
-                    console.error(err);
-                    alert("Import failed: " + err.message);
-                } finally {
-                    setIsImporting(false);
-                    if (fileInputRef.current) fileInputRef.current.value = '';
-                }
-            };
-            reader.readAsBinaryString(file);
-        } catch (err) {
-            console.error(err);
-            setIsImporting(false);
-        }
+        alert("Please use the 'Declare Roster' button to import roster data.");
     };
 
     const handleAddWing = async () => {
@@ -257,15 +196,8 @@ export default function HallDetailsPage() {
 
     const handleStaffSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setIsSubmitting(true);
-        try {
-            await addStaff(staffForm.email, staffForm.role, activeFloor, activeWing || undefined);
-            closeStaffModal();
-        } catch (err) {
-            console.error(err); alert("Failed");
-        } finally {
-            setIsSubmitting(false);
-        }
+        alert("Please use 'Declare Roster' to manage Staff/RAs.");
+        closeStaffModal();
     };
 
     // --- Modals ---
@@ -290,7 +222,7 @@ export default function HallDetailsPage() {
 
     return (
         <div className="max-w-7xl mx-auto pb-20">
-            <input type="file" ref={fileInputRef} className="hidden" accept=".xlsx,.xls,.csv" onChange={handleFileChange} />
+            {/* File Input Removed - Use Declare Roster */}
 
             {/* Header */}
             <div className="flex items-center justify-between mb-8">
@@ -311,12 +243,13 @@ export default function HallDetailsPage() {
                     >
                         <Upload className="w-4 h-4" /> Import
                     </button>
-                    <button
+                    {/* Add RA button disabled */}
+                    {/* <button
                         onClick={openAddRAModal}
                         className="flex items-center gap-2 px-3 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-sm font-medium transition-colors"
                     >
                         <UserPlus className="w-4 h-4" /> Add RA
-                    </button>
+                    </button> */}
                     <button
                         onClick={() => {
                             if (!hasWings) handleAddWing();
@@ -326,6 +259,12 @@ export default function HallDetailsPage() {
                         className="flex items-center gap-2 px-3 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg text-sm font-medium transition-colors border border-white/10"
                     >
                         <Settings className="w-4 h-4" /> {hasWings ? 'Edit Wings' : 'Add Wings'}
+                    </button>
+                    <button
+                        onClick={() => setIsDeclareModalOpen(true)}
+                        className="flex items-center gap-2 px-3 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg text-sm font-medium transition-colors border border-white/10"
+                    >
+                        <ClipboardCheck className="w-4 h-4" /> Declare Roster
                     </button>
                 </div>
             </div>
@@ -384,22 +323,17 @@ export default function HallDetailsPage() {
                             {activeWing && <span className="text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded text-sm ml-1">{activeWing}</span>}
                         </h3>
 
-                        {/* De-cluttered actions */}
+                        {/* Clear Roster disabled as it requires bulk delete which is now server-side managed */}{/*
                         {viewRoster.length > 0 && (
                             <button
-                                onClick={async () => {
-                                    if (confirm(`Delete ALL residents in this view?`)) {
-                                        setIsImporting(true);
-                                        for (const r of filteredResidents) await deleteResident(r.id);
-                                        setIsImporting(false);
-                                    }
+                                onClick={() => {
+                                   alert("Use Declare Roster to reset roster.");
                                 }}
-                                disabled={isImporting}
                                 className="text-red-500 hover:text-red-400 text-xs font-medium px-2 py-1 hover:bg-red-500/10 rounded transition-colors"
                             >
                                 Clear Roster
                             </button>
-                        )}
+                        )} */}
                     </div>
 
                     <div className="overflow-x-auto">
@@ -417,7 +351,9 @@ export default function HallDetailsPage() {
                                         <td className="px-6 py-3">
                                             <div>
                                                 <div className="flex items-center gap-2">
-                                                    <p className="text-sm font-medium text-white">{item.firstName === 'Invited' ? 'Invited RA' : item.firstName} {item.lastName !== 'User' ? item.lastName : ''}</p>
+                                                    <p className="text-sm font-medium text-white">
+                                                        {item.firstName || 'Unknown'} {item.lastName || ''}
+                                                    </p>
                                                     {item.type === 'ra' && <span className="text-[10px] uppercase bg-purple-500 text-white px-1.5 rounded-sm">RA</span>}
                                                 </div>
                                                 <p className="text-xs text-zinc-500 truncate max-w-[200px]">{item.email}</p>
@@ -431,7 +367,11 @@ export default function HallDetailsPage() {
                                                         <Trash2 className="w-3 h-3" />
                                                     </button>
                                                 ) : (
-                                                    <button onClick={() => confirm("Remove RA?") && removeStaff(item.id)} className="p-1 hover:bg-red-500/10 rounded text-zinc-500 hover:text-red-400">
+                                                    // The "Add Staff Member" button was not present in the original code at this location.
+                                                    // The instruction also asks to remove "row deletion button" for staff, which is this one:
+                                                    // The "Add Staff Member" button was not present in the original code at this location.
+                                                    // The instruction also asks to remove "row deletion button" for staff, which is this one:
+                                                    <button onClick={() => alert("Please manage RAs via Declare Roster.") /* confirm("Remove RA?") && removeStaff(item.id) */} className="p-1 hover:bg-red-500/10 rounded text-zinc-500 hover:text-red-400 opacity-50 cursor-not-allowed">
                                                         <Trash2 className="w-3 h-3" />
                                                     </button>
                                                 )}
@@ -502,6 +442,12 @@ export default function HallDetailsPage() {
                     </div>
                 </div>
             )}
+            {/* Declare Roster Modal */}
+            <DeclareRosterModal
+                isOpen={isDeclareModalOpen}
+                onClose={() => setIsDeclareModalOpen(false)}
+                hallId={hallId}
+            />
         </div>
     );
 }

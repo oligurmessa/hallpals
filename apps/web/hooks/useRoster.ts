@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
-import { collection, query, orderBy, onSnapshot, doc, setDoc, deleteDoc, updateDoc, writeBatch } from "firebase/firestore";
+import { collection, query, orderBy, onSnapshot, doc, setDoc, deleteDoc, updateDoc, where } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
 export interface Resident {
-    id: string;
+    id: string; // This is the email (doc ID)
     firstName: string;
     lastName: string;
-    email: string; // For searching
+    email: string;
     roomNumber: string;
     floor: number;
-    wing?: string; // Optional wing assignment
+    wing?: string;
     hallId: string;
     status: 'active' | 'inactive';
     createdAt?: any;
@@ -26,12 +26,37 @@ export function useRoster(hallId: string | null) {
             return;
         }
 
-        const q = query(collection(db, "halls", hallId, "residents"), orderBy("roomNumber"));
+        const q = query(
+            collection(db, "halls", hallId, "roster"),
+            where("role", "==", "resident")
+        );
+
         const unsubscribe = onSnapshot(q, (snapshot) => {
-            const data = snapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-            })) as Resident[];
+            const data = snapshot.docs.map((doc) => {
+                const d = doc.data();
+                return {
+                    id: doc.id,
+                    ...d,
+                    hallId,
+                    // Ensure required fields exist
+                    firstName: d.firstName || "",
+                    lastName: d.lastName || "",
+                    email: d.email || doc.id,
+                    roomNumber: d.roomNumber || "",
+                    floor: d.floor || 1,
+                    status: d.status || 'active'
+                };
+            }) as Resident[];
+
+            // Sort by room number locally since Firestore query checks equality on role first
+            data.sort((a, b) => {
+                // Try numeric sort for room numbers if possible
+                const rA = parseInt(a.roomNumber) || 0;
+                const rB = parseInt(b.roomNumber) || 0;
+                if (rA !== rB) return rA - rB;
+                return a.roomNumber.localeCompare(b.roomNumber);
+            });
+
             setResidents(data);
             setLoading(false);
         });
@@ -40,10 +65,12 @@ export function useRoster(hallId: string | null) {
     }, [hallId]);
 
     const addResident = async (data: Omit<Resident, "id" | "hallId">) => {
-        if (!hallId) return;
-        const newRef = doc(collection(db, "halls", hallId, "residents"));
+        if (!hallId || !data.email) return;
+        const emailLower = data.email.toLowerCase();
+        const newRef = doc(db, "halls", hallId, "roster", emailLower);
         await setDoc(newRef, {
             ...data,
+            role: 'resident',
             hallId,
             createdAt: new Date(),
             updatedAt: new Date()
@@ -52,7 +79,8 @@ export function useRoster(hallId: string | null) {
 
     const updateResident = async (id: string, data: Partial<Resident>) => {
         if (!hallId) return;
-        await updateDoc(doc(db, "halls", hallId, "residents", id), {
+        // id is email
+        await updateDoc(doc(db, "halls", hallId, "roster", id), {
             ...data,
             updatedAt: new Date()
         });
@@ -60,58 +88,8 @@ export function useRoster(hallId: string | null) {
 
     const deleteResident = async (id: string) => {
         if (!hallId) return;
-        await deleteDoc(doc(db, "halls", hallId, "residents", id));
+        await deleteDoc(doc(db, "halls", hallId, "roster", id));
     }
 
-    const addResidentsBulk = async (residentsData: Omit<Resident, "id" | "hallId">[]) => {
-        if (!hallId) return;
-
-        // Firestore batch limit is 500. We'll handle chunks of 450 to be safe.
-        const chunkSize = 450;
-
-        for (let i = 0; i < residentsData.length; i += chunkSize) {
-            const chunk = residentsData.slice(i, i + chunkSize);
-            const batch = writeBatch(db);
-
-            chunk.forEach(data => {
-                const ref = doc(collection(db, "halls", hallId, "residents"));
-                batch.set(ref, {
-                    ...data,
-                    hallId,
-                    wing: data.wing || null,
-                    createdAt: new Date()
-                });
-            });
-            await batch.commit();
-        }
-    };
-
-    const deleteAllResidents = async () => {
-        if (!hallId) return;
-        // Client-side delete all: Query all docs, then batch delete.
-        // Warning: Reads all docs.
-        const q = query(collection(db, "halls", hallId, "residents"));
-        // snapshot is already live in state, but let's query fresh to just get IDs or use state?
-        // Using state 'residents' is cheaper but we need to trust it's synced.
-        // Safer to use the snapshot from the hook's state if we trust it, or fetch fresh.
-        // Let's iterate over `residents` state since we have it.
-
-        const { writeBatch } = await import("firebase/firestore");
-        const chunkSize = 450;
-        const chunks = [];
-
-        for (let i = 0; i < residents.length; i += chunkSize) {
-            chunks.push(residents.slice(i, i + chunkSize));
-        }
-
-        for (const chunk of chunks) {
-            const batch = writeBatch(db);
-            chunk.forEach(r => {
-                batch.delete(doc(db, "halls", hallId, "residents", r.id));
-            });
-            await batch.commit();
-        }
-    }
-
-    return { residents, loading, addResident, updateResident, deleteResident, addResidentsBulk, deleteAllResidents };
+    return { residents, loading, addResident, updateResident, deleteResident };
 }

@@ -9,21 +9,21 @@ import { Input } from "@/components/ui/input";
 
 const footerLinks = [
   {
-    title: "Features",
+    title: "Product",
     links: [
-      { name: "Moment Capture", href: "#features" },
-      { name: "AI Insights", href: "#features" },
-      { name: "Memory Search", href: "#features" },
+      { name: "Features", href: "/#features" },
+      { name: "Use Cases", href: "/#use-cases" },
+      { name: "Request Demo", href: "/demo" },
+      { name: "Download App", href: "/download" },
     ],
   },
   {
     title: "Company",
     links: [
-      { name: "About", href: "#" },
-      { name: "Privacy", href: "#" },
-      { name: "Terms", href: "#" },
-      { name: "Contact", href: "#" },
-      { name: "415-375-0564", href: "tel:4153750564" },
+      { name: "About", href: "/demo" },
+      { name: "Privacy", href: "/privacy" },
+      { name: "Terms", href: "/terms" },
+      { name: "Contact", href: "/demo" },
     ],
   },
 ];
@@ -46,14 +46,14 @@ export default function Footer() {
               {/* Brand Section */}
               <div className="space-y-3 lg:col-span-2">
                 <Link
-                  className="inline-block font-semibold text-2xl text-black/80 tracking-tighter transition-opacity hover:opacity-80 dark:text-white/80"
+                  className="flex items-center gap-1.5 font-semibold text-2xl text-black/80 tracking-tighter transition-opacity hover:opacity-80 dark:text-white/80"
                   href="/"
                 >
-                  <div className="inline-block mr-2 relative h-14 w-14 align-middle translate-y-1">
+                  <div className="relative h-10 w-10">
                     <Image src="/light_logo.png" alt="HallPals Logo" fill className="object-contain dark:hidden" />
                     <Image src="/dark_logo.png" alt="HallPals Logo" fill className="object-contain hidden dark:block" />
                   </div>
-                  <span className="font-bold text-2xl text-black tracking-tighter transition-colors dark:text-white">
+                  <span className="font-bold text-2xl text-black tracking-tighter transition-colors dark:text-white translate-y-[2px]">
                     HallPals
                   </span>
                 </Link>
@@ -123,11 +123,10 @@ export default function Footer() {
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 <div className="space-y-2">
                   <h3 className="font-medium text-black/80 text-sm tracking-tighter dark:text-white/80">
-                    Start your growth journey
+                    Join the HallPals Community
                   </h3>
                   <p className="text-black/60 text-xs tracking-tighter dark:text-white/60">
-                    Get insights on personal development, AI-powered growth,
-                    and the latest HallPals features delivered to your inbox.
+                    Stay updated with HallPals features and Residence Life operational tips.
                   </p>
                 </div>
                 <form className="space-y-2" onSubmit={handleEmailSubmit}>

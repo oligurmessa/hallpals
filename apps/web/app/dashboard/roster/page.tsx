@@ -5,13 +5,15 @@ import { useAuth } from "@/context/AuthContext";
 import { useSchedule, DutySchedule } from "@/hooks/useSchedule";
 import { useHallStaff } from "@/hooks/useHallStaff";
 import { useHalls } from "@/hooks/useHalls";
-import { ChevronLeft, ChevronRight, Plus, Upload, Warehouse } from "lucide-react";
+import { ChevronLeft, ChevronRight, Plus, Upload, Warehouse, LayoutGrid, List, Edit2 } from "lucide-react";
 import * as XLSX from "xlsx";
 
 // Minimal date utils without date-fns
 const getDaysInMonth = (year: number, month: number) => new Date(year, month + 1, 0).getDate();
 const getFirstDayOfMonth = (year: number, month: number) => new Date(year, month, 1).getDay(); // 0 = Sun
 const formatDate = (d: Date) => d.toISOString().split('T')[0];
+
+import { DeclareScheduleModal } from "@/components/dashboard/DeclareScheduleModal";
 
 export default function SchedulePage() {
     const { profile } = useAuth();
@@ -30,13 +32,14 @@ export default function SchedulePage() {
         }
     }, [profile, halls, selectedHallId]);
 
-    const { schedule, loading: scheduleLoading, addDuty, deleteDuty, importSchedule } = useSchedule(selectedHallId);
+    const { schedule, loading: scheduleLoading, addDuty, deleteDuty } = useSchedule(selectedHallId);
     const { staff, loading: staffLoading } = useHallStaff(selectedHallId);
 
     const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState<string | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [importing, setImporting] = useState(false);
+    const [isDeclareModalOpen, setIsDeclareModalOpen] = useState(false);
+    const [viewMode, setViewMode] = useState<'calendar' | 'list'>('calendar');
 
     // Modal Form State
     const [formData, setFormData] = useState({
@@ -84,7 +87,7 @@ export default function SchedulePage() {
     const openAddModal = (dateStr: string) => {
         const existing = schedule.find(s => s.id === dateStr);
         setFormData({
-            primaryId: existing?.primaryRa.id || "",
+            primaryId: existing?.primaryRa?.id || "",
             secondaryId: existing?.secondaryRa?.id || "",
             notes: existing?.notes || ""
         });
@@ -121,91 +124,7 @@ export default function SchedulePage() {
         }
     };
 
-    const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (!file) return;
-
-        setImporting(true);
-        try {
-            const buffer = await file.arrayBuffer();
-            const wb = XLSX.read(buffer, { type: 'array' });
-            const wsName = wb.SheetNames[0];
-            const ws = wb.Sheets[wsName];
-            const data: any[] = XLSX.utils.sheet_to_json(ws);
-
-            const dutiesToImport: DutySchedule[] = [];
-
-            for (const row of data) {
-                // Try to parse Date. Excel often gives Number or String.
-                // Expected Columns: "Date", "Primary", "Secondary"
-                let dateStr = "";
-                if (row['Date']) {
-                    // Very basic date parsing. 
-                    // If string "1/1/2024", normalize.
-                    // If number (Excel serial), convert.
-                    const d = new Date(row['Date']);
-                    if (!isNaN(d.getTime())) {
-                        dateStr = formatDate(d);
-                    }
-                }
-
-                if (!dateStr) continue;
-
-                // Match RAs
-                // We'll search by Name (First/Last) or Email
-                const primaryName = row['Primary'] || "";
-                const secondaryName = row['Secondary'] || "";
-
-                const findRa = (query: string) => {
-                    if (!query) return null;
-                    const q = query.toLowerCase().trim();
-                    return staff.find(s =>
-                        s.email.toLowerCase() === q ||
-                        ((s.firstName || "") + " " + (s.lastName || "")).toLowerCase().includes(q)
-                    );
-                };
-
-                const primary = findRa(primaryName);
-                const secondary = findRa(secondaryName);
-
-                if (primary) {
-                    dutiesToImport.push({
-                        id: dateStr,
-                        date: null, // Hook handles Timestamp conv
-                        primaryRa: {
-                            id: primary.id,
-                            name: (primary.firstName || "") + " " + (primary.lastName || ""),
-                            email: primary.email
-                        },
-                        secondaryRa: secondary ? {
-                            id: secondary.id,
-                            name: (secondary.firstName || "") + " " + (secondary.lastName || ""),
-                            email: secondary.email
-                        } : undefined,
-                        notes: row['Notes'] || ""
-                    } as any);
-                }
-            }
-
-            if (dutiesToImport.length > 0) {
-                await importSchedule(dutiesToImport);
-                alert(`Successfully imported ${dutiesToImport.length} duty slots.`);
-            } else {
-                alert("No valid duties found. Check your column names: 'Date', 'Primary', 'Secondary'.");
-            }
-
-        } catch (err) {
-            console.error("Import failed:", err);
-            alert("Failed to import. See console.");
-        } finally {
-            setImporting(false);
-            e.target.value = "";
-        }
-    };
-
     if (!profile) return <div className="p-10 text-zinc-500">Loading profile...</div>;
-    // We allow selectedHallId to be null initially while loading halls, but if halls loaded and still null, we show select message?
-    // Actually the effect should set it if profile has hall or halls has length.
 
     const monthName = currentDate.toLocaleString('default', { month: 'long', year: 'numeric' });
 
@@ -238,11 +157,14 @@ export default function SchedulePage() {
                 </div>
 
                 <div className="flex gap-3 items-end">
-                    <label className={`flex items-center gap-2 px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-xl text-sm font-medium transition-colors cursor-pointer ${importing ? "opacity-50 pointer-events-none" : ""}`}>
+                    <button
+                        onClick={() => setIsDeclareModalOpen(true)}
+                        className="flex items-center gap-2 px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-xl text-sm font-medium transition-colors border border-white/10"
+                    >
                         <Upload className="w-4 h-4" />
-                        {importing ? "Importing..." : "Excel Import"}
-                        <input type="file" accept=".xlsx, .xls, .csv" className="hidden" onChange={handleFileUpload} />
-                    </label>
+                        Declare Schedule
+                    </button>
+
                     <div className="flex items-center gap-2 bg-zinc-900 border border-white/10 rounded-xl p-1">
                         <button onClick={handlePrevMonth} className="p-2 hover:bg-white/10 rounded-lg text-zinc-400 hover:text-white transition-colors">
                             <ChevronLeft className="w-4 h-4" />
@@ -257,70 +179,162 @@ export default function SchedulePage() {
                 </div>
             </div>
 
-            {/* Calendar Grid */}
-            <div className="flex-1 bg-zinc-900 border border-white/10 rounded-2xl overflow-hidden flex flex-col shadow-2xl">
-                {/* Days Header */}
-                <div className="grid grid-cols-7 border-b border-white/10 bg-zinc-950/50">
-                    {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-                        <div key={day} className="py-3 text-center text-xs font-semibold text-zinc-500 uppercase tracking-wider">
-                            {day}
-                        </div>
-                    ))}
-                </div>
-
-                {/* Days Cells */}
-                <div className="flex-1 grid grid-cols-7 grid-rows-6">
-                    {scheduleLoading ? (
-                        <div className="col-span-7 row-span-6 flex items-center justify-center">
-                            <div className="w-8 h-8 border-4 border-purple-500 border-t-transparent rounded-full animate-spin" />
-                        </div>
-                    ) : calendarGrid.map((cell, idx) => {
-                        const dateStr = formatDate(cell.date);
-                        const duty = getDutyForDate(cell.date);
-                        const isToday = dateStr === formatDate(new Date());
-
-                        return (
-                            <div
-                                key={`${dateStr}-${idx}`}
-                                onClick={() => openAddModal(dateStr)}
-                                className={`
-                                    border-b border-r border-white/5 p-2 relative group cursor-pointer hover:bg-white/5 transition-colors
-                                    ${!cell.isCurrentMonth ? 'bg-zinc-950/30 text-zinc-700' : 'text-zinc-300'}
-                                    ${isToday ? 'bg-purple-500/5' : ''}
-                                `}
-                            >
-                                <span className={`
-                                    text-xs font-medium w-6 h-6 flex items-center justify-center rounded-full mb-1
-                                    ${isToday ? 'bg-purple-600 text-white' : ''}
-                                `}>
-                                    {cell.date.getDate()}
-                                </span>
-
-                                {duty && (
-                                    <div className="space-y-1">
-                                        <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-purple-500/10 border border-purple-500/20">
-                                            <div className="w-1.5 h-1.5 rounded-full bg-purple-500" />
-                                            <span className="text-xs font-medium text-purple-200 truncate">{duty.primaryRa.name}</span>
-                                        </div>
-                                        {duty.secondaryRa && (
-                                            <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-indigo-500/10 border border-indigo-500/20">
-                                                <div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
-                                                <span className="text-xs font-medium text-indigo-200 truncate">{duty.secondaryRa.name}</span>
-                                            </div>
-                                        )}
-                                    </div>
-                                )}
-
-                                {!duty && cell.isCurrentMonth && (
-                                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 pointer-events-none">
-                                        <Plus className="w-4 h-4 text-zinc-500" />
-                                    </div>
-                                )}
-                            </div>
-                        );
-                    })}
-                </div>
+            {/* View Toggle */}
+            <div className="flex bg-zinc-900 border border-white/10 p-1 rounded-xl mb-4 self-end">
+                <button
+                    onClick={() => setViewMode('calendar')}
+                    className={`p-2 rounded-lg transition-colors ${viewMode === 'calendar' ? 'bg-zinc-800 text-white shadow-sm' : 'text-zinc-400 hover:text-white'}`}
+                    title="Calendar View"
+                >
+                    <LayoutGrid className="w-4 h-4" />
+                </button>
+                <button
+                    onClick={() => setViewMode('list')}
+                    className={`p-2 rounded-lg transition-colors ${viewMode === 'list' ? 'bg-zinc-800 text-white shadow-sm' : 'text-zinc-400 hover:text-white'}`}
+                    title="List View"
+                >
+                    <List className="w-4 h-4" />
+                </button>
             </div>
+
+            {/* Content Area */}
+            {viewMode === 'calendar' ? (
+                /* Calendar Grid */
+                <div className="flex-1 bg-zinc-900 border border-white/10 rounded-2xl overflow-hidden flex flex-col shadow-2xl">
+                    {/* Days Header */}
+                    <div className="grid grid-cols-7 border-b border-white/10 bg-zinc-950/50">
+                        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+                            <div key={day} className="py-3 text-center text-xs font-semibold text-zinc-500 uppercase tracking-wider">
+                                {day}
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Days Cells */}
+                    <div className="flex-1 grid grid-cols-7 grid-rows-6">
+                        {scheduleLoading ? (
+                            <div className="col-span-7 row-span-6 flex items-center justify-center">
+                                <div className="w-8 h-8 border-4 border-purple-500 border-t-transparent rounded-full animate-spin" />
+                            </div>
+                        ) : calendarGrid.map((cell, idx) => {
+                            const dateStr = formatDate(cell.date);
+                            const duty = getDutyForDate(cell.date);
+                            const isToday = dateStr === formatDate(new Date());
+
+                            return (
+                                <div
+                                    key={`${dateStr}-${idx}`}
+                                    onClick={() => openAddModal(dateStr)}
+                                    className={`
+                                        border-b border-r border-white/5 p-2 relative group cursor-pointer hover:bg-white/5 transition-colors
+                                        ${!cell.isCurrentMonth ? 'bg-zinc-950/30 text-zinc-700' : 'text-zinc-300'}
+                                        ${isToday ? 'bg-purple-500/5' : ''}
+                                    `}
+                                >
+                                    <span className={`
+                                        text-xs font-medium w-6 h-6 flex items-center justify-center rounded-full mb-1
+                                        ${isToday ? 'bg-purple-600 text-white' : ''}
+                                    `}>
+                                        {cell.date.getDate()}
+                                    </span>
+
+                                    {duty && (
+                                        <div className="space-y-1">
+                                            <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-purple-500/10 border border-purple-500/20">
+                                                <div className="w-1.5 h-1.5 rounded-full bg-purple-500" />
+                                                <span className="text-xs font-medium text-purple-200 truncate">{duty.primaryRa?.name || 'RA'}</span>
+                                            </div>
+                                            {duty.secondaryRa && (
+                                                <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-indigo-500/10 border border-indigo-500/20">
+                                                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
+                                                    <span className="text-xs font-medium text-indigo-200 truncate">{duty.secondaryRa.name}</span>
+                                                </div>
+                                            )}
+                                        </div>
+                                    )}
+
+                                    {!duty && cell.isCurrentMonth && (
+                                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 pointer-events-none">
+                                            <Plus className="w-4 h-4 text-zinc-500" />
+                                        </div>
+                                    )}
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            ) : (
+                /* List View */
+                <div className="flex-1 bg-zinc-900 border border-white/10 rounded-2xl overflow-hidden flex flex-col shadow-2xl overflow-y-auto">
+                    <div className="overflow-x-auto">
+                        <table className="w-full text-left font-sans">
+                            <thead className="bg-zinc-950/50 text-zinc-500 text-xs uppercase tracking-wider font-semibold sticky top-0 backdrop-blur-sm z-10 border-b border-white/10">
+                                <tr>
+                                    <th className="px-6 py-4">Date</th>
+                                    <th className="px-6 py-4">Primary RA</th>
+                                    <th className="px-6 py-4">Secondary RA</th>
+                                    <th className="px-6 py-4 w-1/3">Notes</th>
+                                    <th className="px-6 py-4"></th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-white/5">
+                                {currentMonthDays.map((cell) => {
+                                    const dateStr = formatDate(cell.date);
+                                    const duty = getDutyForDate(cell.date);
+                                    const isToday = dateStr === formatDate(new Date());
+
+                                    return (
+                                        <tr
+                                            key={dateStr}
+                                            onClick={() => openAddModal(dateStr)}
+                                            className={`
+                                                group cursor-pointer hover:bg-white/5 transition-colors
+                                                ${isToday ? 'bg-purple-500/5' : ''}
+                                            `}
+                                        >
+                                            <td className="px-6 py-4 whitespace-nowrap">
+                                                <div className="flex items-center gap-2">
+                                                    <span className={`text-sm font-medium ${isToday ? 'text-purple-400' : 'text-zinc-300'}`}>
+                                                        {cell.date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
+                                                    </span>
+                                                    {isToday && <span className="text-[10px] bg-purple-500 text-white px-1.5 rounded-sm uppercase font-bold">Today</span>}
+                                                </div>
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                {duty ? (
+                                                    <div className="flex items-center gap-2">
+                                                        <div className="w-2 h-2 rounded-full bg-purple-500" />
+                                                        <span className="text-sm text-white font-medium">{duty.primaryRa?.name || 'Unknown'}</span>
+                                                    </div>
+                                                ) : <span className="text-sm text-zinc-600 italic">Unassigned</span>}
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                {duty?.secondaryRa ? (
+                                                    <div className="flex items-center gap-2">
+                                                        <div className="w-2 h-2 rounded-full bg-indigo-500" />
+                                                        <span className="text-sm text-white font-medium">{duty.secondaryRa.name}</span>
+                                                    </div>
+                                                ) : <span className="text-sm text-zinc-600">-</span>}
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                <p className="text-sm text-zinc-400 truncate max-w-xs">{duty?.notes || ''}</p>
+                                            </td>
+                                            <td className="px-6 py-4 text-right">
+                                                <button className="p-1 hover:bg-white/10 rounded text-zinc-500 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                                                    <Edit2 className="w-4 h-4" />
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
+                        {currentMonthDays.length === 0 && (
+                            <div className="p-10 text-center text-zinc-500">No days in this month view?</div>
+                        )}
+                    </div>
+                </div>
+            )}
 
             {/* Modal */}
             {isModalOpen && (
@@ -398,6 +412,13 @@ export default function SchedulePage() {
                     </div>
                 </div>
             )}
+
+            {/* Declare Schedule Modal */}
+            <DeclareScheduleModal
+                isOpen={isDeclareModalOpen}
+                onClose={() => setIsDeclareModalOpen(false)}
+                hallId={selectedHallId || ""}
+            />
         </div>
     );
 }

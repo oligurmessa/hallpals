@@ -54,7 +54,7 @@ export default function RoundsPage() {
                         <thead className="bg-white/5 text-zinc-400 text-xs uppercase tracking-wider font-semibold">
                             <tr>
                                 <th className="px-6 py-4">Status</th>
-                                <th className="px-6 py-4">RA (User ID)</th>
+                                <th className="px-6 py-4">RA</th>
                                 <th className="px-6 py-4">Date</th>
                                 <th className="px-6 py-4">Time</th>
                                 <th className="px-6 py-4">Duration</th>
@@ -63,7 +63,13 @@ export default function RoundsPage() {
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-white/5">
-                            {sessions.map((session) => (
+                            {sessions.length === 0 ? (
+                                <tr>
+                                    <td colSpan={7} className="px-6 py-12 text-center text-zinc-500">
+                                        No rounds sessions recorded yet.
+                                    </td>
+                                </tr>
+                            ) : sessions.map((session) => (
                                 <tr key={session.id} className="hover:bg-white/5 transition-colors">
                                     <td className="px-6 py-4">
                                         <span className={`flex items-center gap-2 text-sm font-medium ${session.status === 'Completed' ? 'text-emerald-400' : 'text-zinc-400'}`}>
@@ -71,8 +77,20 @@ export default function RoundsPage() {
                                             {session.status}
                                         </span>
                                     </td>
-                                    <td className="px-6 py-4 text-sm text-zinc-300 font-mono text-xs">
-                                        {session.userId ? session.userId.slice(0, 8) : 'Unknown'}...
+                                    <td className="px-6 py-4">
+                                        <div className="flex items-center gap-2">
+                                            <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center">
+                                                <User className="w-4 h-4 text-purple-400" />
+                                            </div>
+                                            <div>
+                                                <p className="text-sm text-white font-medium">
+                                                    {session.raName || 'Unknown RA'}
+                                                </p>
+                                                {session.raEmail && (
+                                                    <p className="text-xs text-zinc-500">{session.raEmail}</p>
+                                                )}
+                                            </div>
+                                        </div>
                                     </td>
                                     <td className="px-6 py-4 text-sm text-zinc-300">
                                         {formatDate(session.startTime)}
@@ -88,8 +106,8 @@ export default function RoundsPage() {
                                     </td>
                                     <td className="px-6 py-4">
                                         <div className="flex gap-1">
-                                            {session.floorsVisited?.map(floor => (
-                                                <span key={floor} className="w-6 h-6 flex items-center justify-center bg-zinc-800 rounded text-xs text-zinc-400">
+                                            {session.floorsVisited?.map((floor, idx) => (
+                                                <span key={idx} className="w-6 h-6 flex items-center justify-center bg-zinc-800 rounded text-xs text-zinc-400">
                                                     {floor}
                                                 </span>
                                             ))}

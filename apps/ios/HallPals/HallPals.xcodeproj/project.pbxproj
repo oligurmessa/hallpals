@@ -1,0 +1,968 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5C5EE8FE2EED150D005BB80D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C5EE8FD2EED150D005BB80D /* GoogleService-Info.plist */; };
+		5C7357B32EEF44F3002C189F /* app.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C7357B22EEF44F3002C189F /* app.png */; };
+		5CAB41272EECC85800D966CF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5CAB41262EECC85800D966CF /* FirebaseAuth */; };
+		5CAB41292EECC85800D966CF /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 5CAB41282EECC85800D966CF /* FirebaseCore */; };
+		5CAB412B2EECC85800D966CF /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 5CAB412A2EECC85800D966CF /* FirebaseFirestore */; };
+		5CAB412D2EECC85800D966CF /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 5CAB412C2EECC85800D966CF /* FirebaseFunctions */; };
+		AA000001 /* HallPalsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001 /* HallPalsApp.swift */; };
+		AA000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100002 /* ContentView.swift */; };
+		AA000003 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100003 /* MainTabView.swift */; };
+		AA000004 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100004 /* AppColors.swift */; };
+		AA000005 /* AppTypography.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100005 /* AppTypography.swift */; };
+		AA000006 /* AppSpacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100006 /* AppSpacing.swift */; };
+		AA000007 /* AppCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100007 /* AppCard.swift */; };
+		AA000008 /* AppButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100008 /* AppButtons.swift */; };
+		AA000009 /* UserRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100009 /* UserRole.swift */; };
+		AA000010 /* RoleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100010 /* RoleManager.swift */; };
+		AA000011 /* RoleSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100011 /* RoleSelectionView.swift */; };
+		AA000012 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100012 /* HomeView.swift */; };
+		AA000013 /* EventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100013 /* EventsView.swift */; };
+		AA000014 /* ResourcesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100014 /* ResourcesView.swift */; };
+		AA000015 /* AssistantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100015 /* AssistantView.swift */; };
+		AA000016 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA100016 /* Assets.xcassets */; };
+		AA000017 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA100017 /* Preview Assets.xcassets */; };
+		AA000018 /* RAHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100018 /* RAHomeView.swift */; };
+		AA000020 /* ResidentHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100020 /* ResidentHomeView.swift */; };
+		AA000021 /* RoundsLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100021 /* RoundsLogView.swift */; };
+		AA000022 /* QuickIncidentLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100022 /* QuickIncidentLogView.swift */; };
+		AA000023 /* ResidentEmergencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100023 /* ResidentEmergencyView.swift */; };
+		AA000024 /* EventModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100024 /* EventModels.swift */; };
+		AA000025 /* RAEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100025 /* RAEventsView.swift */; };
+		AA000027 /* ResidentEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100027 /* ResidentEventsView.swift */; };
+		AA000028 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100028 /* EventDetailView.swift */; };
+		AA000029 /* EventFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100029 /* EventFormView.swift */; };
+		AA000030 /* ResourceModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100030 /* ResourceModels.swift */; };
+		AA000031 /* RAResourcesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100031 /* RAResourcesView.swift */; };
+		AA000033 /* ResidentResourcesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100033 /* ResidentResourcesView.swift */; };
+		AA000034 /* SLEDDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100034 /* SLEDDetailView.swift */; };
+		AA000035 /* ProtocolDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100035 /* ProtocolDetailView.swift */; };
+		AA000036 /* RosterDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100036 /* RosterDetailView.swift */; };
+		AA000037 /* AssistantModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100037 /* AssistantModels.swift */; };
+		AA000038 /* AssistantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100038 /* AssistantViewModel.swift */; };
+		AA000039 /* ResidentAssistantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100039 /* ResidentAssistantView.swift */; };
+		AA000040 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100040 /* SettingsView.swift */; };
+		AA000041 /* RoundsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100041 /* RoundsModels.swift */; };
+		AA000042 /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100042 /* MotionManager.swift */; };
+		AA000043 /* AltitudeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100043 /* AltitudeManager.swift */; };
+		AA000044 /* RoundsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100044 /* RoundsViewModel.swift */; };
+		AA000045 /* RoundsTrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100045 /* RoundsTrackerView.swift */; };
+		AA000046 /* RoundsSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100046 /* RoundsSummaryView.swift */; };
+		AA000047 /* AIChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100047 /* AIChatView.swift */; };
+		AA000048 /* AIChatInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100048 /* AIChatInputView.swift */; };
+		AA000049 /* CommunityModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100049 /* CommunityModels.swift */; };
+		AA000050 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100050 /* CommunityView.swift */; };
+		AA000051 /* ChatModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100051 /* ChatModels.swift */; };
+		AA000052 /* ChatHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100052 /* ChatHistoryView.swift */; };
+		AA000053 /* MSGraphConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100053 /* MSGraphConfig.swift */; };
+		AA000054 /* MSALAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100054 /* MSALAuthManager.swift */; };
+		AA000055 /* GraphWorkbookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100055 /* GraphWorkbookService.swift */; };
+		AA000056 /* MoveOutModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100056 /* MoveOutModels.swift */; };
+		AA000057 /* MoveOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100057 /* MoveOutView.swift */; };
+		AA000061 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100061 /* ScheduleView.swift */; };
+		AA000064 /* ResidentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100064 /* ResidentsView.swift */; };
+		AA000065 /* BulletinModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100065 /* BulletinModels.swift */; };
+		AA000066 /* BulletinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100066 /* BulletinView.swift */; };
+		AA000067 /* RoomCheckModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100067 /* RoomCheckModels.swift */; };
+		AA000068 /* RoomCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100068 /* RoomCheckView.swift */; };
+		AA000069 /* CommunityMeetingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100069 /* CommunityMeetingsView.swift */; };
+		CC000001 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC100001 /* AppState.swift */; };
+		CC000002 /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC100002 /* FirebaseAuthManager.swift */; };
+		CC000003 /* OnboardingRoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC100003 /* OnboardingRoleView.swift */; };
+		CC000004 /* OnboardingAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC100004 /* OnboardingAuthView.swift */; };
+		CC000005 /* AuthDebugLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC100005 /* AuthDebugLogger.swift */; };
+		CC000006 /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC100006 /* FirestoreService.swift */; };
+		CC000007 /* CloudFunctionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC100007 /* CloudFunctionsService.swift */; };
+		CC000008 /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC100008 /* ChatService.swift */; };
+		CC000009 /* ConversationsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC100009 /* ConversationsListView.swift */; };
+		CC000010 /* ChatThreadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC100010 /* ChatThreadView.swift */; };
+		CC000011 /* CreateConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC100011 /* CreateConversationView.swift */; };
+		CC000012 /* RoomCheckService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC100012 /* RoomCheckService.swift */; };
+		CC000013 /* BulletinService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC100013 /* BulletinService.swift */; };
+		CC000014 /* ResidentHomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC100014 /* ResidentHomeService.swift */; };
+		CC000015 /* ResidentLivingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC100015 /* ResidentLivingService.swift */; };
+		DD000001 /* DocDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD100001 /* DocDetailView.swift */; };
+		DD000002 /* DocsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD100002 /* DocsService.swift */; };
+		DD000003 /* DocsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD100003 /* DocsModels.swift */; };
+		EE000001 /* RoundsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE100001 /* RoundsService.swift */; };
+		EE000002 /* PushNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE100002 /* PushNotificationService.swift */; };
+		EE000003 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = EE100003 /* FirebaseMessaging */; };
+		FF000001 /* ResidentLivingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF100001 /* ResidentLivingView.swift */; };
+		GG000001 /* ResidentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = GG100001 /* ResidentService.swift */; };
+		GG000002 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = GG100002 /* UserManager.swift */; };
+		GG000003 /* OneOnOneMeetingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = GG100003 /* OneOnOneMeetingsView.swift */; };
+		GG000004 /* RATaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = GG100004 /* RATaskService.swift */; };
+		GG000005 /* RATasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = GG100005 /* RATasksView.swift */; };
+		HH000001 /* DutyScheduleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = HH100001 /* DutyScheduleService.swift */; };
+		II000001 /* ConcernService.swift in Sources */ = {isa = PBXBuildFile; fileRef = II100001 /* ConcernService.swift */; };
+		II000002 /* ReportConcernView.swift in Sources */ = {isa = PBXBuildFile; fileRef = II100002 /* ReportConcernView.swift */; };
+		II000003 /* ConcernsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = II100003 /* ConcernsListView.swift */; };
+		JJ000001 /* CommunityMeetingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = JJ100001 /* CommunityMeetingsService.swift */; };
+		KK000001 /* DutyLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = KK100001 /* DutyLogView.swift */; };
+		LL000001 /* MoveOutChecklistService.swift in Sources */ = {isa = PBXBuildFile; fileRef = LL100001 /* MoveOutChecklistService.swift */; };
+		LL000002 /* ResidentMoveOutChecklistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LL100002 /* ResidentMoveOutChecklistView.swift */; };
+		MM000001 /* FloorRulesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = MM100001 /* FloorRulesService.swift */; };
+		MM000002 /* ResidentFloorRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MM100002 /* ResidentFloorRulesView.swift */; };
+		MM000003 /* RAFloorRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MM100003 /* RAFloorRulesView.swift */; };
+		NN000001 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = NN100001 /* LandingView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5C5EE8FD2EED150D005BB80D /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5C7357B22EEF44F3002C189F /* app.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app.png; sourceTree = "<group>"; };
+		5CBCF8E42EEE88320074F337 /* HallPals.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HallPals.entitlements; sourceTree = "<group>"; };
+		AA100001 /* HallPalsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HallPalsApp.swift; sourceTree = "<group>"; };
+		AA100002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AA100003 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		AA100004 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
+		AA100005 /* AppTypography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTypography.swift; sourceTree = "<group>"; };
+		AA100006 /* AppSpacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSpacing.swift; sourceTree = "<group>"; };
+		AA100007 /* AppCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCard.swift; sourceTree = "<group>"; };
+		AA100008 /* AppButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButtons.swift; sourceTree = "<group>"; };
+		AA100009 /* UserRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRole.swift; sourceTree = "<group>"; };
+		AA100010 /* RoleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleManager.swift; sourceTree = "<group>"; };
+		AA100011 /* RoleSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleSelectionView.swift; sourceTree = "<group>"; };
+		AA100012 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		AA100013 /* EventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsView.swift; sourceTree = "<group>"; };
+		AA100014 /* ResourcesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesView.swift; sourceTree = "<group>"; };
+		AA100015 /* AssistantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantView.swift; sourceTree = "<group>"; };
+		AA100016 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AA100017 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		AA100018 /* RAHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAHomeView.swift; sourceTree = "<group>"; };
+		AA100020 /* ResidentHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentHomeView.swift; sourceTree = "<group>"; };
+		AA100021 /* RoundsLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundsLogView.swift; sourceTree = "<group>"; };
+		AA100022 /* QuickIncidentLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickIncidentLogView.swift; sourceTree = "<group>"; };
+		AA100023 /* ResidentEmergencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentEmergencyView.swift; sourceTree = "<group>"; };
+		AA100024 /* EventModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModels.swift; sourceTree = "<group>"; };
+		AA100025 /* RAEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAEventsView.swift; sourceTree = "<group>"; };
+		AA100027 /* ResidentEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentEventsView.swift; sourceTree = "<group>"; };
+		AA100028 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
+		AA100029 /* EventFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFormView.swift; sourceTree = "<group>"; };
+		AA100030 /* ResourceModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceModels.swift; sourceTree = "<group>"; };
+		AA100031 /* RAResourcesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAResourcesView.swift; sourceTree = "<group>"; };
+		AA100033 /* ResidentResourcesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentResourcesView.swift; sourceTree = "<group>"; };
+		AA100034 /* SLEDDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SLEDDetailView.swift; sourceTree = "<group>"; };
+		AA100035 /* ProtocolDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolDetailView.swift; sourceTree = "<group>"; };
+		AA100036 /* RosterDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RosterDetailView.swift; sourceTree = "<group>"; };
+		AA100037 /* AssistantModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantModels.swift; sourceTree = "<group>"; };
+		AA100038 /* AssistantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantViewModel.swift; sourceTree = "<group>"; };
+		AA100039 /* ResidentAssistantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentAssistantView.swift; sourceTree = "<group>"; };
+		AA100040 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AA100041 /* RoundsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundsModels.swift; sourceTree = "<group>"; };
+		AA100042 /* MotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
+		AA100043 /* AltitudeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AltitudeManager.swift; sourceTree = "<group>"; };
+		AA100044 /* RoundsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundsViewModel.swift; sourceTree = "<group>"; };
+		AA100045 /* RoundsTrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundsTrackerView.swift; sourceTree = "<group>"; };
+		AA100046 /* RoundsSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundsSummaryView.swift; sourceTree = "<group>"; };
+		AA100047 /* AIChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIChatView.swift; sourceTree = "<group>"; };
+		AA100048 /* AIChatInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIChatInputView.swift; sourceTree = "<group>"; };
+		AA100049 /* CommunityModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityModels.swift; sourceTree = "<group>"; };
+		AA100050 /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
+		AA100051 /* ChatModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModels.swift; sourceTree = "<group>"; };
+		AA100052 /* ChatHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHistoryView.swift; sourceTree = "<group>"; };
+		AA100053 /* MSGraphConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSGraphConfig.swift; sourceTree = "<group>"; };
+		AA100054 /* MSALAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSALAuthManager.swift; sourceTree = "<group>"; };
+		AA100055 /* GraphWorkbookService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphWorkbookService.swift; sourceTree = "<group>"; };
+		AA100056 /* MoveOutModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveOutModels.swift; sourceTree = "<group>"; };
+		AA100057 /* MoveOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveOutView.swift; sourceTree = "<group>"; };
+		AA100061 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
+		AA100064 /* ResidentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentsView.swift; sourceTree = "<group>"; };
+		AA100065 /* BulletinModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinModels.swift; sourceTree = "<group>"; };
+		AA100066 /* BulletinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinView.swift; sourceTree = "<group>"; };
+		AA100067 /* RoomCheckModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCheckModels.swift; sourceTree = "<group>"; };
+		AA100068 /* RoomCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCheckView.swift; sourceTree = "<group>"; };
+		AA100069 /* CommunityMeetingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityMeetingsView.swift; sourceTree = "<group>"; };
+		AA200001 /* HallPals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HallPals.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC100001 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		CC100002 /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
+		CC100003 /* OnboardingRoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRoleView.swift; sourceTree = "<group>"; };
+		CC100004 /* OnboardingAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAuthView.swift; sourceTree = "<group>"; };
+		CC100005 /* AuthDebugLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDebugLogger.swift; sourceTree = "<group>"; };
+		CC100006 /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
+		CC100007 /* CloudFunctionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudFunctionsService.swift; sourceTree = "<group>"; };
+		CC100008 /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
+		CC100009 /* ConversationsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListView.swift; sourceTree = "<group>"; };
+		CC100010 /* ChatThreadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatThreadView.swift; sourceTree = "<group>"; };
+		CC100011 /* CreateConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateConversationView.swift; sourceTree = "<group>"; };
+		CC100012 /* RoomCheckService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCheckService.swift; sourceTree = "<group>"; };
+		CC100013 /* BulletinService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinService.swift; sourceTree = "<group>"; };
+		CC100014 /* ResidentHomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentHomeService.swift; sourceTree = "<group>"; };
+		CC100015 /* ResidentLivingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentLivingService.swift; sourceTree = "<group>"; };
+		DD100001 /* DocDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocDetailView.swift; sourceTree = "<group>"; };
+		DD100002 /* DocsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocsService.swift; sourceTree = "<group>"; };
+		DD100003 /* DocsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocsModels.swift; sourceTree = "<group>"; };
+		EE100001 /* RoundsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundsService.swift; sourceTree = "<group>"; };
+		EE100002 /* PushNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationService.swift; sourceTree = "<group>"; };
+		FF100001 /* ResidentLivingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentLivingView.swift; sourceTree = "<group>"; };
+		GG100001 /* ResidentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentService.swift; sourceTree = "<group>"; };
+		GG100002 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		GG100003 /* OneOnOneMeetingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneOnOneMeetingsView.swift; sourceTree = "<group>"; };
+		GG100004 /* RATaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RATaskService.swift; sourceTree = "<group>"; };
+		GG100005 /* RATasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RATasksView.swift; sourceTree = "<group>"; };
+		HH100001 /* DutyScheduleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DutyScheduleService.swift; sourceTree = "<group>"; };
+		II100001 /* ConcernService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcernService.swift; sourceTree = "<group>"; };
+		II100002 /* ReportConcernView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportConcernView.swift; sourceTree = "<group>"; };
+		II100003 /* ConcernsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcernsListView.swift; sourceTree = "<group>"; };
+		JJ100001 /* CommunityMeetingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityMeetingsService.swift; sourceTree = "<group>"; };
+		KK100001 /* DutyLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DutyLogView.swift; sourceTree = "<group>"; };
+		LL100001 /* MoveOutChecklistService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveOutChecklistService.swift; sourceTree = "<group>"; };
+		LL100002 /* ResidentMoveOutChecklistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentMoveOutChecklistView.swift; sourceTree = "<group>"; };
+		MM100001 /* FloorRulesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorRulesService.swift; sourceTree = "<group>"; };
+		MM100002 /* ResidentFloorRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentFloorRulesView.swift; sourceTree = "<group>"; };
+		MM100003 /* RAFloorRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAFloorRulesView.swift; sourceTree = "<group>"; };
+		NN100001 /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AA300001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5CAB41292EECC85800D966CF /* FirebaseCore in Frameworks */,
+				5CAB41272EECC85800D966CF /* FirebaseAuth in Frameworks */,
+				5CAB412B2EECC85800D966CF /* FirebaseFirestore in Frameworks */,
+				5CAB412D2EECC85800D966CF /* FirebaseFunctions in Frameworks */,
+				EE000003 /* FirebaseMessaging in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AA400001 = {
+			isa = PBXGroup;
+			children = (
+				AA400002 /* HallPals */,
+				AA400003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AA400002 /* HallPals */ = {
+			isa = PBXGroup;
+			children = (
+				5CBCF8E42EEE88320074F337 /* HallPals.entitlements */,
+				AA100001 /* HallPalsApp.swift */,
+				AA100002 /* ContentView.swift */,
+				AA100003 /* MainTabView.swift */,
+				AA400004 /* DesignSystem */,
+				AA400005 /* Components */,
+				AA400006 /* Core */,
+				AA400007 /* Features */,
+				AA400017 /* Services */,
+				AA100016 /* Assets.xcassets */,
+				AA400010 /* Preview Content */,
+				5C5EE8FD2EED150D005BB80D /* GoogleService-Info.plist */,
+				5C7357B22EEF44F3002C189F /* app.png */,
+			);
+			path = HallPals;
+			sourceTree = "<group>";
+		};
+		AA400003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA200001 /* HallPals.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AA400004 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				AA100004 /* AppColors.swift */,
+				AA100005 /* AppTypography.swift */,
+				AA100006 /* AppSpacing.swift */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		AA400005 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				AA100007 /* AppCard.swift */,
+				AA100008 /* AppButtons.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		AA400006 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				CC100001 /* AppState.swift */,
+				GG100002 /* UserManager.swift */,
+				AA400011 /* Role */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		AA400007 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				AA400008 /* Home */,
+				AA400012 /* Events */,
+				AA400013 /* Resources */,
+				AA400014 /* Rounds */,
+				AA400015 /* Community */,
+				AA400016 /* Duty */,
+				FF400001 /* Living */,
+				AA400009 /* Assistant */,
+				CC400001 /* Onboarding */,
+				CC400003 /* Chat */,
+				II400001 /* Concerns */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		II400001 /* Concerns */ = {
+			isa = PBXGroup;
+			children = (
+				II100002 /* ReportConcernView.swift */,
+				II100003 /* ConcernsListView.swift */,
+			);
+			path = Concerns;
+			sourceTree = "<group>";
+		};
+		AA400008 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				AA100012 /* HomeView.swift */,
+				AA100018 /* RAHomeView.swift */,
+				AA100020 /* ResidentHomeView.swift */,
+				AA100021 /* RoundsLogView.swift */,
+				AA100022 /* QuickIncidentLogView.swift */,
+				AA100023 /* ResidentEmergencyView.swift */,
+				AA100040 /* SettingsView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		AA400009 /* Assistant */ = {
+			isa = PBXGroup;
+			children = (
+				AA100015 /* AssistantView.swift */,
+				AA100037 /* AssistantModels.swift */,
+				AA100038 /* AssistantViewModel.swift */,
+				AA100039 /* ResidentAssistantView.swift */,
+			);
+			path = Assistant;
+			sourceTree = "<group>";
+		};
+		AA400010 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				AA100017 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		AA400011 /* Role */ = {
+			isa = PBXGroup;
+			children = (
+				AA100009 /* UserRole.swift */,
+				AA100010 /* RoleManager.swift */,
+				AA100011 /* RoleSelectionView.swift */,
+			);
+			path = Role;
+			sourceTree = "<group>";
+		};
+		AA400012 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				AA100013 /* EventsView.swift */,
+				AA100024 /* EventModels.swift */,
+				AA100025 /* RAEventsView.swift */,
+				AA100027 /* ResidentEventsView.swift */,
+				AA100028 /* EventDetailView.swift */,
+				AA100029 /* EventFormView.swift */,
+			);
+			path = Events;
+			sourceTree = "<group>";
+		};
+		AA400013 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AA100014 /* ResourcesView.swift */,
+				AA100030 /* ResourceModels.swift */,
+				DD100003 /* DocsModels.swift */,
+				AA100031 /* RAResourcesView.swift */,
+				AA100033 /* ResidentResourcesView.swift */,
+				AA100034 /* SLEDDetailView.swift */,
+				AA100035 /* ProtocolDetailView.swift */,
+				AA100036 /* RosterDetailView.swift */,
+				DD100001 /* DocDetailView.swift */,
+				AA100047 /* AIChatView.swift */,
+				AA100048 /* AIChatInputView.swift */,
+				AA100051 /* ChatModels.swift */,
+				AA100052 /* ChatHistoryView.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		AA400014 /* Rounds */ = {
+			isa = PBXGroup;
+			children = (
+				AA100041 /* RoundsModels.swift */,
+				AA100042 /* MotionManager.swift */,
+				AA100043 /* AltitudeManager.swift */,
+				AA100044 /* RoundsViewModel.swift */,
+				AA100045 /* RoundsTrackerView.swift */,
+				AA100046 /* RoundsSummaryView.swift */,
+			);
+			path = Rounds;
+			sourceTree = "<group>";
+		};
+		AA400015 /* Community */ = {
+			isa = PBXGroup;
+			children = (
+				AA100049 /* CommunityModels.swift */,
+				AA100050 /* CommunityView.swift */,
+			);
+			path = Community;
+			sourceTree = "<group>";
+		};
+		AA400016 /* Duty */ = {
+			isa = PBXGroup;
+			children = (
+				AA100057 /* MoveOutView.swift */,
+				AA100061 /* ScheduleView.swift */,
+				AA100064 /* ResidentsView.swift */,
+				AA100066 /* BulletinView.swift */,
+				AA100067 /* RoomCheckModels.swift */,
+				AA100068 /* RoomCheckView.swift */,
+				AA100069 /* CommunityMeetingsView.swift */,
+				GG100003 /* OneOnOneMeetingsView.swift */,
+				GG100005 /* RATasksView.swift */,
+				KK100001 /* DutyLogView.swift */,
+				LL100002 /* ResidentMoveOutChecklistView.swift */,
+				MM100003 /* RAFloorRulesView.swift */,
+			);
+			path = Duty;
+			sourceTree = "<group>";
+		};
+		AA400017 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				CC400002 /* Firebase */,
+				AA400018 /* MSGraph */,
+				AA400020 /* Bulletin */,
+				DD100002 /* DocsService.swift */,
+				EE100001 /* RoundsService.swift */,
+				EE100002 /* PushNotificationService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		AA400018 /* MSGraph */ = {
+			isa = PBXGroup;
+			children = (
+				AA100053 /* MSGraphConfig.swift */,
+				AA100054 /* MSALAuthManager.swift */,
+				AA100055 /* GraphWorkbookService.swift */,
+				AA100056 /* MoveOutModels.swift */,
+			);
+			path = MSGraph;
+			sourceTree = "<group>";
+		};
+		AA400020 /* Bulletin */ = {
+			isa = PBXGroup;
+			children = (
+				AA100065 /* BulletinModels.swift */,
+			);
+			path = Bulletin;
+			sourceTree = "<group>";
+		};
+		CC400001 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				CC100003 /* OnboardingRoleView.swift */,
+				CC100004 /* OnboardingAuthView.swift */,
+				NN100001 /* LandingView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		CC400002 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				CC100002 /* FirebaseAuthManager.swift */,
+				CC100005 /* AuthDebugLogger.swift */,
+				CC100006 /* FirestoreService.swift */,
+				CC100007 /* CloudFunctionsService.swift */,
+				CC100008 /* ChatService.swift */,
+				CC100012 /* RoomCheckService.swift */,
+				CC100013 /* BulletinService.swift */,
+				CC100014 /* ResidentHomeService.swift */,
+				CC100015 /* ResidentLivingService.swift */,
+				GG100001 /* ResidentService.swift */,
+				GG100004 /* RATaskService.swift */,
+				HH100001 /* DutyScheduleService.swift */,
+				II100001 /* ConcernService.swift */,
+				JJ100001 /* CommunityMeetingsService.swift */,
+				LL100001 /* MoveOutChecklistService.swift */,
+				MM100001 /* FloorRulesService.swift */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		CC400003 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				CC100009 /* ConversationsListView.swift */,
+				CC100010 /* ChatThreadView.swift */,
+				CC100011 /* CreateConversationView.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		FF400001 /* Living */ = {
+			isa = PBXGroup;
+			children = (
+				FF100001 /* ResidentLivingView.swift */,
+				MM100002 /* ResidentFloorRulesView.swift */,
+			);
+			path = Living;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AA500001 /* HallPals */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA600003 /* Build configuration list for PBXNativeTarget "HallPals" */;
+			buildPhases = (
+				AA500002 /* Sources */,
+				AA300001 /* Frameworks */,
+				AA500003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HallPals;
+			packageProductDependencies = (
+				5CAB41262EECC85800D966CF /* FirebaseAuth */,
+				5CAB41282EECC85800D966CF /* FirebaseCore */,
+				5CAB412A2EECC85800D966CF /* FirebaseFirestore */,
+				5CAB412C2EECC85800D966CF /* FirebaseFunctions */,
+				EE100003 /* FirebaseMessaging */,
+			);
+			productName = HallPals;
+			productReference = AA200001 /* HallPals.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA700001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					AA500001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = AA600001 /* Build configuration list for PBXProject "HallPals" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AA400001;
+			packageReferences = (
+				5CAB41252EECC85800D966CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
+			productRefGroup = AA400003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AA500001 /* HallPals */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AA500003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA000016 /* Assets.xcassets in Resources */,
+				AA000017 /* Preview Assets.xcassets in Resources */,
+				5C5EE8FE2EED150D005BB80D /* GoogleService-Info.plist in Resources */,
+				5C7357B32EEF44F3002C189F /* app.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AA500002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC000001 /* AppState.swift in Sources */,
+				CC000002 /* FirebaseAuthManager.swift in Sources */,
+				CC000003 /* OnboardingRoleView.swift in Sources */,
+				CC000004 /* OnboardingAuthView.swift in Sources */,
+				CC000005 /* AuthDebugLogger.swift in Sources */,
+				AA000001 /* HallPalsApp.swift in Sources */,
+				AA000002 /* ContentView.swift in Sources */,
+				AA000003 /* MainTabView.swift in Sources */,
+				AA000004 /* AppColors.swift in Sources */,
+				AA000005 /* AppTypography.swift in Sources */,
+				AA000006 /* AppSpacing.swift in Sources */,
+				AA000007 /* AppCard.swift in Sources */,
+				AA000008 /* AppButtons.swift in Sources */,
+				AA000009 /* UserRole.swift in Sources */,
+				AA000010 /* RoleManager.swift in Sources */,
+				AA000011 /* RoleSelectionView.swift in Sources */,
+				AA000012 /* HomeView.swift in Sources */,
+				AA000013 /* EventsView.swift in Sources */,
+				AA000014 /* ResourcesView.swift in Sources */,
+				AA000015 /* AssistantView.swift in Sources */,
+				AA000018 /* RAHomeView.swift in Sources */,
+				AA000020 /* ResidentHomeView.swift in Sources */,
+				AA000021 /* RoundsLogView.swift in Sources */,
+				AA000022 /* QuickIncidentLogView.swift in Sources */,
+				AA000023 /* ResidentEmergencyView.swift in Sources */,
+				AA000024 /* EventModels.swift in Sources */,
+				AA000025 /* RAEventsView.swift in Sources */,
+				AA000027 /* ResidentEventsView.swift in Sources */,
+				AA000028 /* EventDetailView.swift in Sources */,
+				AA000029 /* EventFormView.swift in Sources */,
+				AA000030 /* ResourceModels.swift in Sources */,
+				AA000031 /* RAResourcesView.swift in Sources */,
+				AA000033 /* ResidentResourcesView.swift in Sources */,
+				AA000034 /* SLEDDetailView.swift in Sources */,
+				AA000035 /* ProtocolDetailView.swift in Sources */,
+				AA000036 /* RosterDetailView.swift in Sources */,
+				AA000037 /* AssistantModels.swift in Sources */,
+				AA000038 /* AssistantViewModel.swift in Sources */,
+				AA000039 /* ResidentAssistantView.swift in Sources */,
+				AA000040 /* SettingsView.swift in Sources */,
+				AA000041 /* RoundsModels.swift in Sources */,
+				AA000042 /* MotionManager.swift in Sources */,
+				AA000043 /* AltitudeManager.swift in Sources */,
+				AA000044 /* RoundsViewModel.swift in Sources */,
+				AA000045 /* RoundsTrackerView.swift in Sources */,
+				AA000046 /* RoundsSummaryView.swift in Sources */,
+				AA000047 /* AIChatView.swift in Sources */,
+				AA000048 /* AIChatInputView.swift in Sources */,
+				AA000049 /* CommunityModels.swift in Sources */,
+				AA000050 /* CommunityView.swift in Sources */,
+				AA000051 /* ChatModels.swift in Sources */,
+				AA000052 /* ChatHistoryView.swift in Sources */,
+				AA000053 /* MSGraphConfig.swift in Sources */,
+				AA000054 /* MSALAuthManager.swift in Sources */,
+				AA000055 /* GraphWorkbookService.swift in Sources */,
+				AA000056 /* MoveOutModels.swift in Sources */,
+				AA000057 /* MoveOutView.swift in Sources */,
+				AA000061 /* ScheduleView.swift in Sources */,
+				AA000064 /* ResidentsView.swift in Sources */,
+				AA000065 /* BulletinModels.swift in Sources */,
+				AA000066 /* BulletinView.swift in Sources */,
+				AA000067 /* RoomCheckModels.swift in Sources */,
+				AA000068 /* RoomCheckView.swift in Sources */,
+				AA000069 /* CommunityMeetingsView.swift in Sources */,
+				CC000006 /* FirestoreService.swift in Sources */,
+				CC000007 /* CloudFunctionsService.swift in Sources */,
+				CC000008 /* ChatService.swift in Sources */,
+				CC000012 /* RoomCheckService.swift in Sources */,
+				CC000013 /* BulletinService.swift in Sources */,
+				CC000014 /* ResidentHomeService.swift in Sources */,
+				CC000015 /* ResidentLivingService.swift in Sources */,
+				FF000001 /* ResidentLivingView.swift in Sources */,
+				CC000009 /* ConversationsListView.swift in Sources */,
+				CC000010 /* ChatThreadView.swift in Sources */,
+				CC000011 /* CreateConversationView.swift in Sources */,
+				DD000001 /* DocDetailView.swift in Sources */,
+				DD000002 /* DocsService.swift in Sources */,
+				DD000003 /* DocsModels.swift in Sources */,
+				EE000001 /* RoundsService.swift in Sources */,
+				EE000002 /* PushNotificationService.swift in Sources */,
+				GG000001 /* ResidentService.swift in Sources */,
+				GG000002 /* UserManager.swift in Sources */,
+				GG000003 /* OneOnOneMeetingsView.swift in Sources */,
+				GG000004 /* RATaskService.swift in Sources */,
+				GG000005 /* RATasksView.swift in Sources */,
+				HH000001 /* DutyScheduleService.swift in Sources */,
+				II000001 /* ConcernService.swift in Sources */,
+				II000002 /* ReportConcernView.swift in Sources */,
+				II000003 /* ConcernsListView.swift in Sources */,
+				JJ000001 /* CommunityMeetingsService.swift in Sources */,
+				KK000001 /* DutyLogView.swift in Sources */,
+				LL000001 /* MoveOutChecklistService.swift in Sources */,
+				LL000002 /* ResidentMoveOutChecklistView.swift in Sources */,
+				MM000001 /* FloorRulesService.swift in Sources */,
+				MM000002 /* ResidentFloorRulesView.swift in Sources */,
+				MM000003 /* RAFloorRulesView.swift in Sources */,
+				NN000001 /* LandingView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AA600002 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AA600004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AA600005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = HallPals/HallPals.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"HallPals/Preview Content\"";
+				DEVELOPMENT_TEAM = 23QTJ437WL;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HallPals/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HallPals;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_NSMotionUsageDescription = "HallPals uses motion data to track your steps and activity during rounds, helping you document thorough coverage of your assigned floors.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hallpals.hallpals;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AA600006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = HallPals/HallPals.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"HallPals/Preview Content\"";
+				DEVELOPMENT_TEAM = 23QTJ437WL;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HallPals/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HallPals;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_NSMotionUsageDescription = "HallPals uses motion data to track your steps and activity during rounds, helping you document thorough coverage of your assigned floors.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hallpals.hallpals;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA600001 /* Build configuration list for PBXProject "HallPals" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA600002 /* Debug */,
+				AA600004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA600003 /* Build configuration list for PBXNativeTarget "HallPals" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA600005 /* Debug */,
+				AA600006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5CAB41252EECC85800D966CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.7.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5CAB41262EECC85800D966CF /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5CAB41252EECC85800D966CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		5CAB41282EECC85800D966CF /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5CAB41252EECC85800D966CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		5CAB412A2EECC85800D966CF /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5CAB41252EECC85800D966CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		5CAB412C2EECC85800D966CF /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5CAB41252EECC85800D966CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
+		};
+		EE100003 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5CAB41252EECC85800D966CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = AA700001 /* Project object */;
+}

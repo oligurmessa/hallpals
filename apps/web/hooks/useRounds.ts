@@ -5,6 +5,8 @@ import { db } from "@/lib/firebase";
 export interface RoundsSession {
     id: string;
     userId: string;
+    raName?: string;
+    raEmail?: string;
     startTime: any; // Firestore Timestamp
     endTime?: any; // Firestore Timestamp
     status: string;

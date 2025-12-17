@@ -25,7 +25,7 @@ export default function HeroSection() {
                   <div className="h-px w-16 bg-gradient-to-r from-transparent to-black/10 dark:to-white/10" />
                   <div className="group flex items-center gap-2 rounded-lg border border-black/5 bg-black/2 px-3 py-1.5 transition-all duration-200 hover:border-black/10 hover:bg-black/5 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/15 dark:hover:bg-white/8">
                     <span className="font-medium text-black/60 text-xs transition-colors group-hover:text-black/80 dark:text-white/60 dark:group-hover:text-white/80">
-                      Residence Life, Simplified
+                      Dedicated to University of St. Thomas
                     </span>
                   </div>
                   <div className="h-px w-16 bg-gradient-to-l from-transparent to-black/10 dark:to-white/10" />
@@ -40,7 +40,8 @@ export default function HeroSection() {
                   )}
                   style={{ lineHeight: 1.15 }}
                 >
-                  The Modern RA Toolkit
+                  Residence Life, Simplified
+
                 </h1>
                 <p className="mx-auto max-w-[600px] text-neutral-500 text-sm leading-relaxed md:text-base dark:text-neutral-400">
                   HallPals helps RAs manage their communities, connect with residents, and handle duty tasks — all in one app.
@@ -66,19 +67,7 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Hero Visual */}
-        <div className="container mx-auto px-4 pt-6 md:px-6 mt-12 md:mt-16">
-          <div className="relative mx-auto aspect-[9/16] w-full max-w-xs overflow-hidden rounded-[40px] border-8 border-black shadow-2xl bg-black dark:border-gray-800">
-            {/* Note: User specified an iPhone mockup. Using the screenshot with rounded corners to simulate it. */}
-            <div className="h-full w-full rounded-[32px] overflow-hidden bg-white">
-              <img
-                src="/screenshots/hero_mockup.png"
-                alt="HallPals RA Home View"
-                className="h-full w-full object-cover"
-              />
-            </div>
-          </div>
-        </div>
+
       </section>
     </>
   );
