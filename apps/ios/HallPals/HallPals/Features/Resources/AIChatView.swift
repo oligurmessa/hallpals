@@ -11,9 +11,6 @@ struct AIChatView: View {
     @State private var messageText: String = ""
     @State private var isTyping: Bool = false
     
-    // UI States
-    @State private var showingHistory: Bool = false
-
     // Attachment states
     @State private var showingAttachmentOptions: Bool = false
     @State private var showingPhotoPicker: Bool = false
@@ -81,29 +78,12 @@ struct AIChatView: View {
                         .foregroundColor(.primary)
                 }
 
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        showingHistory = true
-                    } label: {
-                        Image(systemName: "clock.arrow.circlepath")
-                            .font(.system(size: 16, weight: .medium))
-                            .foregroundColor(.primary)
-                    }
-                }
             }
             .onAppear {
                 // Start a new session if none exists
                 if chatStore.currentSession == nil {
                     chatStore.startNewSession()
                 }
-            }
-            .sheet(isPresented: $showingHistory) {
-                ChatHistoryView(onSelectSession: { session in
-                    withAnimation {
-                        chatStore.selectSession(session)
-                    }
-                })
-                .environmentObject(chatStore)
             }
             .confirmationDialog("Add Attachment", isPresented: $showingAttachmentOptions, titleVisibility: .hidden) {
                 Button("Photo Library") {

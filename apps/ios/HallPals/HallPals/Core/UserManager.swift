@@ -277,10 +277,11 @@ final class UserManager: ObservableObject {
         }
     }
 
-    /// Stop listening to user profile changes
+    /// Stop listening to user profile changes and clear all cached data
     func stopListening() {
         userListener?.remove()
         userListener = nil
+        currentUser = nil
         stopHallListener()
         stopRADataListeners()
         stopResidentDataListeners()
@@ -380,6 +381,7 @@ final class UserManager: ObservableObject {
     private func stopHallListener() {
         hallListener?.remove()
         hallListener = nil
+        currentHall = nil
     }
 
     // MARK: - Manual Fetch (for one-time reads)
@@ -907,16 +909,32 @@ final class UserManager: ObservableObject {
                 // Support both field name conventions: endTime (new) and end (legacy)
                 if let endTimestamp = data["endTime"] as? Timestamp ?? data["end"] as? Timestamp {
                     if endTimestamp.dateValue() > nowDate {
-                        self.onDutyRA = self.parseOnDutyRA(data, docId: doc.documentID)
-                        #if DEBUG
-                        if let ra = self.onDutyRA {
-                            print("🏠 BATCH-DUTY: On-duty RA found: \(ra.displayName)")
+                        // Check if we need to resolve UID from email
+                        let hasUid = (data["uid"] as? String) != nil ||
+                                     (data["odRAuid"] as? String) != nil ||
+                                     (data["userId"] as? String) != nil
+
+                        if hasUid {
+                            // Has direct UID - parse immediately
+                            self.onDutyRA = self.parseOnDutyRA(data, docId: doc.documentID)
+                            #if DEBUG
+                            if let ra = self.onDutyRA {
+                                print("🏠 BATCH-DUTY: On-duty RA found: \(ra.displayName)")
+                            } else {
+                                print("🏠 BATCH-DUTY: Failed to parse shift doc: \(data)")
+                            }
+                            #endif
+                            self.onDutyRALoaded = true
+                            self.updateResidentLoadingState()
+                        } else if let email = data["email"] as? String, !email.isEmpty {
+                            // No UID but has email - resolve UID from email_index
+                            self.resolveOnDutyRAFromEmail(shiftData: data, email: email, docId: doc.documentID)
                         } else {
-                            print("🏠 BATCH-DUTY: Failed to parse shift doc: \(data)")
+                            // No UID and no email - still show RA info but DM won't work
+                            self.onDutyRA = self.parseOnDutyRA(data, docId: doc.documentID)
+                            self.onDutyRALoaded = true
+                            self.updateResidentLoadingState()
                         }
-                        #endif
-                        self.onDutyRALoaded = true
-                        self.updateResidentLoadingState()
                         return
                     }
                 }
@@ -932,19 +950,41 @@ final class UserManager: ObservableObject {
         }
     }
 
+    /// Resolve RA UID from email_index when shift document only has email
+    private func resolveOnDutyRAFromEmail(shiftData: [String: Any], email: String, docId: String) {
+        db.collection("email_index").document(email).getDocument { [weak self] snapshot, error in
+            guard let self = self else { return }
+
+            if let data = snapshot?.data(), let uid = data["uid"] as? String {
+                // Found UID - merge into shift data and parse
+                var mergedData = shiftData
+                mergedData["userId"] = uid
+                self.onDutyRA = self.parseOnDutyRA(mergedData, docId: docId)
+            } else {
+                // Couldn't resolve - still parse without UID (DM won't work)
+                self.onDutyRA = self.parseOnDutyRA(shiftData, docId: docId)
+            }
+
+            self.onDutyRALoaded = true
+            self.updateResidentLoadingState()
+        }
+    }
+
     /// Parse duty shift data to OnDutyRA model
     /// Supports both field name conventions for backward compatibility
+    /// NOTE: Does NOT use email as fallback for UID - use resolveOnDutyRAFromEmail first if needed
     private func parseOnDutyRA(_ data: [String: Any], docId: String) -> OnDutyRA? {
-        // Get RA identifier - try multiple field names
-        let odRAuid = data["uid"] as? String ?? data["odRAuid"] as? String ?? data["userId"] as? String ?? data["email"] as? String
-        // Get display name
-        let displayName = data["displayName"] as? String ?? data["raName"] as? String ?? data["name"] as? String
+        // Get RA identifier - try multiple field names (but NOT email - email is not a UID)
+        let odRAuid = data["uid"] as? String ?? data["odRAuid"] as? String ?? data["userId"] as? String
+        // Get display name - fall back to email prefix if no name
+        let email = data["email"] as? String
+        let displayName = data["displayName"] as? String ?? data["raName"] as? String ?? data["name"] as? String ?? email?.components(separatedBy: "@").first
         // Get timestamps - support both conventions
         let start = (data["startTime"] as? Timestamp)?.dateValue() ?? (data["start"] as? Timestamp)?.dateValue()
         let end = (data["endTime"] as? Timestamp)?.dateValue() ?? (data["end"] as? Timestamp)?.dateValue()
 
-        guard let raId = odRAuid,
-              let raName = displayName,
+        // We can show the RA even without UID (DM just won't work)
+        guard let raName = displayName,
               let shiftStart = start,
               let shiftEnd = end else {
             #if DEBUG
@@ -952,6 +992,9 @@ final class UserManager: ObservableObject {
             #endif
             return nil
         }
+
+        // If no UID, we'll still return the RA info but DM functionality won't work
+        let raId = odRAuid ?? ""
 
         return OnDutyRA(
             odRAuid: raId,

@@ -101,7 +101,7 @@ struct RAToolsView: View {
         RATool(title: "Tommie Link", subtitle: "Events and Clubs", icon: "link.circle.fill", color: .blue, url: "https://tommielink.stthomas.edu"),
         RATool(title: "Advocate", subtitle: "Incident reporting", icon: "exclamationmark.bubble.fill", color: .indigo, url: "https://stthomas-advocate.symplicity.com"),
         RATool(title: "Roompact", subtitle: "Community standards", icon: "doc.text.fill", color: .cyan, url: "https://roompact.com"),
-        RATool(title: "Murphy Online", subtitle: "Student Portal", icon: "fork.knife", color: .purple, url: "https://experience.elluciancloud.com/uofstthomasmn/"),
+        RATool(title: "Murphy Online", subtitle: "Student Portal", icon: "graduationcap.fill", color: .purple, url: "https://experience.elluciancloud.com/uofstthomasmn/"),
         RATool(title: "One St. Thomas", subtitle: "University hub", icon: "building.columns.fill", color: .teal, url: "https://one.stthomas.edu")
     ]
 
@@ -142,7 +142,12 @@ struct RAToolsView: View {
                 CampusSafetySheet()
             }
             .navigationDestination(item: $selectedWebLink) { link in
-                InAppBrowserView(url: URL(string: link.urlString)!, title: link.title)
+                if let url = URL(string: link.urlString) {
+                    InAppBrowserView(url: url, title: link.title)
+                } else {
+                    Text("Unable to load \(link.title)")
+                        .foregroundColor(.secondary)
+                }
             }
         }
     }
@@ -287,7 +292,7 @@ struct ResidentToolsView: View {
     private let essentialTools: [ResidentTool] = [
         ResidentTool(title: "Tommie Link", subtitle: "Student portal", icon: "link.circle.fill", color: .blue, url: "https://tommielink.stthomas.edu"),
         ResidentTool(title: "RFS / Maintenance", subtitle: "Submit work orders", icon: "wrench.and.screwdriver.fill", color: .green, url: "https://rmsstudent.stthomas.edu/page/HousingPortal"),
-        ResidentTool(title: "Murphy Online", subtitle: "Central Toll", icon: "fork.knife", color: .purple, url: "https://experience.elluciancloud.com/uofstthomasmn/"),
+        ResidentTool(title: "Murphy Online", subtitle: "Central Toll", icon: "graduationcap.fill", color: .purple, url: "https://experience.elluciancloud.com/uofstthomasmn/"),
         ResidentTool(title: "One St. Thomas", subtitle: "University hub", icon: "building.columns.fill", color: .teal, url: "https://one.stthomas.edu")
     ]
 
@@ -321,7 +326,12 @@ struct ResidentToolsView: View {
                 ResidentCampusSafetySheet()
             }
             .navigationDestination(item: $selectedWebLink) { link in
-                InAppBrowserView(url: URL(string: link.urlString)!, title: link.title)
+                if let url = URL(string: link.urlString) {
+                    InAppBrowserView(url: url, title: link.title)
+                } else {
+                    Text("Unable to load \(link.title)")
+                        .foregroundColor(.secondary)
+                }
             }
         }
     }
@@ -927,12 +937,16 @@ struct DutyView: View {
     @StateObject private var roomCheckService = RoomCheckService.shared
     @StateObject private var residentService = ResidentService.shared
     @StateObject private var userManager = UserManager.shared
+    @StateObject private var concernService = ConcernService.shared
+    @StateObject private var noiseReportService = NoiseReportService.shared
 
     @State private var showingRounds = false
     @State private var selectedWebLink: QuickLink?
     @State private var showingCampusSafety = false
     @State private var showingSettings = false
     @State private var showingDutyLog = false
+    @State private var showingConcerns = false
+    @State private var showingNoiseReports = false
 
     var body: some View {
         NavigationStack {
@@ -970,13 +984,26 @@ struct DutyView: View {
             .fullScreenCover(isPresented: $showingDutyLog) {
                 DutyLogView()
             }
+            .sheet(isPresented: $showingConcerns) {
+                ConcernsListView()
+            }
+            .sheet(isPresented: $showingNoiseReports) {
+                NoiseReportsListView()
+            }
             .navigationDestination(item: $selectedWebLink) { link in
-                InAppBrowserView(url: URL(string: link.urlString)!, title: link.title)
+                if let url = URL(string: link.urlString) {
+                    InAppBrowserView(url: url, title: link.title)
+                } else {
+                    Text("Unable to load \(link.title)")
+                        .foregroundColor(.secondary)
+                }
             }
             .onAppear {
                 // Start listening for inspection data when view appears
                 if let hallId = userManager.hallId, !hallId.isEmpty {
                     roomCheckService.startListening(hallId: hallId)
+                    concernService.startListening(hallId: hallId)
+                    noiseReportService.startListening(hallId: hallId)
                 }
             }
         }
@@ -1204,6 +1231,38 @@ struct DutyView: View {
                         title: "Schedule",
                         subtitle: scheduleService.thisWeekShifts.isEmpty ? "View your schedule" : "\(scheduleService.thisWeekShifts.count) shifts this week",
                         color: .cyan
+                    )
+                }
+
+                Divider()
+                    .padding(.leading, 62)
+
+                // Concerns
+                Button {
+                    showingConcerns = true
+                } label: {
+                    dutyRow(
+                        icon: "exclamationmark.bubble.fill",
+                        title: "Concerns",
+                        subtitle: concernService.pendingCount > 0 ? "\(concernService.pendingCount) pending" : "No pending concerns",
+                        color: .orange,
+                        highlight: concernService.pendingCount > 0
+                    )
+                }
+
+                Divider()
+                    .padding(.leading, 62)
+
+                // Noise Reports
+                Button {
+                    showingNoiseReports = true
+                } label: {
+                    dutyRow(
+                        icon: "speaker.wave.3.fill",
+                        title: "Noise Reports",
+                        subtitle: noiseReportService.pendingCount > 0 ? "\(noiseReportService.pendingCount) pending" : "No pending reports",
+                        color: .red,
+                        highlight: noiseReportService.pendingCount > 0
                     )
                 }
             }

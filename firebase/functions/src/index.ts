@@ -2121,7 +2121,8 @@ export const submitNoiseReport = functions.https.onCall(
 
     // Find on-duty RA to notify
     // V1 FIX: Firestore cannot do inequality filters on two fields.
-    // Query by start <= now, then filter in-memory for end > now
+    // Query by startTime <= now, then filter in-memory for endTime > now
+    // NOTE: Collection is "shifts" (not "duty_shifts"), fields are startTime/endTime
     try {
       const nowDate = new Date();
       const nowTimestamp = admin.firestore.Timestamp.fromDate(nowDate);
@@ -2129,17 +2130,17 @@ export const submitNoiseReport = functions.https.onCall(
       const dutyShiftsSnapshot = await db
         .collection("halls")
         .doc(hallId)
-        .collection("duty_shifts")
-        .where("start", "<=", nowTimestamp)
-        .orderBy("start", "desc")
+        .collection("shifts")
+        .where("startTime", "<=", nowTimestamp)
+        .orderBy("startTime", "desc")
         .limit(10)
         .get();
 
-      // Find first active shift (in-memory filter for end > now)
+      // Find first active shift (in-memory filter for endTime > now)
       let activeShift: FirebaseFirestore.DocumentData | null = null;
       for (const doc of dutyShiftsSnapshot.docs) {
         const shiftData = doc.data();
-        const endTime = shiftData.end as admin.firestore.Timestamp | undefined;
+        const endTime = shiftData.endTime as admin.firestore.Timestamp | undefined;
         if (endTime && endTime.toMillis() > nowTimestamp.toMillis()) {
           activeShift = shiftData;
           break;
@@ -2202,14 +2203,104 @@ export const submitNoiseReport = functions.https.onCall(
 
             await admin.messaging().send(payload);
             console.log(`Push notification sent to on-duty RA ${onDutyRaUid} for noise report`);
+          } else {
+            // On-duty RA has no FCM token, fall through to notify all RAs
+            console.log("On-duty RA has no FCM token, will notify all RAs");
           }
         }
-      } else {
-        console.log("No on-duty RA found for notification");
+      }
+
+      // If no on-duty RA found or no token, notify all RAs/staff in the hall
+      if (!activeShift || !activeShift.userId) {
+        const fcmTokens: string[] = [];
+
+        // Query for RAs and staff (both can handle concerns)
+        const membersSnapshot = await db
+          .collection("halls")
+          .doc(hallId)
+          .collection("members")
+          .where("role", "in", ["ra", "staff"])
+          .where("isActive", "==", true)
+          .get();
+
+        console.log(`Found ${membersSnapshot.size} active RA/staff members in hall ${hallId}`);
+
+        for (const memberDoc of membersSnapshot.docs) {
+          const raUid = memberDoc.data().userId || memberDoc.id;
+          const memberRole = memberDoc.data().role;
+          console.log(`Checking member ${raUid} (role: ${memberRole})`);
+          if (raUid) {
+            const raUserDoc = await db.collection("users").doc(raUid).get();
+            const fcmToken = raUserDoc.data()?.fcmToken;
+            if (fcmToken && !fcmTokens.includes(fcmToken)) {
+              fcmTokens.push(fcmToken);
+              console.log(`Added FCM token for ${raUid}`);
+            } else if (!fcmToken) {
+              console.log(`No FCM token for ${raUid}`);
+            }
+          }
+        }
+
+        if (fcmTokens.length > 0) {
+          const urgencyLabel = urgency.charAt(0).toUpperCase() + urgency.slice(1);
+          const notificationTitle = `${urgencyLabel} Priority Noise Report`;
+          const notificationBody = `Noise reported at ${location.trim()}`;
+
+          const sendPromises = fcmTokens.map((token) => {
+            const payload: admin.messaging.Message = {
+              token: token,
+              notification: {
+                title: notificationTitle,
+                body: notificationBody,
+              },
+              data: {
+                type: "noise_report",
+                reportId: reportRef.id,
+                hallId: hallId,
+                urgency: urgency,
+              },
+              apns: {
+                headers: {
+                  "apns-priority": urgency === "high" ? "10" : "5",
+                  "apns-push-type": "alert",
+                },
+                payload: {
+                  aps: {
+                    "alert": {
+                      title: notificationTitle,
+                      body: notificationBody,
+                    },
+                    "sound": "default",
+                    "badge": 1,
+                    "mutable-content": 1,
+                    "content-available": 1,
+                  },
+                },
+              },
+              android: {
+                notification: {
+                  sound: "default",
+                  channelId: "noise_reports",
+                  priority: urgency === "high" ? "high" : "default",
+                },
+              },
+            };
+
+            return admin.messaging().send(payload).catch((err) => {
+              console.error(`Failed to send notification to token: ${err}`);
+              return null;
+            });
+          });
+
+          await Promise.all(sendPromises);
+          console.log(`Push notifications sent to ${fcmTokens.length} RA(s) for noise report (no on-duty RA)`);
+        } else {
+          console.log("No RA FCM tokens found for notification");
+        }
       }
     } catch (error) {
       // Don't fail the report if notification fails
-      console.error("Error sending notification to on-duty RA:", error);
+      console.error("Error sending notification to RA(s):", error);
     }
 
     return {
@@ -2270,25 +2361,26 @@ export const getOnDutyRa = functions.https.onCall(
     }
 
     // V1 FIX: Firestore does not allow inequality filters on two fields.
-    // Query: where("start", "<=", now) + orderBy("start", "desc") + limit(10)
-    // Then filter in-memory for end > now
+    // Query: where("startTime", "<=", now) + orderBy("startTime", "desc") + limit(10)
+    // Then filter in-memory for endTime > now
+    // NOTE: Collection is "shifts" (not "duty_shifts"), fields are startTime/endTime
     const nowDate = new Date();
     const nowTimestamp = admin.firestore.Timestamp.fromDate(nowDate);
 
     const dutyShiftsSnapshot = await db
       .collection("halls")
       .doc(hallId)
-      .collection("duty_shifts")
-      .where("start", "<=", nowTimestamp)
-      .orderBy("start", "desc")
+      .collection("shifts")
+      .where("startTime", "<=", nowTimestamp)
+      .orderBy("startTime", "desc")
       .limit(10)
       .get();
 
-    // Find the first shift where end > now (in-memory filter)
+    // Find the first shift where endTime > now (in-memory filter)
     let activeShift: FirebaseFirestore.DocumentData | null = null;
     for (const doc of dutyShiftsSnapshot.docs) {
       const shiftData = doc.data();
-      const endTime = shiftData.end as admin.firestore.Timestamp | undefined;
+      const endTime = shiftData.endTime as admin.firestore.Timestamp | undefined;
       if (endTime && endTime.toMillis() > nowTimestamp.toMillis()) {
         activeShift = shiftData;
         break;
@@ -2342,8 +2434,8 @@ export const getOnDutyRa = functions.https.onCall(
       raUid: onDutyRaUid,
       displayName: displayName,
       email: email,
-      shiftStart: activeShift.start || undefined,
-      shiftEnd: activeShift.end || undefined,
+      shiftStart: activeShift.startTime || activeShift.start || undefined,
+      shiftEnd: activeShift.endTime || activeShift.end || undefined,
     };
   }
 );
@@ -2980,6 +3072,7 @@ export const submitConcern = functions.https.onCall(
     const reporterRoom = isAnonymous ? null : (memberDoc.data()?.roomNumber || null);
 
     // Find on-duty RA
+    // NOTE: Collection is "shifts" (not "duty_shifts"), fields are startTime/endTime
     let onDutyRaUid: string | null = null;
     let onDutyRaName: string | null = null;
 
@@ -2990,16 +3083,16 @@ export const submitConcern = functions.https.onCall(
       const dutyShiftsSnapshot = await db
         .collection("halls")
         .doc(hallId)
-        .collection("duty_shifts")
-        .where("start", "<=", nowTimestamp)
-        .orderBy("start", "desc")
+        .collection("shifts")
+        .where("startTime", "<=", nowTimestamp)
+        .orderBy("startTime", "desc")
         .limit(10)
         .get();
 
-      // Find first active shift (in-memory filter for end > now)
+      // Find first active shift (in-memory filter for endTime > now)
       for (const doc of dutyShiftsSnapshot.docs) {
         const shiftData = doc.data();
-        const endTime = shiftData.end as admin.firestore.Timestamp | undefined;
+        const endTime = shiftData.endTime as admin.firestore.Timestamp | undefined;
         if (endTime && endTime.toMillis() > nowTimestamp.toMillis()) {
           onDutyRaUid = shiftData.userId || shiftData.odRAuid || null;
           onDutyRaName = shiftData.displayName || shiftData.name || null;
@@ -3050,23 +3143,33 @@ export const submitConcern = functions.https.onCall(
         }
       }
 
-      // If no on-duty RA or no token, notify all RAs in the hall
+      // If no on-duty RA or no token, notify all RAs/staff in the hall
       if (fcmTokens.length === 0) {
+        console.log(`No on-duty RA FCM token, falling back to all RAs/staff in hall ${hallId}`);
+
+        // Query for RAs and staff (both can handle concerns)
         const membersSnapshot = await db
           .collection("halls")
           .doc(hallId)
           .collection("members")
-          .where("role", "==", "ra")
+          .where("role", "in", ["ra", "staff"])
           .where("isActive", "==", true)
           .get();
 
+        console.log(`Found ${membersSnapshot.size} active RA/staff members in hall ${hallId}`);
+
         for (const memberDoc of membersSnapshot.docs) {
           const raUid = memberDoc.data().userId || memberDoc.id;
+          const memberRole = memberDoc.data().role;
+          console.log(`Checking member ${raUid} (role: ${memberRole})`);
           if (raUid) {
             const raUserDoc = await db.collection("users").doc(raUid).get();
             const fcmToken = raUserDoc.data()?.fcmToken;
             if (fcmToken && !fcmTokens.includes(fcmToken)) {
               fcmTokens.push(fcmToken);
+              console.log(`Added FCM token for ${raUid}`);
+            } else if (!fcmToken) {
+              console.log(`No FCM token for ${raUid}`);
             }
           }
         }
@@ -3084,9 +3187,10 @@ export const submitConcern = functions.https.onCall(
         const categoryLabel = categoryLabels[category] || "General";
 
         const notificationTitle = `New ${categoryLabel} Concern`;
-        const notificationBody = isAnonymous
-          ? `Anonymous report: ${message.trim().substring(0, 100)}${message.length > 100 ? "..." : ""}`
-          : `${reporterName}: ${message.trim().substring(0, 100)}${message.length > 100 ? "..." : ""}`;
+        const msgPreview = message.trim().substring(0, 100) + (message.length > 100 ? "..." : "");
+        const notificationBody = isAnonymous ?
+          `Anonymous report: ${msgPreview}` :
+          `${reporterName}: ${msgPreview}`;
 
         // Send to all collected tokens
         const sendPromises = fcmTokens.map((token) => {

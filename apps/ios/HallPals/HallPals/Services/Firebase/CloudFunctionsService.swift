@@ -138,7 +138,7 @@ final class CloudFunctionsService: ObservableObject {
             let uid = data["uid"] as? String ?? ""
 
             #if DEBUG
-            print("☁️ FUNCTIONS: ensureUserDoc response - success: \(success), action: \(action), uid: \(uid)")
+            print("☁️ FUNCTIONS: ensureUserDoc response - success: \(success), action: \(action), uid: \(uid.prefix(8))...")
             #endif
 
             return EnsureUserDocResponse(

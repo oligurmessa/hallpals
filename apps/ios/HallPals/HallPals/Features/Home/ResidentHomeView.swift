@@ -15,12 +15,9 @@ struct ResidentHomeView: View {
     @State private var showPoliciesSheet = false
     @State private var showNoiseReportSheet = false
     @State private var showReportConcernSheet = false
-    @State private var navigateToEmergency = false
+    @State private var showingLockedOut = false
     @State private var showingSettings = false
     @State private var navigateToAI = false
-    @State private var navigateToDM = false
-    @State private var dmConversationId: String?
-    @State private var isCreatingDM = false
     @State private var resolvedHallId: String?
     @State private var isLoadingHallId = false
     /// Get the current hall ID - prefer resolved, then userManager, empty string if none
@@ -73,8 +70,8 @@ struct ResidentHomeView: View {
             .fullScreenCover(isPresented: $showingSettings) {
                 SettingsView()
             }
-            .navigationDestination(isPresented: $navigateToEmergency) {
-                ResidentEmergencyView()
+            .sheet(isPresented: $showingLockedOut) {
+                LockedOutSheet()
             }
             .sheet(isPresented: $showLockoutSheet) {
                 LockoutInfoSheet()
@@ -87,15 +84,6 @@ struct ResidentHomeView: View {
             }
             .fullScreenCover(isPresented: $navigateToAI) {
                 AIChatView()
-            }
-            .navigationDestination(isPresented: $navigateToDM) {
-                if let conversationId = dmConversationId {
-                    ChatThreadView(
-                        conversationId: conversationId,
-                        conversationType: .dm,
-                        title: userManager.assignedRA?.displayName ?? userManager.onDutyRA?.displayName ?? "RA"
-                    )
-                }
             }
             .onAppear {
                 loadHallIdAndStartListeners()
@@ -153,29 +141,6 @@ struct ResidentHomeView: View {
                                (userManager.upcomingEvents.isEmpty && userManager.eventsLoaded)
             if needsRefresh {
                 userManager.refreshResidentData()
-            }
-        }
-    }
-
-    private func startDMWithRA(raUid: String) {
-        guard !isCreatingDM else { return }
-        isCreatingDM = true
-
-        Task {
-            do {
-                let conversationId = try await ChatService.shared.createOrGetDM(otherUid: raUid)
-                await MainActor.run {
-                    self.dmConversationId = conversationId
-                    self.navigateToDM = true
-                    self.isCreatingDM = false
-                }
-            } catch {
-                await MainActor.run {
-                    self.isCreatingDM = false
-                }
-                #if DEBUG
-                print("🏠 RESIDENT: Failed to create DM: \(error.localizedDescription)")
-                #endif
             }
         }
     }
@@ -302,27 +267,17 @@ struct ResidentHomeView: View {
 
                         Spacer()
 
-                        // DM Button
-                        Button {
-                            startDMWithRA(raUid: assignedRA.odRAuid)
-                        } label: {
-                            HStack(spacing: 4) {
-                                if isCreatingDM {
-                                    ProgressView()
-                                        .scaleEffect(0.8)
-                                } else {
-                                    Image(systemName: "message.fill")
-                                }
-                                Text("DM")
-                            }
-                            .font(.system(size: 13, weight: .semibold))
-                            .foregroundColor(.purple)
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 8)
-                            .background(Color.purple.opacity(0.1))
-                            .cornerRadius(8)
+                        // DM Button (disabled)
+                        HStack(spacing: 4) {
+                            Image(systemName: "message.fill")
+                            Text("DM")
                         }
-                        .disabled(isCreatingDM)
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundColor(.gray)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 8)
+                        .background(Color.gray.opacity(0.1))
+                        .cornerRadius(8)
                     }
                 }
             } else if userManager.isLoadingAssignedRA {
@@ -404,32 +359,18 @@ struct ResidentHomeView: View {
 
                         Spacer()
 
-                        // Action buttons
-                        HStack(spacing: 8) {
-                            if let phone = ra.dutyPhone {
-                                Button {
-                                    callPhone(phone)
-                                } label: {
-                                    Image(systemName: "phone.fill")
-                                        .font(.system(size: 14))
-                                        .foregroundColor(.green)
-                                        .frame(width: 36, height: 36)
-                                        .background(Color.green.opacity(0.1))
-                                        .cornerRadius(8)
-                                }
-                            }
-
+                        // Call button only
+                        if let phone = ra.dutyPhone {
                             Button {
-                                startDMWithRA(raUid: ra.odRAuid)
+                                callPhone(phone)
                             } label: {
-                                Image(systemName: "message.fill")
+                                Image(systemName: "phone.fill")
                                     .font(.system(size: 14))
-                                    .foregroundColor(.blue)
+                                    .foregroundColor(.green)
                                     .frame(width: 36, height: 36)
-                                    .background(Color.blue.opacity(0.1))
+                                    .background(Color.green.opacity(0.1))
                                     .cornerRadius(8)
                             }
-                            .disabled(isCreatingDM)
                         }
                     }
                 } else {
@@ -476,19 +417,19 @@ struct ResidentHomeView: View {
                 }
             }
 
-            // Emergency Button
+            // Locked Out Button
             Button {
-                navigateToEmergency = true
+                showingLockedOut = true
             } label: {
                 HStack {
-                    Image(systemName: "exclamationmark.triangle.fill")
-                    Text("Emergency Resources")
+                    Image(systemName: "key.fill")
+                    Text("Locked Out?")
                 }
                 .font(.system(size: 14, weight: .semibold))
-                .foregroundColor(.red)
+                .foregroundColor(.orange)
                 .frame(maxWidth: .infinity)
                 .frame(height: 40)
-                .background(Color.red.opacity(0.1))
+                .background(Color.orange.opacity(0.1))
                 .cornerRadius(10)
             }
         }

@@ -13,12 +13,10 @@
 	</array>
 	<key>FirebaseMessagingAutoInitEnabled</key>
 	<true/>
-	<key>NSUserActivityTypes</key>
-	<array>
-		<string>INSendMessageIntent</string>
-	</array>
 	<key>NSMotionUsageDescription</key>
 	<string>HallPals uses motion data to track your steps and floor changes during rounds, helping you document your rounds activity.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>HallPals uses your camera to capture photos for chat attachments.</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 </dict>

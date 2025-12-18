@@ -28,7 +28,7 @@ export default function SignUpPage() {
         const { name, email, password, accessCode } = formData;
 
         if (!accessCode) {
-            setError("Access code is required (e.g., DEVLEAD)");
+            setError("Access code is required");
             setLoading(false);
             return;
         }
@@ -58,15 +58,11 @@ export default function SignUpPage() {
     };
 
     return (
-        <div className="min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-zinc-950">
-            {/* Dynamic Background Elements */}
-            <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-[100px] animate-pulse" />
-            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-[100px]" />
-
+        <div className="min-h-screen w-full flex items-center justify-center relative bg-zinc-950">
             <div className="relative z-10 w-full max-w-md p-6">
-                <div className="bg-zinc-900/50 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl">
+                <div className="bg-zinc-900/50 border border-white/5 rounded-2xl p-8 shadow-none">
                     <div className="text-center mb-8">
-                        <h1 className="text-3xl font-bold bg-gradient-to-r from-white to-zinc-400 bg-clip-text text-transparent">
+                        <h1 className="text-3xl font-bold text-white">
                             Join HallPals
                         </h1>
                         <p className="text-zinc-400 mt-2">Create your staff account</p>
@@ -82,7 +78,7 @@ export default function SignUpPage() {
                                 required
                                 value={formData.name}
                                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                className="w-full px-4 py-3 bg-zinc-800/50 border border-white/5 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all"
+                                className="w-full px-4 py-3 bg-zinc-900 border border-white/10 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-white transition-all"
                                 placeholder="John Doe"
                             />
                         </div>
@@ -96,7 +92,7 @@ export default function SignUpPage() {
                                 required
                                 value={formData.email}
                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                className="w-full px-4 py-3 bg-zinc-800/50 border border-white/5 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all"
+                                className="w-full px-4 py-3 bg-zinc-900 border border-white/10 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-white transition-all"
                                 placeholder="john@example.com"
                             />
                         </div>
@@ -110,7 +106,7 @@ export default function SignUpPage() {
                                 required
                                 value={formData.password}
                                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                                className="w-full px-4 py-3 bg-zinc-800/50 border border-white/5 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all"
+                                className="w-full px-4 py-3 bg-zinc-900 border border-white/10 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-white transition-all"
                                 placeholder="••••••••"
                             />
                         </div>
@@ -124,14 +120,14 @@ export default function SignUpPage() {
                                 required
                                 value={formData.accessCode}
                                 onChange={(e) => setFormData({ ...formData, accessCode: e.target.value })}
-                                className="w-full px-4 py-3 bg-zinc-800/50 border border-white/5 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all uppercase tracking-widest"
-                                placeholder="DEVLEAD"
+                                className="w-full px-4 py-3 bg-zinc-900 border border-white/10 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-white transition-all uppercase tracking-widest"
+                                placeholder="Access Code"
                             />
                             <p className="text-xs text-zinc-500 mt-1">Required for staff registration</p>
                         </div>
 
                         {error && (
-                            <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-sm">
+                            <div className="p-3 bg-red-950/20 border border-red-500/20 rounded-lg text-red-500 text-sm">
                                 {error}
                             </div>
                         )}
@@ -139,7 +135,7 @@ export default function SignUpPage() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full py-4 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl text-white font-medium shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                            className="w-full py-4 bg-white rounded-lg text-black font-medium hover:bg-zinc-200 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                         >
                             {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Create Account"}
                         </button>
@@ -147,7 +143,7 @@ export default function SignUpPage() {
 
                     <p className="text-center mt-6 text-zinc-500 text-sm">
                         Already have an account?{" "}
-                        <Link href="/auth/signin" className="text-purple-400 hover:text-purple-300 font-medium transition-colors">
+                        <Link href="/auth/signin" className="text-white hover:text-zinc-300 font-medium transition-colors">
                             Sign in
                         </Link>
                     </p>

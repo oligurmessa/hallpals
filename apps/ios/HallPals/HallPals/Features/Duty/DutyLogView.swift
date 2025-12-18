@@ -7,15 +7,20 @@ struct DutyLogView: View {
     @State private var isLoading = true
     @State private var webView = DutyLogWebView()
 
-    private let roompactFormURL = URL(string: "https://roompact.com/forms/#/form/b0llDq")!
+    private let roompactFormURL: URL? = URL(string: "https://roompact.com/forms/#/form/b0llDq")
 
     var body: some View {
         NavigationStack {
             ZStack {
-                DutyLogWebViewWrapper(webView: webView, url: roompactFormURL, isLoading: $isLoading)
-                    .edgesIgnoringSafeArea(.bottom)
+                if let url = roompactFormURL {
+                    DutyLogWebViewWrapper(webView: webView, url: url, isLoading: $isLoading)
+                        .edgesIgnoringSafeArea(.bottom)
+                } else {
+                    Text("Unable to load duty log form")
+                        .foregroundColor(.secondary)
+                }
 
-                if isLoading {
+                if isLoading && roompactFormURL != nil {
                     VStack(spacing: 16) {
                         ProgressView()
                             .progressViewStyle(CircularProgressViewStyle())

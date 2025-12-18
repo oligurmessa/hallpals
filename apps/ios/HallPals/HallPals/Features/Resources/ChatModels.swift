@@ -37,32 +37,14 @@ struct ChatSession: Identifiable {
             }
         }
     }
-
-    // Formatted date string for display
-    var dateString: String {
-        let calendar = Calendar.current
-        if calendar.isDateInToday(updatedAt) {
-            let formatter = DateFormatter()
-            formatter.timeStyle = .short
-            return formatter.string(from: updatedAt)
-        } else if calendar.isDateInYesterday(updatedAt) {
-            return "Yesterday"
-        } else {
-            let formatter = DateFormatter()
-            formatter.dateStyle = .short
-            return formatter.string(from: updatedAt)
-        }
-    }
 }
 
-// MARK: - Chat Store
+// MARK: - Chat Store (Simplified - No History)
 
 class ChatStore: ObservableObject {
-    @Published var sessions: [ChatSession] = []
     @Published var currentSession: ChatSession?
 
     init() {
-        // Start with a welcome session
         startNewSession()
     }
 
@@ -90,47 +72,5 @@ class ChatStore: ObservableObject {
         }
 
         currentSession = session
-
-        // Save to history if it has user messages
-        if isUser {
-            saveCurrentSessionToHistory()
-        }
-    }
-
-    func selectSession(_ session: ChatSession) {
-        currentSession = session
-    }
-
-    private func saveCurrentSessionToHistory() {
-        guard let current = currentSession else { return }
-
-        // Update existing or add new
-        if let index = sessions.firstIndex(where: { $0.id == current.id }) {
-            sessions[index] = current
-        } else {
-            sessions.insert(current, at: 0)
-        }
-
-        // Keep only last 20 sessions
-        if sessions.count > 20 {
-            sessions = Array(sessions.prefix(20))
-        }
-    }
-
-    func deleteSession(_ session: ChatSession) {
-        sessions.removeAll { $0.id == session.id }
-        if currentSession?.id == session.id {
-            startNewSession()
-        }
-    }
-
-    func deleteSession(at offsets: IndexSet) {
-        for index in offsets {
-            let session = sessions[index]
-            if currentSession?.id == session.id {
-                startNewSession()
-            }
-        }
-        sessions.remove(atOffsets: offsets)
     }
 }

@@ -88,17 +88,17 @@ struct LandingView: View {
                     .cornerRadius(14)
             }
 
-            // Create Account button
+            // Create Account button (gray themed)
             Button {
                 isSignUp = true
                 showAuthSheet = true
             } label: {
                 Text("Create Account")
                     .font(.system(size: 17, weight: .semibold))
-                    .foregroundColor(.appPrimary)
+                    .foregroundColor(Color(UIColor.label))
                     .frame(maxWidth: .infinity)
                     .frame(height: 54)
-                    .background(Color.appPrimary.opacity(0.1))
+                    .background(Color(UIColor.secondarySystemBackground))
                     .cornerRadius(14)
             }
         }
@@ -177,7 +177,7 @@ struct AuthSheetView: View {
                     Button("Cancel") {
                         dismiss()
                     }
-                    .foregroundColor(.appPrimary)
+                    .foregroundColor(isSignUp ? .primary : .appPrimary)
                 }
             }
             .sheet(isPresented: $showResetPassword) {
@@ -273,7 +273,7 @@ struct AuthSheetView: View {
                     .font(.system(size: 13, weight: .medium))
                     .foregroundColor(.secondary)
 
-                SecureField("Min. 6 characters", text: $password)
+                SecureField("Min. 10 characters", text: $password)
                     .textContentType(isSignUp ? .newPassword : .password)
                     .focused($focusedField, equals: .password)
                     .padding(.horizontal, 16)
@@ -305,6 +305,15 @@ struct AuthSheetView: View {
 
     // MARK: - Submit Button
 
+    /// Button color: purple for sign-in, gray for sign-up
+    private var submitButtonColor: Color {
+        if isSignUp {
+            return Color(UIColor.darkGray)
+        } else {
+            return Color.appPrimary
+        }
+    }
+
     private var submitButton: some View {
         Button {
             Task { await submitAuth() }
@@ -321,7 +330,7 @@ struct AuthSheetView: View {
             .foregroundColor(.white)
             .frame(maxWidth: .infinity)
             .frame(height: 54)
-            .background(isFormValid ? Color.appPrimary : Color.gray.opacity(0.5))
+            .background(isFormValid ? submitButtonColor : Color.gray.opacity(0.5))
             .cornerRadius(14)
         }
         .disabled(!isFormValid || firebaseAuth.isLoading)
@@ -396,8 +405,9 @@ struct AuthSheetView: View {
             return !firstName.trimmingCharacters(in: .whitespaces).isEmpty &&
                    !lastName.trimmingCharacters(in: .whitespaces).isEmpty &&
                    !email.isEmpty &&
-                   password.count >= 6
+                   password.count >= 10
         } else {
+            // Sign-in: Firebase requires min 6, but we allow any password length for existing accounts
             return !email.isEmpty && password.count >= 6
         }
     }

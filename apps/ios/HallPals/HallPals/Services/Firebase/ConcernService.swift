@@ -45,16 +45,17 @@ final class ConcernService: ObservableObject {
         let id: String
         let category: ConcernCategory
         let message: String
-        let residentUid: String
+        let residentUid: String?  // Optional for anonymous concerns
         let residentName: String
         let residentRoom: String?
-        let onDutyRAUid: String
-        let onDutyRAName: String
+        let onDutyRAUid: String?  // Optional if no RA on duty
+        let onDutyRAName: String?  // Optional if no RA on duty
         let status: ConcernStatus
         let createdAt: Date
         let resolvedAt: Date?
         let resolvedBy: String?
         let raNote: String?
+        let isAnonymous: Bool
 
         var timeAgo: String {
             let interval = Date().timeIntervalSince(createdAt)
@@ -241,10 +242,7 @@ final class ConcernService: ObservableObject {
                 guard let categoryStr = data["category"] as? String,
                       let category = ConcernCategory(rawValue: categoryStr),
                       let message = data["message"] as? String,
-                      let residentUid = data["residentUid"] as? String,
                       let residentName = data["residentName"] as? String,
-                      let onDutyRAUid = data["onDutyRAUid"] as? String,
-                      let onDutyRAName = data["onDutyRAName"] as? String,
                       let statusStr = data["status"] as? String,
                       let status = ConcernStatus(rawValue: statusStr),
                       let createdAt = (data["createdAt"] as? Timestamp)?.dateValue()
@@ -254,16 +252,17 @@ final class ConcernService: ObservableObject {
                     id: doc.documentID,
                     category: category,
                     message: message,
-                    residentUid: residentUid,
+                    residentUid: data["residentUid"] as? String,
                     residentName: residentName,
                     residentRoom: data["residentRoom"] as? String,
-                    onDutyRAUid: onDutyRAUid,
-                    onDutyRAName: onDutyRAName,
+                    onDutyRAUid: data["onDutyRAUid"] as? String,
+                    onDutyRAName: data["onDutyRAName"] as? String,
                     status: status,
                     createdAt: createdAt,
                     resolvedAt: (data["resolvedAt"] as? Timestamp)?.dateValue(),
                     resolvedBy: data["resolvedBy"] as? String,
-                    raNote: data["raNote"] as? String
+                    raNote: data["raNote"] as? String,
+                    isAnonymous: data["isAnonymous"] as? Bool ?? false
                 )
             }
 

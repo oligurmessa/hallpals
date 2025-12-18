@@ -499,7 +499,7 @@ class FirebaseAuthManager: ObservableObject {
             // Note: Firestore user data cleanup should be handled via Cloud Functions
             // using a Firebase Auth trigger (onDelete)
             #if DEBUG
-            print("🗑️ AUTH: Attempting to delete Firebase Auth user: \(user.uid)")
+            print("🗑️ AUTH: Attempting to delete Firebase Auth user: \(user.uid.prefix(8))...")
             #endif
 
             try await user.delete()

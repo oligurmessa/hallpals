@@ -22,6 +22,7 @@ export interface RoundsSession {
 export function useRounds(hallId: string | null) {
     const [sessions, setSessions] = useState<RoundsSession[]>([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         if (!hallId) {
@@ -35,17 +36,25 @@ export function useRounds(hallId: string | null) {
             limit(50) // Limit to last 50 for performance
         );
 
-        const unsubscribe = onSnapshot(q, (snapshot) => {
-            const data = snapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-            })) as RoundsSession[];
-            setSessions(data);
-            setLoading(false);
-        });
+        const unsubscribe = onSnapshot(
+            q,
+            (snapshot) => {
+                const data = snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data(),
+                })) as RoundsSession[];
+                setSessions(data);
+                setLoading(false);
+                setError(null);
+            },
+            (err) => {
+                setError(err.message);
+                setLoading(false);
+            }
+        );
 
         return () => unsubscribe();
     }, [hallId]);
 
-    return { sessions, loading };
+    return { sessions, loading, error };
 }

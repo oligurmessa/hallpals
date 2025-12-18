@@ -8,7 +8,7 @@ import { Shield, Calendar, Clock, User, CheckCircle } from "lucide-react";
 export default function RoundsPage() {
     const { profile } = useAuth();
     const hallId = profile?.hallId;
-    const { sessions, loading } = useRounds(hallId);
+    const { sessions, loading, error } = useRounds(hallId);
 
     if (!hallId) {
         return (
@@ -43,6 +43,12 @@ export default function RoundsPage() {
                     <p className="text-zinc-400 mt-1">Audit log of all rounds sessions in Hall {hallId}.</p>
                 </div>
             </div>
+
+            {error && (
+                <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-4 mb-6">
+                    <p className="text-red-400 text-sm">Error loading rounds: {error}</p>
+                </div>
+            )}
 
             {loading ? (
                 <div className="flex justify-center py-20">

@@ -209,12 +209,18 @@ final class AppState: ObservableObject {
     func signOut() throws {
         let previousRole = savedRole
 
+        // Remove FCM token from Firestore before signing out
+        PushNotificationService.shared.removeTokenFromFirestore()
+
         try firebaseAuth.signOut()
 
         // Clear role and pending state
         pendingRole = nil
         savedRole = nil
         errorMessage = nil
+
+        // Clear all cached data in UserManager (hall, RA, residents, etc.)
+        UserManager.shared.stopListening()
 
         // Force state to needsAuth (landing page)
         authState = .needsAuth

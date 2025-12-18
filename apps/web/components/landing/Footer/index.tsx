@@ -155,7 +155,7 @@ export default function Footer() {
 
             {/* Bottom Bar */}
             <div className="mt-6 flex flex-col justify-between gap-3 border-black/5 border-t pt-6 text-black/50 text-xs tracking-tighter sm:flex-row sm:items-center dark:border-white/10 dark:text-white/50">
-              <p>© {currentYear} HallPals. All rights reserved.</p>
+              <p>© {currentYear} HallPals.</p>
               <div className="flex gap-4">
                 <Link
                   className="transition-colors hover:text-black/70 dark:hover:text-white/70"

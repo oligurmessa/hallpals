@@ -65,7 +65,7 @@ final class FirestoreService: ObservableObject {
         if snapshot.exists {
             // Update only allowed fields
             #if DEBUG
-            print("🗄️ FIRESTORE: Updating existing user profile for \(uid)")
+            print("🗄️ FIRESTORE: Updating existing user profile for \(uid.prefix(8))...")
             #endif
 
             try await userRef.updateData([
@@ -75,7 +75,7 @@ final class FirestoreService: ObservableObject {
         } else {
             // Create new user document
             #if DEBUG
-            print("🗄️ FIRESTORE: Creating new user profile for \(uid)")
+            print("🗄️ FIRESTORE: Creating new user profile for \(uid.prefix(8))...")
             #endif
 
             let userData: [String: Any] = [
@@ -124,7 +124,7 @@ final class FirestoreService: ObservableObject {
 
             if snapshot.exists {
                 #if DEBUG
-                print("🗄️ FIRESTORE: Membership already exists for \(uid) in \(hallId)")
+                print("🗄️ FIRESTORE: Membership already exists for \(uid.prefix(8))... in \(hallId)")
                 #endif
                 return
             }
@@ -137,7 +137,7 @@ final class FirestoreService: ObservableObject {
 
         // Create membership
         #if DEBUG
-        print("🗄️ FIRESTORE: Creating membership for \(uid) in \(hallId)")
+        print("🗄️ FIRESTORE: Creating membership for \(uid.prefix(8))... in \(hallId)")
         #endif
 
         let memberData: [String: Any] = [
@@ -205,14 +205,14 @@ final class FirestoreService: ObservableObject {
 
             guard snapshot.exists, let data = snapshot.data() else {
                 #if DEBUG
-                print("🗄️ FIRESTORE: User doc not found for \(uid)")
+                print("🗄️ FIRESTORE: User doc not found for \(uid.prefix(8))...")
                 #endif
                 return nil
             }
 
             guard let roleString = data["role"] as? String else {
                 #if DEBUG
-                print("🗄️ FIRESTORE: Role field missing for \(uid)")
+                print("🗄️ FIRESTORE: Role field missing for \(uid.prefix(8))...")
                 #endif
                 return nil
             }
@@ -225,7 +225,7 @@ final class FirestoreService: ObservableObject {
             }
 
             #if DEBUG
-            print("🗄️ FIRESTORE: Fetched role '\(roleString)' for \(uid) -> \(role?.displayName ?? "unknown")")
+            print("🗄️ FIRESTORE: Fetched role '\(roleString)' for \(uid.prefix(8))... -> \(role?.displayName ?? "unknown")")
             #endif
 
             return role

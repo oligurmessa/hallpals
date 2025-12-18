@@ -75,7 +75,12 @@ struct ResidentLivingView: View {
                 AIChatView()
             }
             .navigationDestination(item: $selectedWebLink) { link in
-                InAppBrowserView(url: URL(string: link.rawValue)!, title: link.title)
+                if let url = URL(string: link.rawValue) {
+                    InAppBrowserView(url: url, title: link.title)
+                } else {
+                    Text("Unable to load \(link.title)")
+                        .foregroundColor(.secondary)
+                }
             }
             .sheet(isPresented: $showingMoveOutChecklist) {
                 ResidentMoveOutChecklistView()

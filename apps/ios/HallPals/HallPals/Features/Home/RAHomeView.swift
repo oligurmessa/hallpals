@@ -68,7 +68,12 @@ struct RAHomeView: View {
             }
             .fullScreenCover(isPresented: $showingAdvocate) {
                 NavigationStack {
-                    InAppBrowserView(url: URL(string: advocateURL)!, title: "Report Incident")
+                    if let url = URL(string: advocateURL) {
+                        InAppBrowserView(url: url, title: "Report Incident")
+                    } else {
+                        Text("Unable to load incident reporting")
+                            .foregroundColor(.secondary)
+                    }
                 }
             }
             .sheet(isPresented: $showingCampusSafety) {

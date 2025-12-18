@@ -24,13 +24,12 @@ class DocsService: ObservableObject {
             let userDoc = try await db.collection("users").document(uid).getDocument()
             if userDoc.exists {
                 let data = userDoc.data() ?? [:]
-                print("🔍 DEBUG: User document found for \(uid)")
+                print("🔍 DEBUG: User document found for \(uid.prefix(8))...")
                 print("   Role: \(data["role"] ?? "nil")")
                 print("   HallId: \(data["hallId"] ?? "nil")")
                 print("   TenantId: \(data["tenantId"] ?? "nil")")
-                print("   Email: \(data["email"] ?? "nil")")
             } else {
-                print("🔍 DEBUG: ⚠️ No user document exists for \(uid)")
+                print("🔍 DEBUG: ⚠️ No user document exists for \(uid.prefix(8))...")
             }
         } catch {
             print("🔍 DEBUG: ❌ Failed to read user document: \(error)")
@@ -75,8 +74,7 @@ class DocsService: ObservableObject {
         #if DEBUG
         print("🔥 DocsService: Fetching published docs from Firestore...")
         if let user = Auth.auth().currentUser {
-            print("🔥 DocsService: Current user UID: \(user.uid)")
-            print("🔥 DocsService: User email: \(user.email ?? "nil")")
+            print("🔥 DocsService: Current user UID: \(user.uid.prefix(8))...")
         } else {
             print("🔥 DocsService: ⚠️ No authenticated user!")
         }

@@ -39,7 +39,9 @@ class PushNotificationService: NSObject, ObservableObject {
                 if user != nil {
                     // User logged in - save any pending token
                     if let pendingToken = self?.pendingToken {
+                        #if DEBUG
                         print("📱 Saving pending FCM token after auth")
+                        #endif
                         self?.saveTokenToFirestore(pendingToken)
                         self?.pendingToken = nil
                     } else if let currentToken = self?.fcmToken {
@@ -60,17 +62,23 @@ class PushNotificationService: NSObject, ObservableObject {
 
         UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { granted, error in
             if let error = error {
+                #if DEBUG
                 print("❌ Push notification authorization error: \(error)")
+                #endif
                 return
             }
 
             if granted {
+                #if DEBUG
                 print("✅ Push notification authorization granted")
+                #endif
                 DispatchQueue.main.async {
                     UIApplication.shared.registerForRemoteNotifications()
                 }
             } else {
+                #if DEBUG
                 print("⚠️ Push notification authorization denied")
+                #endif
             }
         }
     }
@@ -80,7 +88,9 @@ class PushNotificationService: NSObject, ObservableObject {
     /// Save the FCM token to Firestore user document
     func saveTokenToFirestore(_ token: String) {
         guard let uid = Auth.auth().currentUser?.uid else {
+            #if DEBUG
             print("⚠️ Cannot save FCM token: No authenticated user")
+            #endif
             return
         }
 
@@ -95,11 +105,13 @@ class PushNotificationService: NSObject, ObservableObject {
         ]
 
         userRef.updateData(tokenData) { error in
+            #if DEBUG
             if let error = error {
                 print("❌ Failed to save FCM token: \(error)")
             } else {
                 print("✅ FCM token saved to Firestore")
             }
+            #endif
         }
     }
 
@@ -113,11 +125,13 @@ class PushNotificationService: NSObject, ObservableObject {
             "fcmToken": FieldValue.delete(),
             "fcmTokenUpdatedAt": FieldValue.delete()
         ]) { error in
+            #if DEBUG
             if let error = error {
                 print("❌ Failed to remove FCM token: \(error)")
             } else {
                 print("✅ FCM token removed from Firestore")
             }
+            #endif
         }
     }
 
@@ -129,8 +143,11 @@ class PushNotificationService: NSObject, ObservableObject {
 
         // Extract conversation ID if present
         if let conversationId = userInfo["conversationId"] as? String {
+            #if DEBUG
             print("📬 Foreground notification for conversation: \(conversationId)")
+            #endif
             // Don't navigate automatically - just badge the conversation
+            _ = conversationId // Silence unused variable warning in release
         }
     }
 
@@ -139,7 +156,9 @@ class PushNotificationService: NSObject, ObservableObject {
         let userInfo = response.notification.request.content.userInfo
 
         if let conversationId = userInfo["conversationId"] as? String {
+            #if DEBUG
             print("📬 Notification tap - navigating to conversation: \(conversationId)")
+            #endif
             pendingConversationId = conversationId
         }
     }
@@ -157,8 +176,9 @@ extension PushNotificationService: MessagingDelegate {
     nonisolated func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         guard let token = fcmToken else { return }
 
+        #if DEBUG
         print("📱 FCM Token received: \(token.prefix(20))...")
-        print("📱 FULL FCM TOKEN FOR TESTING: \(token)")
+        #endif
 
         Task { @MainActor in
             self.fcmToken = token
@@ -168,7 +188,9 @@ extension PushNotificationService: MessagingDelegate {
                 self.saveTokenToFirestore(token)
             } else {
                 // Store token to save later when user logs in
+                #if DEBUG
                 print("📱 User not logged in, storing token for later")
+                #endif
                 self.pendingToken = token
             }
         }

@@ -61,7 +61,6 @@
 		AA000049 /* CommunityModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100049 /* CommunityModels.swift */; };
 		AA000050 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100050 /* CommunityView.swift */; };
 		AA000051 /* ChatModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100051 /* ChatModels.swift */; };
-		AA000052 /* ChatHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100052 /* ChatHistoryView.swift */; };
 		AA000053 /* MSGraphConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100053 /* MSGraphConfig.swift */; };
 		AA000054 /* MSALAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100054 /* MSALAuthManager.swift */; };
 		AA000055 /* GraphWorkbookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100055 /* GraphWorkbookService.swift */; };
@@ -113,6 +112,9 @@
 		MM000002 /* ResidentFloorRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MM100002 /* ResidentFloorRulesView.swift */; };
 		MM000003 /* RAFloorRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MM100003 /* RAFloorRulesView.swift */; };
 		NN000001 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = NN100001 /* LandingView.swift */; };
+		OO000001 /* NoiseReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OO100001 /* NoiseReportService.swift */; };
+		OO000002 /* NoiseReportsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = OO100002 /* NoiseReportsListView.swift */; };
+		PP000001 /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP100001 /* DebugLog.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -167,7 +169,6 @@
 		AA100049 /* CommunityModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityModels.swift; sourceTree = "<group>"; };
 		AA100050 /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
 		AA100051 /* ChatModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModels.swift; sourceTree = "<group>"; };
-		AA100052 /* ChatHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHistoryView.swift; sourceTree = "<group>"; };
 		AA100053 /* MSGraphConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSGraphConfig.swift; sourceTree = "<group>"; };
 		AA100054 /* MSALAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSALAuthManager.swift; sourceTree = "<group>"; };
 		AA100055 /* GraphWorkbookService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphWorkbookService.swift; sourceTree = "<group>"; };
@@ -219,6 +220,9 @@
 		MM100002 /* ResidentFloorRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentFloorRulesView.swift; sourceTree = "<group>"; };
 		MM100003 /* RAFloorRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAFloorRulesView.swift; sourceTree = "<group>"; };
 		NN100001 /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
+		OO100001 /* NoiseReportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoiseReportService.swift; sourceTree = "<group>"; };
+		OO100002 /* NoiseReportsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoiseReportsListView.swift; sourceTree = "<group>"; };
+		PP100001 /* DebugLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugLog.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -316,6 +320,7 @@
 				CC400001 /* Onboarding */,
 				CC400003 /* Chat */,
 				II400001 /* Concerns */,
+				OO400001 /* NoiseReports */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -327,6 +332,14 @@
 				II100003 /* ConcernsListView.swift */,
 			);
 			path = Concerns;
+			sourceTree = "<group>";
+		};
+		OO400001 /* NoiseReports */ = {
+			isa = PBXGroup;
+			children = (
+				OO100002 /* NoiseReportsListView.swift */,
+			);
+			path = NoiseReports;
 			sourceTree = "<group>";
 		};
 		AA400008 /* Home */ = {
@@ -400,7 +413,6 @@
 				AA100047 /* AIChatView.swift */,
 				AA100048 /* AIChatInputView.swift */,
 				AA100051 /* ChatModels.swift */,
-				AA100052 /* ChatHistoryView.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -455,6 +467,7 @@
 				DD100002 /* DocsService.swift */,
 				EE100001 /* RoundsService.swift */,
 				EE100002 /* PushNotificationService.swift */,
+				PP100001 /* DebugLog.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -507,6 +520,7 @@
 				JJ100001 /* CommunityMeetingsService.swift */,
 				LL100001 /* MoveOutChecklistService.swift */,
 				MM100001 /* FloorRulesService.swift */,
+				OO100001 /* NoiseReportService.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -663,7 +677,6 @@
 				AA000049 /* CommunityModels.swift in Sources */,
 				AA000050 /* CommunityView.swift in Sources */,
 				AA000051 /* ChatModels.swift in Sources */,
-				AA000052 /* ChatHistoryView.swift in Sources */,
 				AA000053 /* MSGraphConfig.swift in Sources */,
 				AA000054 /* MSALAuthManager.swift in Sources */,
 				AA000055 /* GraphWorkbookService.swift in Sources */,
@@ -701,6 +714,8 @@
 				II000001 /* ConcernService.swift in Sources */,
 				II000002 /* ReportConcernView.swift in Sources */,
 				II000003 /* ConcernsListView.swift in Sources */,
+				OO000001 /* NoiseReportService.swift in Sources */,
+				OO000002 /* NoiseReportsListView.swift in Sources */,
 				JJ000001 /* CommunityMeetingsService.swift in Sources */,
 				KK000001 /* DutyLogView.swift in Sources */,
 				LL000001 /* MoveOutChecklistService.swift in Sources */,
@@ -709,6 +724,7 @@
 				MM000002 /* ResidentFloorRulesView.swift in Sources */,
 				MM000003 /* RAFloorRulesView.swift in Sources */,
 				NN000001 /* LandingView.swift in Sources */,
+				PP000001 /* DebugLog.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

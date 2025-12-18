@@ -1,162 +1,143 @@
 import SwiftUI
 
-// MARK: - Mock Data
+// MARK: - Locked Out Sheet
 
-struct EmergencyContact: Identifiable {
-    let id = UUID()
-    let name: String
-    let phone: String
-    let description: String
-    let icon: String
-    let isEmergency: Bool
-}
-
-// MARK: - ResidentEmergencyView
-
-struct ResidentEmergencyView: View {
-    private let contacts: [EmergencyContact] = [
-        EmergencyContact(
-            name: "Campus Safety",
-            phone: "(651) 962-5555",
-            description: "24/7 emergency response",
-            icon: "shield.fill",
-            isEmergency: true
-        ),
-        EmergencyContact(
-            name: "911 Emergency",
-            phone: "911",
-            description: "Police, Fire, Ambulance",
-            icon: "phone.fill",
-            isEmergency: true
-        ),
-        EmergencyContact(
-            name: "RA Duty Phone",
-            phone: "(651) 555-0199",
-            description: "After hours RA assistance",
-            icon: "person.fill",
-            isEmergency: false
-        ),
-        EmergencyContact(
-            name: "Health Services",
-            phone: "(651) 962-6750",
-            description: "Student health & wellness",
-            icon: "cross.case.fill",
-            isEmergency: false
-        ),
-        EmergencyContact(
-            name: "Counseling Center",
-            phone: "(651) 962-6780",
-            description: "Mental health support",
-            icon: "heart.fill",
-            isEmergency: false
-        )
-    ]
+struct LockedOutSheet: View {
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: AppSpacing.lg) {
-                // Emergency Banner
-                AppCard {
-                    HStack(spacing: AppSpacing.md) {
-                        Image(systemName: "exclamationmark.triangle.fill")
-                            .font(.system(size: 32))
-                            .foregroundColor(.appError)
-
-                        VStack(alignment: .leading, spacing: AppSpacing.xs) {
-                            Text("In an Emergency")
-                                .appStyle(.titleSmall)
-
-                            Text("Call 911 or Campus Safety immediately for life-threatening situations.")
-                                .appStyle(.caption, color: .textSecondary)
+        NavigationStack {
+            ScrollView {
+                VStack(spacing: 24) {
+                    // Header
+                    VStack(spacing: 16) {
+                        ZStack {
+                            Circle()
+                                .fill(Color.orange.opacity(0.1))
+                                .frame(width: 72, height: 72)
+                            Image(systemName: "key.fill")
+                                .font(.system(size: 32))
+                                .foregroundColor(.orange)
                         }
+
+                        Text("Locked Out?")
+                            .font(.system(size: 22, weight: .bold))
+                            .foregroundColor(.primary)
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                }
+                    .padding(.top, 20)
 
-                // Emergency Contacts
-                VStack(alignment: .leading, spacing: AppSpacing.sm) {
-                    Text("Emergency Numbers")
-                        .appStyle(.titleSmall)
-                        .padding(.horizontal, AppSpacing.xs)
+                    // Resources
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Resources")
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundColor(.secondary)
+                            .textCase(.uppercase)
+                            .tracking(0.5)
+                            .padding(.horizontal, 20)
 
-                    VStack(spacing: AppSpacing.sm) {
-                        ForEach(contacts.filter { $0.isEmergency }) { contact in
-                            EmergencyContactCard(contact: contact, isHighlighted: true)
+                        VStack(spacing: 0) {
+                            LockedOutContactRow(
+                                title: "Residence Life",
+                                number: "(651) 962-6470",
+                                subtitle: "Koch Commons",
+                                icon: "building.2.fill",
+                                color: .purple,
+                                isLast: false
+                            )
+                            LockedOutContactRow(
+                                title: "Public Safety",
+                                number: "651-962-5555",
+                                subtitle: "Non-Emergency",
+                                icon: "shield.fill",
+                                color: .blue,
+                                isLast: false
+                            )
+                            LockedOutContactRow(
+                                title: "Public Safety",
+                                number: "651-962-5555",
+                                subtitle: "Emergency",
+                                icon: "exclamationmark.triangle.fill",
+                                color: .red,
+                                isLast: true
+                            )
                         }
-                    }
-                }
-
-                // Other Contacts
-                VStack(alignment: .leading, spacing: AppSpacing.sm) {
-                    Text("Support Resources")
-                        .appStyle(.titleSmall)
-                        .padding(.horizontal, AppSpacing.xs)
-
-                    VStack(spacing: AppSpacing.sm) {
-                        ForEach(contacts.filter { !$0.isEmergency }) { contact in
-                            EmergencyContactCard(contact: contact, isHighlighted: false)
-                        }
-                    }
-                }
-
-                // Info Card
-                AppCard {
-                    VStack(alignment: .leading, spacing: AppSpacing.sm) {
-                        HStack {
-                            Image(systemName: "info.circle.fill")
-                                .foregroundColor(.appPrimary)
-                            Text("Need to talk?")
-                                .appStyle(.titleSmall)
-                        }
-
-                        Text("Your RA and Residence Life staff are here to help with any concerns, big or small. Don't hesitate to reach out.")
-                            .appStyle(.body, color: .textSecondary)
+                        .background(Color(UIColor.secondarySystemBackground))
+                        .cornerRadius(12)
+                        .padding(.horizontal, 20)
                     }
                 }
             }
-            .padding(AppSpacing.md)
+            .background(Color(UIColor.systemBackground))
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Done") { dismiss() }
+                        .font(.system(size: 17, weight: .semibold))
+                }
+            }
         }
-        .background(Color.appBackground)
-        .navigationTitle("Emergency Contacts")
-        .navigationBarTitleDisplayMode(.inline)
+        .presentationDetents([.medium])
     }
 }
 
-struct EmergencyContactCard: View {
-    let contact: EmergencyContact
-    let isHighlighted: Bool
+// MARK: - Contact Row
+
+struct LockedOutContactRow: View {
+    let title: String
+    let number: String
+    let subtitle: String
+    let icon: String
+    let color: Color
+    let isLast: Bool
 
     var body: some View {
-        AppCard {
-            HStack(spacing: AppSpacing.md) {
-                Image(systemName: contact.icon)
-                    .font(.system(size: 24))
-                    .foregroundColor(isHighlighted ? .appError : .appPrimary)
-                    .frame(width: 44, height: 44)
-                    .background((isHighlighted ? Color.appError : Color.appPrimary).opacity(0.1))
-                    .cornerRadius(AppRadius.card)
+        VStack(spacing: 0) {
+            HStack(spacing: 14) {
+                Image(systemName: icon)
+                    .font(.system(size: 18))
+                    .foregroundColor(color)
+                    .frame(width: 32, height: 32)
+                    .background(color.opacity(0.12))
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
 
-                VStack(alignment: .leading, spacing: AppSpacing.xs) {
-                    Text(contact.name)
-                        .appStyle(.body)
-
-                    Text(contact.phone)
-                        .appStyle(.titleSmall, color: isHighlighted ? .appError : .appPrimary)
-
-                    Text(contact.description)
-                        .appStyle(.caption, color: .textSecondary)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(title)
+                        .font(.system(size: 16))
+                        .foregroundColor(.primary)
+                    Text(subtitle)
+                        .font(.system(size: 13))
+                        .foregroundColor(.secondary)
                 }
 
                 Spacer()
 
                 Button {
-                    // Mock call action
-                    print("Calling \(contact.phone)")
+                    // Format number for tel: URL
+                    let cleanNumber = number.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+                    if let url = URL(string: "tel://\(cleanNumber)") {
+                        UIApplication.shared.open(url)
+                    }
                 } label: {
-                    Image(systemName: "phone.circle.fill")
-                        .font(.system(size: 32))
-                        .foregroundColor(isHighlighted ? .appError : .appPrimary)
+                    HStack(spacing: 4) {
+                        Text(number)
+                            .font(.system(size: 15, weight: .medium))
+                            .foregroundColor(color)
+                        Image(systemName: "phone.fill")
+                            .font(.system(size: 12))
+                            .foregroundColor(color)
+                    }
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 6)
+                    .background(color.opacity(0.12))
+                    .cornerRadius(8)
                 }
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 14)
+
+            if !isLast {
+                Divider()
+                    .padding(.leading, 62)
             }
         }
     }
@@ -165,7 +146,5 @@ struct EmergencyContactCard: View {
 // MARK: - Preview
 
 #Preview {
-    NavigationStack {
-        ResidentEmergencyView()
-    }
+    LockedOutSheet()
 }

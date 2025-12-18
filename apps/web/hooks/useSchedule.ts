@@ -92,9 +92,9 @@ export function useSchedule(hallId: string | null) {
             const month = parseInt(dateParts[1]) - 1;
             const day = parseInt(dateParts[2]);
 
-            // Default Duty: 7 PM to 7 AM next day
-            const start = new Date(year, month, day, 19, 0, 0);
-            const end = new Date(year, month, day + 1, 7, 0, 0);
+            // Default Duty: 4:30 PM to 8:00 AM next day
+            const start = new Date(year, month, day, 16, 30, 0);
+            const end = new Date(year, month, day + 1, 8, 0, 0);
 
             if (item.primary) {
                 const ref = doc(db, "halls", hallId, "shifts", `${item.dateStr}_primary`);
